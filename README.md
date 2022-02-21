@@ -10,6 +10,9 @@
   <br>
 </p>
 
+## Update
+
+This project has now bee retired and is no longer live updating.
 
 ### Introduction
 
