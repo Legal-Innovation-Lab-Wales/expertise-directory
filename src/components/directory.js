@@ -46,9 +46,9 @@ export default class Directory extends React.Component {
                 <thead>
                 <tr>
                   <th scope='col'>Name</th>
-                  <th scope='col'>College</th>
+                  <th scope='col'>School</th>
                   <th scope='col'>Department</th>
-                  <th scope='col'>Expertise</th>
+                  <th scope='col'>Areas of Expertise</th>
                 </tr>
                 </thead>
                 <tbody id='table-body'>
