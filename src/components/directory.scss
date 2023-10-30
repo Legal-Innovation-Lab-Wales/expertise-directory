@@ -1,3 +1,9 @@
+
+.staff-name {
+  max-width: 25%;
+  white-space: normal; /* Allow text to wrap */
+}
+
 .table {
     tr {
         &.media {
