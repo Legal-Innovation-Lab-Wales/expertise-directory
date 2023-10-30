@@ -1,16 +1,28 @@
-import React from 'react'
-import ReactDOM from 'react-dom'
-import Directory from './components/directory'
-import {Header,Footer} from 'lilw-react-components'
+import React from 'react';
+import ReactDOM from 'react-dom';
+import Directory from './components/directory';
+import './custom-header.scss'; // Add custom CSS file for styling
+import { Footer } from 'lilw-react-components'; // Import the footer component
 
-ReactDOM.render([
- <Header>
-  <span className="custom-header">Expertise Directory</span>
-</Header>
-  <main>
-    <Directory/>
-  </main>,
-  <Footer/>
-  ],
+ReactDOM.render(
+  <div className="custom-header-container">
+    <div className="custom-logo">
+      <a href="https://swansea.ac.uk">
+        <img
+          src="https://intranet.swan.ac.uk/cdn/suds/images/logo/application-custom/logo-white-en.png"
+          alt="Swansea University Logo"
+        />
+      </a>
+    </div>
+    <div className="custom-logo">
+      <a href="https://legaltech.wales">
+        <img
+          src="/static/media/lilw-logo-white.2c58d3c3.png"
+          alt="LILW Logo"
+        />
+      </a>
+    </div>
+    <h1 className="custom-header-text">Expertise Directory</h1>
+  </div>,
   document.getElementById('root')
-)
+);
