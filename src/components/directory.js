@@ -40,8 +40,6 @@ export default class Directory extends React.Component {
           <Row>
             <Col xs={12}>
               <h1 className='title text-center'><strong>Directory of Expertise</strong></h1>
-              <h5 className='text-center'>This is a quick proof of concept that automatically collates the Areas of
-                Expertise from staff's profile pages on the main University website.</h5>
               <Filter data={this.state}/>
               <div>Last Updated at: {this.state.last_update}</div>
               <table className='table'>
