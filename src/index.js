@@ -4,7 +4,9 @@ import Directory from './components/directory'
 import {Header,Footer} from 'lilw-react-components'
 
 ReactDOM.render([
- <Header a11y_header_desc='Expertise Directory' className='custom-header'/>,
+ <Header>
+  <span className="custom-header">Expertise Directory</span>
+</Header>
   <main>
     <Directory/>
   </main>,
