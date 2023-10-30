@@ -1,12 +1,12 @@
 {
-    "last_update": "19:53 30-10-2023",
+    "last_update": "21:01 30-10-2023",
     "colleges": [
         {
-            "key": "ppirs",
-            "name": "Politics, Philosophy, International Relations",
+            "key": "socialsciences",
+            "name": "School of Social Sciences",
             "departments": [
                 {
-                    "key": "ppirs",
+                    "key": "ppir",
                     "name": "Politics, Philosophy, International Relations",
                     "staff": [
                         {
@@ -201,13 +201,7 @@
                             ]
                         }
                     ]
-                }
-            ]
-        },
-        {
-            "key": "education",
-            "name": "Education & Childhood Studies",
-            "departments": [
+                },
                 {
                     "key": "education",
                     "name": "Education & Childhood Studies",
@@ -456,13 +450,7 @@
                             ]
                         }
                     ]
-                }
-            ]
-        },
-        {
-            "key": "economics",
-            "name": "Economics",
-            "departments": [
+                },
                 {
                     "key": "economics",
                     "name": "Economics",
@@ -667,16 +655,10 @@
                             ]
                         }
                     ]
-                }
-            ]
-        },
-        {
-            "key": "criminology_sociology",
-            "name": "Criminology, Sociology, Social Policy",
-            "departments": [
+                },
                 {
-                    "key": "criminology_sociology",
-                    "name": "Criminology, Sociology, Social Policy",
+                    "key": "criminology",
+                    "name": "Criminology, Sociology & Social Policy",
                     "staff": [
                         {
                             "name": "Dr Gulzat Botoeva",
@@ -1039,434 +1021,8 @@
             ]
         },
         {
-            "key": "accounting_finance",
-            "name": "Account & Finance",
-            "departments": [
-                {
-                    "key": "accounting_finance",
-                    "name": "Account & Finance",
-                    "staff": [
-                        {
-                            "name": "Dr Richard Baylis",
-                            "url": "https://www.swansea.ac.uk/staff/r.m.baylis/",
-                            "expertise": [
-                                "Accounting",
-                                "International financial reporting",
-                                "Audit and assurance",
-                                "Public sector accounting",
-                                "Accounting education",
-                                "Executive education"
-                            ]
-                        },
-                        {
-                            "name": "Professor Sabri Boubaker",
-                            "url": "https://www.swansea.ac.uk/staff/sabri.boubaker/",
-                            "expertise": [
-                                "Ownership structure",
-                                "Control of listed companies"
-                            ]
-                        },
-                        {
-                            "name": "Professor Mike Buckle",
-                            "url": "https://www.swansea.ac.uk/staff/m.j.buckle/",
-                            "expertise": [
-                                "Trend following strategies",
-                                "ESG investing",
-                                "Jump detection in financial data",
-                                "Fintech"
-                            ]
-                        },
-                        {
-                            "name": "Dr Yuzhi Cai",
-                            "url": "https://www.swansea.ac.uk/staff/y.cai/",
-                            "expertise": [
-                                "Financial econometrics",
-                                "Quantitative finance",
-                                "Quantile regression and quantile function modelling",
-                                "Statistical modelling for quantitative data"
-                            ]
-                        },
-                        {
-                            "name": "Dr Rongxin Chen",
-                            "url": "https://www.swansea.ac.uk/staff/rongxin.chen/",
-                            "expertise": [
-                                "Behavioural Finance",
-                                "Asset Pricing",
-                                "Financial Markets",
-                                "Cryptocurrencies",
-                                "Big Data & Machine Learning in Finance",
-                                "Corporate Finance & Governance"
-                            ]
-                        },
-                        {
-                            "name": "Dr Bryan Collings",
-                            "url": "https://www.swansea.ac.uk/staff/b.a.c.collings/",
-                            "expertise": [
-                                "Applied Corporate Governance and Agency Theory in Finance",
-                                "Machine Learning & Artificial Intelligence applications",
-                                "Investment in Emerging Markets"
-                            ]
-                        },
-                        {
-                            "name": "Mrs Lesley Davies",
-                            "url": "https://www.swansea.ac.uk/staff/l.p.davies/",
-                            "expertise": [
-                                "Audit and Assurance"
-                            ]
-                        },
-                        {
-                            "name": "Mr Johan de Rooy",
-                            "url": "https://www.swansea.ac.uk/staff/j.p.derooy/",
-                            "expertise": [
-                                "Financial accounting theory",
-                                "Combining positive psychology to accountancy",
-                                "Explaining accounting to non-accountancy audiences",
-                                "Motivating learners to aspire",
-                                "Training in employment readiness, especially for the more able and well-rounded young learners"
-                            ]
-                        },
-                        {
-                            "name": "Dr Ashraf Elbakry",
-                            "url": "https://www.swansea.ac.uk/staff/a.e.elbakry/",
-                            "expertise": [
-                                "Financial reporting",
-                                "International financial reporting standards",
-                                "Capital markets",
-                                "Management accounting",
-                                "Cost control",
-                                "Value relevance of accounting information"
-                            ]
-                        },
-                        {
-                            "name": "Dr Mohamed Elmagrhi",
-                            "url": "https://www.swansea.ac.uk/staff/m.h.a.elmagrhi/",
-                            "expertise": [
-                                "Governance",
-                                "Accountability and Ethics",
-                                "Risk management",
-                                "Executive Pay",
-                                "Social and Environmental Accounting",
-                                "Financial Reporting",
-                                "Quantitative Research",
-                                "Data Analysis"
-                            ]
-                        },
-                        {
-                            "name": "Ms Sue Evans",
-                            "url": "https://www.swansea.ac.uk/staff/p.s.evans/",
-                            "expertise": [
-                                "Management accounting",
-                                "Employability",
-                                "Accessibility",
-                                "Inclusivity",
-                                "Digital collaboration",
-                                "Active learning spaces"
-                            ]
-                        },
-                        {
-                            "name": "Dr Giulia Fantini",
-                            "url": "https://www.swansea.ac.uk/staff/g.fantini/",
-                            "expertise": [
-                                "Risk Management",
-                                "Corporate Governance",
-                                "Corporate Finance",
-                                "Executive Compensation",
-                                "Small and Medium-Sized Enterprises"
-                            ]
-                        },
-                        {
-                            "name": "Ms Terry Filer",
-                            "url": "https://www.swansea.ac.uk/staff/t.filer/",
-                            "expertise": [
-                                "UK Taxation",
-                                "Welsh Devolved Taxes",
-                                "Financial Accounting",
-                                "Pedagogic research",
-                                "Virtual Reality"
-                            ]
-                        },
-                        {
-                            "name": "Dr Cigdem Gedikli",
-                            "url": "https://www.swansea.ac.uk/staff/cigdem.gedikli/",
-                            "expertise": [
-                                "Labour and household economics",
-                                "Household finance",
-                                "Economics of gender",
-                                "Wellbeing",
-                                "Equality and diversity in corporate boards"
-                            ]
-                        },
-                        {
-                            "name": "Name Not Found",
-                            "url": "https://www.swansea.ac.uk/staff/a.g.hawkes/",
-                            "expertise": []
-                        },
-                        {
-                            "name": "Dr Lukas Helikum",
-                            "url": "https://www.swansea.ac.uk/staff/l.j.helikum/",
-                            "expertise": [
-                                "Behavioural Accounting",
-                                "Judgement and Decision-Making",
-                                "Earnings Management",
-                                "Corporate Social Responsibility (CSR) Reporting",
-                                "Non-GAAP Accounting",
-                                "Data Analytics"
-                            ]
-                        },
-                        {
-                            "name": "Professor Hafiz Hoque",
-                            "url": "https://www.swansea.ac.uk/staff/h.hoque/",
-                            "expertise": [
-                                "Corporate Finance",
-                                "Corporate boards",
-                                "Director’s network",
-                                "Islamic/Ethical Finance",
-                                "Bank Regulations",
-                                "Credit default Swaps",
-                                "Green innovation",
-                                "Climate change and finance",
-                                "ESG"
-                            ]
-                        },
-                        {
-                            "name": "Dr Fangzhou Huang",
-                            "url": "https://www.swansea.ac.uk/staff/f.huang/",
-                            "expertise": [
-                                "Asset pricing",
-                                "Downside risk of stock market",
-                                "Data analysis",
-                                "Pedagogical research"
-                            ]
-                        },
-                        {
-                            "name": "Miss Emma James",
-                            "url": "https://www.swansea.ac.uk/staff/e.m.james/",
-                            "expertise": [
-                                "International Financial Reporting Standards (IFRS)",
-                                "Financial Accounting",
-                                "Computerised Accounting Systems"
-                            ]
-                        },
-                        {
-                            "name": "Dr Joy Jia",
-                            "url": "https://www.swansea.ac.uk/staff/y.jia/",
-                            "expertise": [
-                                "Risk Management",
-                                "Corporate Governance",
-                                "Financial Management",
-                                "Asset Pricing"
-                            ]
-                        },
-                        {
-                            "name": "Professor Sarah Jones",
-                            "url": "https://www.swansea.ac.uk/staff/sarah.j.jones/",
-                            "expertise": [
-                                "Management Accounting",
-                                "Business Decision Making"
-                            ]
-                        },
-                        {
-                            "name": "Mr Andrew Miller",
-                            "url": "https://www.swansea.ac.uk/staff/andrew.j.miller/",
-                            "expertise": [
-                                "Strategy development",
-                                "Managing strategic change",
-                                "Corporate governance",
-                                "Leadership development",
-                                "Performance management",
-                                "Executive coaching",
-                                "Project management",
-                                "Business growth"
-                            ]
-                        },
-                        {
-                            "name": "Dr Hanh Nguyen",
-                            "url": "https://www.swansea.ac.uk/staff/t.h.h.nguyen/",
-                            "expertise": [
-                                "Governance",
-                                "Board diversity",
-                                "Accountability and Disclosure",
-                                "Executive compensation",
-                                "Environmental management accounting",
-                                "Quantitative and qualitative research",
-                                "Data analysis",
-                                "Corporate Finance"
-                            ]
-                        },
-                        {
-                            "name": "Dr Louise Obara",
-                            "url": "https://www.swansea.ac.uk/staff/l.j.obara/",
-                            "expertise": [
-                                "Business ethics, CSR, sustainability and human rights",
-                                "Corporate governance",
-                                "Qualitative research methods"
-                            ]
-                        },
-                        {
-                            "name": "Dr Jafar Ojra",
-                            "url": "https://www.swansea.ac.uk/staff/j.y.ojra/",
-                            "expertise": [
-                                "Strategic Management Accounting",
-                                "Performance Measurement",
-                                "Corporate Governance",
-                                "Entrepreneurship and SMEs"
-                            ]
-                        },
-                        {
-                            "name": "Dr Tim Pryce-Brown",
-                            "url": "https://www.swansea.ac.uk/staff/t.j.pryce-brown/",
-                            "expertise": [
-                                "Company Law",
-                                "International Corporate Governance"
-                            ]
-                        },
-                        {
-                            "name": "Dr Anh Do",
-                            "url": "https://www.swansea.ac.uk/staff/q.a.do/",
-                            "expertise": [
-                                "Corporate finance",
-                                "Corporate governance",
-                                "Sustainability",
-                                "Corporate social responsibility",
-                                "Banking",
-                                "Risk management"
-                            ]
-                        },
-                        {
-                            "name": "Dr Boru Ren",
-                            "url": "https://www.swansea.ac.uk/staff/humanities-and-socialsciences/management-staff/accounting-finance-staff/ren-b/",
-                            "expertise": [
-                                "Textual analysis",
-                                "Sentiment analysis",
-                                "Spillover effects",
-                                "Herd behaviour",
-                                "Price forecasting",
-                                "Applied machine learning"
-                            ]
-                        },
-                        {
-                            "name": "Dr Ruth Sagay",
-                            "url": "https://www.swansea.ac.uk/staff/r.o.sagay/",
-                            "expertise": [
-                                "Corporate Governance",
-                                "Initial Public Offering (IPO) Firms",
-                                "Empirical Corporate Finance",
-                                "Data Analysis"
-                            ]
-                        },
-                        {
-                            "name": "Dr Sarosh Shabi",
-                            "url": "https://www.swansea.ac.uk/staff/s.shabi/",
-                            "expertise": [
-                                "International Financial Markets",
-                                "Uncertainty and Financial Crisis",
-                                "Nonlinear Time Series"
-                            ]
-                        },
-                        {
-                            "name": "Dr Syed Shabi-Ul-Hassan",
-                            "url": "https://www.swansea.ac.uk/staff/s.shabi-ul-hassan/",
-                            "expertise": [
-                                "Financial Modelling",
-                                "Economic Uncertainty",
-                                "Asset Pricing Models",
-                                "Asymmetries and Nonlinearities in the Financial Time Series"
-                            ]
-                        },
-                        {
-                            "name": "Mrs Ellen Spender",
-                            "url": "https://www.swansea.ac.uk/staff/e.t.spender/",
-                            "expertise": [
-                                "Financial Accounting",
-                                "Financial Statement Analysis",
-                                "Forensic Accounting",
-                                "Corporate Finance"
-                            ]
-                        },
-                        {
-                            "name": "Dr Linh Tran",
-                            "url": "https://www.swansea.ac.uk/staff/l.t.t.tran/",
-                            "expertise": [
-                                "Corporate Governance",
-                                "Banking",
-                                "Fintech"
-                            ]
-                        },
-                        {
-                            "name": "Dr Katerina Tsakou",
-                            "url": "https://www.swansea.ac.uk/staff/katerina.tsakou/",
-                            "expertise": [
-                                "Volatility Modelling and Forecasting",
-                                "Financial Econometrics",
-                                "Risk Management",
-                                "High-Frequency Data"
-                            ]
-                        },
-                        {
-                            "name": "Dr Vineet Upreti",
-                            "url": "https://www.swansea.ac.uk/staff/v.upreti/",
-                            "expertise": [
-                                "Financial risk management",
-                                "Financial asset pricing",
-                                "Volatility forecasting"
-                            ]
-                        },
-                        {
-                            "name": "Dr Nader Virk",
-                            "url": "https://www.swansea.ac.uk/staff/n.s.virk/",
-                            "expertise": [
-                                "Asset pricing: factor models and anomalies",
-                                "Volatility modelling",
-                                "Religious governance in Islamic finance",
-                                "Peer-to-peer business lending in DeFi",
-                                "high frequency data analytics and financial market stability"
-                            ]
-                        },
-                        {
-                            "name": "Mrs Tracey Williams",
-                            "url": "https://www.swansea.ac.uk/staff/t.m.williams/",
-                            "expertise": [
-                                "Financial Accounting",
-                                "Management Accounting"
-                            ]
-                        },
-                        {
-                            "name": "Dr Okan Yilmaz",
-                            "url": "https://www.swansea.ac.uk/staff/okan.yilmaz/",
-                            "expertise": [
-                                "Labour and Development Economics",
-                                "Real Estate Finance and Pricing",
-                                "Data Analysis",
-                                "Applied Econometrics"
-                            ]
-                        },
-                        {
-                            "name": "Dr Tim Zhou",
-                            "url": "https://www.swansea.ac.uk/staff/t.zhou/",
-                            "expertise": [
-                                "Bank mergers and acquisitions",
-                                "Banking regulation",
-                                "Banking crisis and regulatory intervention"
-                            ]
-                        },
-                        {
-                            "name": "Dr Matt Wilson",
-                            "url": "https://www.swansea.ac.uk/staff/matthew.wilson/",
-                            "expertise": [
-                                "Alternative Organising",
-                                "Cultural Theory",
-                                "Applied Ethics",
-                                "Social Movements",
-                                "Political theory"
-                            ]
-                        }
-                    ]
-                }
-            ]
-        },
-        {
-            "key": "business",
-            "name": "Business Management",
+            "key": "management",
+            "name": "School of Management",
             "departments": [
                 {
                     "key": "business",
@@ -2225,15 +1781,435 @@
                             ]
                         }
                     ]
+                },
+                {
+                    "key": "finance",
+                    "name": "Accounting and Finance",
+                    "staff": [
+                        {
+                            "name": "Dr Richard Baylis",
+                            "url": "https://www.swansea.ac.uk/staff/r.m.baylis/",
+                            "expertise": [
+                                "Accounting",
+                                "International financial reporting",
+                                "Audit and assurance",
+                                "Public sector accounting",
+                                "Accounting education",
+                                "Executive education"
+                            ]
+                        },
+                        {
+                            "name": "Professor Sabri Boubaker",
+                            "url": "https://www.swansea.ac.uk/staff/sabri.boubaker/",
+                            "expertise": [
+                                "Ownership structure",
+                                "Control of listed companies"
+                            ]
+                        },
+                        {
+                            "name": "Professor Mike Buckle",
+                            "url": "https://www.swansea.ac.uk/staff/m.j.buckle/",
+                            "expertise": [
+                                "Trend following strategies",
+                                "ESG investing",
+                                "Jump detection in financial data",
+                                "Fintech"
+                            ]
+                        },
+                        {
+                            "name": "Dr Yuzhi Cai",
+                            "url": "https://www.swansea.ac.uk/staff/y.cai/",
+                            "expertise": [
+                                "Financial econometrics",
+                                "Quantitative finance",
+                                "Quantile regression and quantile function modelling",
+                                "Statistical modelling for quantitative data"
+                            ]
+                        },
+                        {
+                            "name": "Dr Rongxin Chen",
+                            "url": "https://www.swansea.ac.uk/staff/rongxin.chen/",
+                            "expertise": [
+                                "Behavioural Finance",
+                                "Asset Pricing",
+                                "Financial Markets",
+                                "Cryptocurrencies",
+                                "Big Data & Machine Learning in Finance",
+                                "Corporate Finance & Governance"
+                            ]
+                        },
+                        {
+                            "name": "Dr Bryan Collings",
+                            "url": "https://www.swansea.ac.uk/staff/b.a.c.collings/",
+                            "expertise": [
+                                "Applied Corporate Governance and Agency Theory in Finance",
+                                "Machine Learning & Artificial Intelligence applications",
+                                "Investment in Emerging Markets"
+                            ]
+                        },
+                        {
+                            "name": "Mrs Lesley Davies",
+                            "url": "https://www.swansea.ac.uk/staff/l.p.davies/",
+                            "expertise": [
+                                "Audit and Assurance"
+                            ]
+                        },
+                        {
+                            "name": "Mr Johan de Rooy",
+                            "url": "https://www.swansea.ac.uk/staff/j.p.derooy/",
+                            "expertise": [
+                                "Financial accounting theory",
+                                "Combining positive psychology to accountancy",
+                                "Explaining accounting to non-accountancy audiences",
+                                "Motivating learners to aspire",
+                                "Training in employment readiness, especially for the more able and well-rounded young learners"
+                            ]
+                        },
+                        {
+                            "name": "Dr Ashraf Elbakry",
+                            "url": "https://www.swansea.ac.uk/staff/a.e.elbakry/",
+                            "expertise": [
+                                "Financial reporting",
+                                "International financial reporting standards",
+                                "Capital markets",
+                                "Management accounting",
+                                "Cost control",
+                                "Value relevance of accounting information"
+                            ]
+                        },
+                        {
+                            "name": "Dr Mohamed Elmagrhi",
+                            "url": "https://www.swansea.ac.uk/staff/m.h.a.elmagrhi/",
+                            "expertise": [
+                                "Governance",
+                                "Accountability and Ethics",
+                                "Risk management",
+                                "Executive Pay",
+                                "Social and Environmental Accounting",
+                                "Financial Reporting",
+                                "Quantitative Research",
+                                "Data Analysis"
+                            ]
+                        },
+                        {
+                            "name": "Ms Sue Evans",
+                            "url": "https://www.swansea.ac.uk/staff/p.s.evans/",
+                            "expertise": [
+                                "Management accounting",
+                                "Employability",
+                                "Accessibility",
+                                "Inclusivity",
+                                "Digital collaboration",
+                                "Active learning spaces"
+                            ]
+                        },
+                        {
+                            "name": "Dr Giulia Fantini",
+                            "url": "https://www.swansea.ac.uk/staff/g.fantini/",
+                            "expertise": [
+                                "Risk Management",
+                                "Corporate Governance",
+                                "Corporate Finance",
+                                "Executive Compensation",
+                                "Small and Medium-Sized Enterprises"
+                            ]
+                        },
+                        {
+                            "name": "Ms Terry Filer",
+                            "url": "https://www.swansea.ac.uk/staff/t.filer/",
+                            "expertise": [
+                                "UK Taxation",
+                                "Welsh Devolved Taxes",
+                                "Financial Accounting",
+                                "Pedagogic research",
+                                "Virtual Reality"
+                            ]
+                        },
+                        {
+                            "name": "Dr Cigdem Gedikli",
+                            "url": "https://www.swansea.ac.uk/staff/cigdem.gedikli/",
+                            "expertise": [
+                                "Labour and household economics",
+                                "Household finance",
+                                "Economics of gender",
+                                "Wellbeing",
+                                "Equality and diversity in corporate boards"
+                            ]
+                        },
+                        {
+                            "name": "Name Not Found",
+                            "url": "https://www.swansea.ac.uk/staff/a.g.hawkes/",
+                            "expertise": []
+                        },
+                        {
+                            "name": "Dr Lukas Helikum",
+                            "url": "https://www.swansea.ac.uk/staff/l.j.helikum/",
+                            "expertise": [
+                                "Behavioural Accounting",
+                                "Judgement and Decision-Making",
+                                "Earnings Management",
+                                "Corporate Social Responsibility (CSR) Reporting",
+                                "Non-GAAP Accounting",
+                                "Data Analytics"
+                            ]
+                        },
+                        {
+                            "name": "Professor Hafiz Hoque",
+                            "url": "https://www.swansea.ac.uk/staff/h.hoque/",
+                            "expertise": [
+                                "Corporate Finance",
+                                "Corporate boards",
+                                "Director’s network",
+                                "Islamic/Ethical Finance",
+                                "Bank Regulations",
+                                "Credit default Swaps",
+                                "Green innovation",
+                                "Climate change and finance",
+                                "ESG"
+                            ]
+                        },
+                        {
+                            "name": "Dr Fangzhou Huang",
+                            "url": "https://www.swansea.ac.uk/staff/f.huang/",
+                            "expertise": [
+                                "Asset pricing",
+                                "Downside risk of stock market",
+                                "Data analysis",
+                                "Pedagogical research"
+                            ]
+                        },
+                        {
+                            "name": "Miss Emma James",
+                            "url": "https://www.swansea.ac.uk/staff/e.m.james/",
+                            "expertise": [
+                                "International Financial Reporting Standards (IFRS)",
+                                "Financial Accounting",
+                                "Computerised Accounting Systems"
+                            ]
+                        },
+                        {
+                            "name": "Dr Joy Jia",
+                            "url": "https://www.swansea.ac.uk/staff/y.jia/",
+                            "expertise": [
+                                "Risk Management",
+                                "Corporate Governance",
+                                "Financial Management",
+                                "Asset Pricing"
+                            ]
+                        },
+                        {
+                            "name": "Professor Sarah Jones",
+                            "url": "https://www.swansea.ac.uk/staff/sarah.j.jones/",
+                            "expertise": [
+                                "Management Accounting",
+                                "Business Decision Making"
+                            ]
+                        },
+                        {
+                            "name": "Mr Andrew Miller",
+                            "url": "https://www.swansea.ac.uk/staff/andrew.j.miller/",
+                            "expertise": [
+                                "Strategy development",
+                                "Managing strategic change",
+                                "Corporate governance",
+                                "Leadership development",
+                                "Performance management",
+                                "Executive coaching",
+                                "Project management",
+                                "Business growth"
+                            ]
+                        },
+                        {
+                            "name": "Dr Hanh Nguyen",
+                            "url": "https://www.swansea.ac.uk/staff/t.h.h.nguyen/",
+                            "expertise": [
+                                "Governance",
+                                "Board diversity",
+                                "Accountability and Disclosure",
+                                "Executive compensation",
+                                "Environmental management accounting",
+                                "Quantitative and qualitative research",
+                                "Data analysis",
+                                "Corporate Finance"
+                            ]
+                        },
+                        {
+                            "name": "Dr Louise Obara",
+                            "url": "https://www.swansea.ac.uk/staff/l.j.obara/",
+                            "expertise": [
+                                "Business ethics, CSR, sustainability and human rights",
+                                "Corporate governance",
+                                "Qualitative research methods"
+                            ]
+                        },
+                        {
+                            "name": "Dr Jafar Ojra",
+                            "url": "https://www.swansea.ac.uk/staff/j.y.ojra/",
+                            "expertise": [
+                                "Strategic Management Accounting",
+                                "Performance Measurement",
+                                "Corporate Governance",
+                                "Entrepreneurship and SMEs"
+                            ]
+                        },
+                        {
+                            "name": "Dr Tim Pryce-Brown",
+                            "url": "https://www.swansea.ac.uk/staff/t.j.pryce-brown/",
+                            "expertise": [
+                                "Company Law",
+                                "International Corporate Governance"
+                            ]
+                        },
+                        {
+                            "name": "Dr Anh Do",
+                            "url": "https://www.swansea.ac.uk/staff/q.a.do/",
+                            "expertise": [
+                                "Corporate finance",
+                                "Corporate governance",
+                                "Sustainability",
+                                "Corporate social responsibility",
+                                "Banking",
+                                "Risk management"
+                            ]
+                        },
+                        {
+                            "name": "Dr Boru Ren",
+                            "url": "https://www.swansea.ac.uk/staff/humanities-and-socialsciences/management-staff/accounting-finance-staff/ren-b/",
+                            "expertise": [
+                                "Textual analysis",
+                                "Sentiment analysis",
+                                "Spillover effects",
+                                "Herd behaviour",
+                                "Price forecasting",
+                                "Applied machine learning"
+                            ]
+                        },
+                        {
+                            "name": "Dr Ruth Sagay",
+                            "url": "https://www.swansea.ac.uk/staff/r.o.sagay/",
+                            "expertise": [
+                                "Corporate Governance",
+                                "Initial Public Offering (IPO) Firms",
+                                "Empirical Corporate Finance",
+                                "Data Analysis"
+                            ]
+                        },
+                        {
+                            "name": "Dr Sarosh Shabi",
+                            "url": "https://www.swansea.ac.uk/staff/s.shabi/",
+                            "expertise": [
+                                "International Financial Markets",
+                                "Uncertainty and Financial Crisis",
+                                "Nonlinear Time Series"
+                            ]
+                        },
+                        {
+                            "name": "Dr Syed Shabi-Ul-Hassan",
+                            "url": "https://www.swansea.ac.uk/staff/s.shabi-ul-hassan/",
+                            "expertise": [
+                                "Financial Modelling",
+                                "Economic Uncertainty",
+                                "Asset Pricing Models",
+                                "Asymmetries and Nonlinearities in the Financial Time Series"
+                            ]
+                        },
+                        {
+                            "name": "Mrs Ellen Spender",
+                            "url": "https://www.swansea.ac.uk/staff/e.t.spender/",
+                            "expertise": [
+                                "Financial Accounting",
+                                "Financial Statement Analysis",
+                                "Forensic Accounting",
+                                "Corporate Finance"
+                            ]
+                        },
+                        {
+                            "name": "Dr Linh Tran",
+                            "url": "https://www.swansea.ac.uk/staff/l.t.t.tran/",
+                            "expertise": [
+                                "Corporate Governance",
+                                "Banking",
+                                "Fintech"
+                            ]
+                        },
+                        {
+                            "name": "Dr Katerina Tsakou",
+                            "url": "https://www.swansea.ac.uk/staff/katerina.tsakou/",
+                            "expertise": [
+                                "Volatility Modelling and Forecasting",
+                                "Financial Econometrics",
+                                "Risk Management",
+                                "High-Frequency Data"
+                            ]
+                        },
+                        {
+                            "name": "Dr Vineet Upreti",
+                            "url": "https://www.swansea.ac.uk/staff/v.upreti/",
+                            "expertise": [
+                                "Financial risk management",
+                                "Financial asset pricing",
+                                "Volatility forecasting"
+                            ]
+                        },
+                        {
+                            "name": "Dr Nader Virk",
+                            "url": "https://www.swansea.ac.uk/staff/n.s.virk/",
+                            "expertise": [
+                                "Asset pricing: factor models and anomalies",
+                                "Volatility modelling",
+                                "Religious governance in Islamic finance",
+                                "Peer-to-peer business lending in DeFi",
+                                "high frequency data analytics and financial market stability"
+                            ]
+                        },
+                        {
+                            "name": "Mrs Tracey Williams",
+                            "url": "https://www.swansea.ac.uk/staff/t.m.williams/",
+                            "expertise": [
+                                "Financial Accounting",
+                                "Management Accounting"
+                            ]
+                        },
+                        {
+                            "name": "Dr Okan Yilmaz",
+                            "url": "https://www.swansea.ac.uk/staff/okan.yilmaz/",
+                            "expertise": [
+                                "Labour and Development Economics",
+                                "Real Estate Finance and Pricing",
+                                "Data Analysis",
+                                "Applied Econometrics"
+                            ]
+                        },
+                        {
+                            "name": "Dr Tim Zhou",
+                            "url": "https://www.swansea.ac.uk/staff/t.zhou/",
+                            "expertise": [
+                                "Bank mergers and acquisitions",
+                                "Banking regulation",
+                                "Banking crisis and regulatory intervention"
+                            ]
+                        },
+                        {
+                            "name": "Dr Matt Wilson",
+                            "url": "https://www.swansea.ac.uk/staff/matthew.wilson/",
+                            "expertise": [
+                                "Alternative Organising",
+                                "Cultural Theory",
+                                "Applied Ethics",
+                                "Social Movements",
+                                "Political theory"
+                            ]
+                        }
+                    ]
                 }
             ]
         },
         {
             "key": "law",
-            "name": "Law",
+            "name": "School of Law",
             "departments": [
                 {
-                    "key": "law",
+                    "key": "Law",
                     "name": "Law",
                     "staff": [
                         {
