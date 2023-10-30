@@ -4,14 +4,18 @@ import './directory.scss';
 import Filter from './filter';
 
 function DirectoryRow(props) {
+  // Split the title by the first comma and take the first part
+  const titleParts = props.staff_member.title.split(', ');
+  const formattedTitle = titleParts.length > 0 ? titleParts[0] : props.staff_member.title;
+
   return (
     <tr className={`${props.college.key} ${props.department.key}`}>
       <td nowrap='true' className='staff-name'>
         <a href={props.staff_member.url} target='_blank' rel='noreferrer'>
           {props.staff_member.name}
         </a>
-        <br /> {/* Add a line break */}
-        {props.staff_member.title}
+        <br />
+        {formattedTitle} {/* Display the formatted title */}
       </td>
       <td className='college'>{props.college.name}</td>
       <td>{props.department.name}</td>
@@ -52,7 +56,7 @@ export default class Directory extends React.Component {
             <table className='table'>
               <thead>
                 <tr>
-                  <th scope='col'>Name / Employee Title</th> {/* Update header */}
+                  <th scope='col'>Name / Employee Title</th>
                   <th scope='col'>School</th>
                   <th scope='col'>Department</th>
                   <th scope='col'>Areas of Expertise</th>
