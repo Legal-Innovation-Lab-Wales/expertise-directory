@@ -55,11 +55,13 @@ export default class Directory extends React.Component {
       <Container>
         <Row>
           <Col xs={12}>
-            <h1 className='title text-center'>
-              <strong>Directory of Expertise</strong>
-            </h1>
+            <div className='header-container'>
+              <h1 className='title'>
+                <strong>Directory of Expertise</strong>
+              </h1>
+              <div>Last Updated at: {this.state.last_update}</div>
+            </div>
             <Filter data={this.state} />
-            <div>Last Updated at: {this.state.last_update}</div>
             <table className='table'>
               <thead>
                 <tr>
