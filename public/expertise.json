@@ -1,199 +1,2804 @@
 {
-    "last_update": "19:15 30-10-2023",
+    "last_update": "19:53 30-10-2023",
     "colleges": [
         {
             "key": "ppirs",
             "name": "Politics, Philosophy, International Relations",
             "departments": [
                 {
-                    "name": "Dr Anna Bortolan",
-                    "url": "https://www.swansea.ac.uk/staff/anna.bortolan/",
-                    "expertise": []
-                },
-                {
-                    "name": "Dr Bettina Petersohn",
-                    "url": "https://www.swansea.ac.uk/staff/b.petersohn/",
-                    "expertise": [
-                        "Comparative federalism",
-                        "Local government coordination",
-                        "Accountability in Multi-level systems",
-                        "Accommodation of internal nations"
+                    "key": "ppirs",
+                    "name": "Politics, Philosophy, International Relations",
+                    "staff": [
+                        {
+                            "name": "Dr Anna Bortolan",
+                            "url": "https://www.swansea.ac.uk/staff/anna.bortolan/",
+                            "expertise": []
+                        },
+                        {
+                            "name": "Dr Bettina Petersohn",
+                            "url": "https://www.swansea.ac.uk/staff/b.petersohn/",
+                            "expertise": [
+                                "Comparative federalism",
+                                "Local government coordination",
+                                "Accountability in Multi-level systems",
+                                "Accommodation of internal nations"
+                            ]
+                        },
+                        {
+                            "name": "Dr Caner Sayan",
+                            "url": "https://www.swansea.ac.uk/staff/r.c.sayan",
+                            "expertise": [
+                                "(Global) Environmental Politics",
+                                "Water Security",
+                                "Environmental and Water Justice",
+                                "Politics of Transboundary Waters",
+                                "Political Ecology",
+                                "International Development",
+                                "Qualitative Research and Fieldwork Design"
+                            ]
+                        },
+                        {
+                            "name": "Dr Dion Curry",
+                            "url": "https://www.swansea.ac.uk/staff/d.s.d.curry/",
+                            "expertise": [
+                                "Governance",
+                                "Political legitimacy",
+                                "Trust",
+                                "Public sector reform",
+                                "British politics"
+                            ]
+                        },
+                        {
+                            "name": "Dr Gerard Clarke",
+                            "url": "https://www.swansea.ac.uk/staff/g.clarke/",
+                            "expertise": [
+                                "Politics and International Development",
+                                "Politics in the Global South",
+                                "International development policy",
+                                "Civil society and international development",
+                                "Human rights and international development"
+                            ]
+                        },
+                        {
+                            "name": "Professor Krijn Peters",
+                            "url": "https://www.swansea.ac.uk/staff/k.peters/",
+                            "expertise": [
+                                "Armed conflict",
+                                "Post-war reconstruction",
+                                "Disarmament, demobilisation and reintegration",
+                                "International development",
+                                "Urban and rural transport services",
+                                "Rural access",
+                                "Appropriate and sustainable Technologies"
+                            ]
+                        },
+                        {
+                            "name": "Ms Leah Owen",
+                            "url": "https://www.swansea.ac.uk/staff/leah.owen/",
+                            "expertise": [
+                                "Security studies",
+                                "Genocide",
+                                "Post-conflict justice",
+                                "International institutions",
+                                "Archival research methods",
+                                "LGBT/queer politics"
+                            ]
+                        },
+                        {
+                            "name": "Dr Luca Trenta",
+                            "url": "https://www.swansea.ac.uk/staff/l.trenta/",
+                            "expertise": [
+                                "International Relations",
+                                "US Foreign Policy",
+                                "Cold War",
+                                "Covert Action",
+                                "Intelligence Studies",
+                                "Assassinations and targeted killing",
+                                "Drones"
+                            ]
+                        },
+                        {
+                            "name": "Dr Matthew Wall",
+                            "url": "https://www.swansea.ac.uk/staff/m.t.wall/",
+                            "expertise": [
+                                "Election campaign dynamics",
+                                "Online politics and the role of the Internet in contemporary campaigns",
+                                "Vote Advice Application Websites",
+                                "Election forecasting",
+                                "Political Party Policy Analysis",
+                                "Electoral System Consequences and Reform Dynamics"
+                            ]
+                        },
+                        {
+                            "name": "Dr Matthias Dilling",
+                            "url": "https://www.swansea.ac.uk/staff/matthias.dilling/",
+                            "expertise": [
+                                "Comparative politics",
+                                "European politics",
+                                "Political parties",
+                                "Political institutions",
+                                "Qualitative and historical methods"
+                            ]
+                        },
+                        {
+                            "name": "Dr Paddy McQueen",
+                            "url": "https://www.swansea.ac.uk/staff/paddy.mcqueen/",
+                            "expertise": [
+                                "The politics of recognition",
+                                "The ethics of identity",
+                                "Freedom and autonomy",
+                                "Applied ethics"
+                            ]
+                        },
+                        {
+                            "name": "Dr Patrick Cockburn",
+                            "url": "https://www.swansea.ac.uk/staff/p.j.l.cockburn/",
+                            "expertise": []
+                        },
+                        {
+                            "name": "Dr Pier-Luc Dupont Picard",
+                            "url": "https://www.swansea.ac.uk/staff/p.l.dupont/",
+                            "expertise": [
+                                "The politics of race, ethnicity, religion, gender, sexuality, class, disability and age",
+                                "Anti-discrimination policy",
+                                "Employment and education inequalities",
+                                "Grassroots activism",
+                                "Human rights law and institutions",
+                                "Multiculturalism",
+                                "Political theory"
+                            ]
+                        },
+                        {
+                            "name": "Mr Robert Bideleux",
+                            "url": "https://www.swansea.ac.uk/staff/r.j.bideleux/",
+                            "expertise": [
+                                "The history, politics and economic development of the eastern half of Europe.",
+                                "The evolution of Marxism/Communism.",
+                                "The global history of economic thinking",
+                                "Postcolonialism (including Orientalism)",
+                                "Genocide",
+                                "Latin American politics & economic development"
+                            ]
+                        },
+                        {
+                            "name": "Dr Rob Knowles",
+                            "url": "https://www.swansea.ac.uk/staff/r.f.knowles/",
+                            "expertise": [
+                                "Metaphysics",
+                                "Epistemology",
+                                "Philosophy of Language",
+                                "Philosophy of Mathematics",
+                                "Philosophy of Science"
+                            ]
+                        },
+                        {
+                            "name": "Professor Alan Collins",
+                            "url": "https://www.swansea.ac.uk/staff/a.collins/",
+                            "expertise": [
+                                "Theories of International Security",
+                                "Security Dilemma",
+                                "Constructivism",
+                                "Securitization",
+                                "ASEAN",
+                                "Southeast Asian Security"
+                            ]
+                        },
+                        {
+                            "name": "Professor David Bewley-Taylor",
+                            "url": "https://www.swansea.ac.uk/staff/d.r.taylor/",
+                            "expertise": []
+                        },
+                        {
+                            "name": "Professor Jonathan Bradbury",
+                            "url": "https://www.swansea.ac.uk/staff/j.p.bradbury/",
+                            "expertise": [
+                                "Comparative territorial politics",
+                                "UK territorial politics and devolution",
+                                "Constitutional policy and devolution",
+                                "Devolution, governance and public policy",
+                                "Party adaptation to devolution",
+                                "Multi-level politics and representation"
+                            ]
+                        }
                     ]
-                },
+                }
+            ]
+        },
+        {
+            "key": "education",
+            "name": "Education & Childhood Studies",
+            "departments": [
                 {
-                    "name": "Dr Caner Sayan",
-                    "url": "https://www.swansea.ac.uk/staff/r.c.sayan",
-                    "expertise": [
-                        "(Global) Environmental Politics",
-                        "Water Security",
-                        "Environmental and Water Justice",
-                        "Politics of Transboundary Waters",
-                        "Political Ecology",
-                        "International Development",
-                        "Qualitative Research and Fieldwork Design"
+                    "key": "education",
+                    "name": "Education & Childhood Studies",
+                    "staff": [
+                        {
+                            "name": "Dr Michelle Brinn",
+                            "url": "https://www.swansea.ac.uk/staff/m.s.brinn",
+                            "expertise": [
+                                "Early Years Education",
+                                "Parental Engagement",
+                                "Student Participation",
+                                "Developing Communities of Practice and Learning"
+                            ]
+                        },
+                        {
+                            "name": "Dr Zoe Clegg",
+                            "url": "https://www.swansea.ac.uk/staff/z.m.clegg/",
+                            "expertise": [
+                                "Youth Citizenship",
+                                "Children's Rights",
+                                "Youth Participation/Youth Voice",
+                                "Education and Youth Policy",
+                                "Qualitative Research Methods",
+                                "Creative Research Methods"
+                            ]
+                        },
+                        {
+                            "name": "Dr Angella Cooze",
+                            "url": "https://www.swansea.ac.uk/staff/a.c.cooze/",
+                            "expertise": [
+                                "Initial Teacher Education",
+                                "The teaching of English",
+                                "Literacy",
+                                "Teacher development"
+                            ]
+                        },
+                        {
+                            "name": "Professor Tom Crick",
+                            "url": "https://www.swansea.ac.uk/staff/thomas.crick/",
+                            "expertise": [
+                                "Computer science and STEM education",
+                                "Digital skills",
+                                "Curriculum reform",
+                                "Secondary/administrative/linked data analysis",
+                                "Computational social science",
+                                "Intelligent systems",
+                                "Digital/data infrastructure",
+                                "Digital economy"
+                            ]
+                        },
+                        {
+                            "name": "Dr Ceryn Evans",
+                            "url": "https://www.swansea.ac.uk/staff/ceryn.evans/",
+                            "expertise": [
+                                "Widening participation in higher education",
+                                "Inequalities in education",
+                                "Social class",
+                                "Young people’s post-16 education and training"
+                            ]
+                        },
+                        {
+                            "name": "Miss Laura Evans",
+                            "url": "https://www.swansea.ac.uk/staff/laura.m.evans/",
+                            "expertise": [
+                                "Teaching and learning (Pedagogy)",
+                                "Initial Teacher Education",
+                                "Reflective practice",
+                                "Practitioner research"
+                            ]
+                        },
+                        {
+                            "name": "Mr Ross Evans",
+                            "url": "https://www.swansea.ac.uk/staff/r.j.b.evans/",
+                            "expertise": [
+                                "Data tracking and analysis",
+                                "Secondary school computer science education",
+                                "Independent and remote learning",
+                                "Department self-evaluation",
+                                "Initial Teacher Education",
+                                "Classroom Management",
+                                "Digital Competency"
+                            ]
+                        },
+                        {
+                            "name": "Dr Jane Gatley",
+                            "url": "https://www.swansea.ac.uk/staff/j.o.gatley",
+                            "expertise": [
+                                "Philosophy of Education",
+                                "Curriculum",
+                                "Philosophy in Schools",
+                                "Aims of Education",
+                                "Social Justice",
+                                "Metaphilosophy",
+                                "Social Epistemology"
+                            ]
+                        },
+                        {
+                            "name": "Professor Janet Goodall",
+                            "url": "https://www.swansea.ac.uk/staff/j.s.goodall/",
+                            "expertise": [
+                                "Parental engagement",
+                                "School leadership",
+                                "Qualitative research"
+                            ]
+                        },
+                        {
+                            "name": "Dr Russell Grigg",
+                            "url": "https://www.swansea.ac.uk/staff/g.r.grigg",
+                            "expertise": [
+                                "Initial Teacher Education",
+                                "History of education",
+                                "Primary humanities",
+                                "School inspection and evaluation",
+                                "Problem-based learning",
+                                "Entrepreneurial education"
+                            ]
+                        },
+                        {
+                            "name": "Professor Alma Harris",
+                            "url": "https://www.swansea.ac.uk/staff/alma.harris/",
+                            "expertise": []
+                        },
+                        {
+                            "name": "Dr Helen Lewis",
+                            "url": "https://www.swansea.ac.uk/staff/helen.e.lewis/",
+                            "expertise": [
+                                "Thinking Skills and Metacognition",
+                                "Teaching and Learning (Pedagogy)",
+                                "Reflective Practice",
+                                "Initial and Continuing Teacher Education",
+                                "Teacher Research and Enquiry",
+                                "Animal-assisted Interventions"
+                            ]
+                        },
+                        {
+                            "name": "Mr Pete Lloyd",
+                            "url": "https://www.swansea.ac.uk/staff/p.j.lloyd/",
+                            "expertise": [
+                                "Post graduate science education",
+                                "Teaching practical science",
+                                "Monitoring and tracking progress",
+                                "Examining",
+                                "Teaching through the medium of Welsh"
+                            ]
+                        },
+                        {
+                            "name": "Dr Neil Lucas",
+                            "url": "https://www.swansea.ac.uk/staff/n.lucas/",
+                            "expertise": [
+                                "Education Leadership",
+                                "Education Governance",
+                                "Education Quality Assurance",
+                                "Geostatistics",
+                                "Geographic Information Systems"
+                            ]
+                        },
+                        {
+                            "name": "Mr Sion Owen",
+                            "url": "https://www.swansea.ac.uk/staff/s.c.owen/",
+                            "expertise": [
+                                "Welsh Language Charter",
+                                "Digital Competence"
+                            ]
+                        },
+                        {
+                            "name": "Dr Alex Southern",
+                            "url": "https://www.swansea.ac.uk/staff/alex.southern/",
+                            "expertise": [
+                                "Educational research methods",
+                                "Archival research methodologies",
+                                "British Education History",
+                                "Film Education",
+                                "Film History",
+                                "Close to practice pedagogical enquiry"
+                            ]
+                        },
+                        {
+                            "name": "Mrs Emma Spacey",
+                            "url": "https://www.swansea.ac.uk/staff/e.s.spacey/",
+                            "expertise": []
+                        },
+                        {
+                            "name": "Dr Gisselle Tur Porres",
+                            "url": "https://www.swansea.ac.uk/staff/g.m.turporres/",
+                            "expertise": [
+                                "Initial Teacher Education",
+                                "Teaching and Learning (Emancipatory pedagogies)",
+                                "Family, Children, School and Community relations",
+                                "Early childhood educational policies",
+                                "Qualitative research"
+                            ]
+                        },
+                        {
+                            "name": "Dr Jacky Tyrie",
+                            "url": "https://www.swansea.ac.uk/staff/j.tyrie/",
+                            "expertise": [
+                                "Socio-cultural understand of Childhood",
+                                "Sociology of Childhood",
+                                "International Childhoods",
+                                "Young Children’s Rights",
+                                "Participation in the Early Years",
+                                "Gender equality in the early years",
+                                "Research with and for Young Children"
+                            ]
+                        },
+                        {
+                            "name": "Dr Alison Walker",
+                            "url": "https://www.swansea.ac.uk/staff/a.walker/",
+                            "expertise": [
+                                "Service-Learning",
+                                "Critical Reflection",
+                                "Experiential learning",
+                                "Developing Graduate Identity",
+                                "Community Engagement",
+                                "Qualitative Research and Analysis"
+                            ]
+                        },
+                        {
+                            "name": "Mr Chris Wolfe",
+                            "url": "https://www.swansea.ac.uk/staff/c.c.wolfe/",
+                            "expertise": [
+                                "Reflective practice",
+                                "Coaching and Mentoring",
+                                "Using ICT to support learning"
+                            ]
+                        },
+                        {
+                            "name": "Dr Annamari Ylonen",
+                            "url": "https://www.swansea.ac.uk/staff/a.p.ylonen/",
+                            "expertise": [
+                                "International Education",
+                                "Lesson Study",
+                                "Qualitative research and analysis"
+                            ]
+                        },
+                        {
+                            "name": "Dr Emily Lowthian",
+                            "url": "https://www.swansea.ac.uk/staff/e.m.lowthian/",
+                            "expertise": [
+                                "Quantitative methods and design",
+                                "Child-wellbeing (e.g., substance use, education outcomes)",
+                                "Adverse Childhood Experiences (ACEs)",
+                                "Inequalities in health and wellbeing",
+                                "Parenting and the family environment",
+                                "Structural equational modelling (SEM)"
+                            ]
+                        }
                     ]
-                },
+                }
+            ]
+        },
+        {
+            "key": "economics",
+            "name": "Economics",
+            "departments": [
                 {
-                    "name": "Dr Dion Curry",
-                    "url": "https://www.swansea.ac.uk/staff/d.s.d.curry/",
-                    "expertise": [
-                        "Governance",
-                        "Political legitimacy",
-                        "Trust",
-                        "Public sector reform",
-                        "British politics"
+                    "key": "economics",
+                    "name": "Economics",
+                    "staff": [
+                        {
+                            "name": "Dr Ilias Asproudis",
+                            "url": "https://www.swansea.ac.uk/staff/ilias.asproudis/",
+                            "expertise": [
+                                "Environmental Economics and Environmental Policy",
+                                "Industrial Organisation and Technological Choice",
+                                "Microeconomics",
+                                "Trade Unions and Bargaining",
+                                "Environmental Non-Governmental Organisations"
+                            ]
+                        },
+                        {
+                            "name": "Dr Lucy Barros",
+                            "url": "https://www.swansea.ac.uk/staff/lucy.barros/",
+                            "expertise": [
+                                "Applied macroeconomics",
+                                "DSGE modelling",
+                                "Economic growth"
+                            ]
+                        },
+                        {
+                            "name": "Professor David Blackaby",
+                            "url": "https://www.swansea.ac.uk/staff/d.h.blackaby/",
+                            "expertise": [
+                                "Labour Markets",
+                                "Regional Economics",
+                                "Public Policy",
+                                "Welsh Economy"
+                            ]
+                        },
+                        {
+                            "name": "Dr Rosen Chowdhury",
+                            "url": "https://www.swansea.ac.uk/staff/r.a.chowdhury/",
+                            "expertise": [
+                                "Monetary economics- a) Bank centric monetary transmission mechanism channels; b) Inflation dynamics",
+                                "Real estate economics. Econometric theory- a) Time series (structural breaks in data generation processes, switching models); b) Spatial econometric theory"
+                            ]
+                        },
+                        {
+                            "name": "Professor Steve Cook",
+                            "url": "https://www.swansea.ac.uk/staff/s.cook/",
+                            "expertise": [
+                                "Time Series Econometrics",
+                                "Numerical Simulation",
+                                "Applied Econometrics",
+                                "Spatial Housing Economics",
+                                "Pedagogic Research",
+                                "Teaching Innovation"
+                            ]
+                        },
+                        {
+                            "name": "Dr Dario Debowicz",
+                            "url": "https://www.swansea.ac.uk/staff/d.j.debowicz/",
+                            "expertise": [
+                                "Computable General Equilibrium (CGE) model",
+                                "Microsimulations",
+                                "Regression analysis",
+                                "Development Economics",
+                                "Policy-relevant economic analysis"
+                            ]
+                        },
+                        {
+                            "name": "Dr Yue Gai",
+                            "url": "https://www.swansea.ac.uk/staff/yue.gai/",
+                            "expertise": [
+                                "DSGE Modelling",
+                                "Applied Macroeconomics",
+                                "Policy implication",
+                                "Housing Market and Financial Stability"
+                            ]
+                        },
+                        {
+                            "name": "Dr Dilshad Jahan",
+                            "url": "https://www.swansea.ac.uk/staff/dilshad.jahan/",
+                            "expertise": [
+                                "Macro and International Economics",
+                                "Applied Econometrics"
+                            ]
+                        },
+                        {
+                            "name": "Dr Jonathan James",
+                            "url": "https://www.swansea.ac.uk/staff/jonathan.g.james/",
+                            "expertise": [
+                                "Macroeconomics",
+                                "Monetary economics"
+                            ]
+                        },
+                        {
+                            "name": "Dr Jinke Li",
+                            "url": "https://www.swansea.ac.uk/staff/jinke.li/",
+                            "expertise": [
+                                "Oil markets",
+                                "Electricity markets",
+                                "Renewable energy",
+                                "Government policy"
+                            ]
+                        },
+                        {
+                            "name": "Professor Phil Murphy",
+                            "url": "https://www.swansea.ac.uk/staff/p.d.murphy/",
+                            "expertise": [
+                                "Applied labour economics",
+                                "Economics of discrimination",
+                                "Public sector pay",
+                                "Health and education outcomes",
+                                "Wellbeing and social capital"
+                            ]
+                        },
+                        {
+                            "name": "Professor Nigel O'Leary",
+                            "url": "https://www.swansea.ac.uk/staff/n.c.oleary/",
+                            "expertise": [
+                                "Labour Economics",
+                                "The Economics of Wellbeing",
+                                "Regional Economics",
+                                "The Economics of Education"
+                            ]
+                        },
+                        {
+                            "name": "Dr Yohan Pelosse",
+                            "url": "https://www.swansea.ac.uk/staff/y.j.h.pelosse/",
+                            "expertise": [
+                                "Epistemic Game Theory",
+                                "Epistemic Logic",
+                                "Quantum Information"
+                            ]
+                        },
+                        {
+                            "name": "Dr Riikka Savolainen",
+                            "url": "https://www.swansea.ac.uk/staff/r.h.m.savolainen/",
+                            "expertise": [
+                                "Political economics",
+                                "Public economics",
+                                "Empirical microeconometrics"
+                            ]
+                        },
+                        {
+                            "name": "Dr Jing Shao",
+                            "url": "https://www.swansea.ac.uk/staff/jing.shao/",
+                            "expertise": [
+                                "Labour Economics",
+                                "Health Economics",
+                                "Energy Economics",
+                                "Microeconometrics",
+                                "Panel Data Analysis"
+                            ]
+                        },
+                        {
+                            "name": "Dr Wayne Thomas",
+                            "url": "https://www.swansea.ac.uk/staff/wayne.thomas/",
+                            "expertise": [
+                                "Economics of education and student choice",
+                                "Economics of happiness"
+                            ]
+                        },
+                        {
+                            "name": "Dr Annie Tubadji",
+                            "url": "https://www.swansea.ac.uk/staff/a.k.tubadji/",
+                            "expertise": [
+                                "New Cultural Economics (NCE) and Narrative Economics",
+                                "cultural capital, religion, race, diversity and discrimination",
+                                "regional productivity, migration, innovation and growth",
+                                "happiness and wellbeing,",
+                                "digital inclusion"
+                            ]
+                        },
+                        {
+                            "name": "Dr Ansgar Wohlschlegel",
+                            "url": "https://www.swansea.ac.uk/staff/a.u.m.wohlschlegel/",
+                            "expertise": [
+                                "Applied Microeconomics",
+                                "Law & Economics",
+                                "Industrial Organisation"
+                            ]
+                        },
+                        {
+                            "name": "Dr Bo Yang",
+                            "url": "https://www.swansea.ac.uk/staff/bo.yang/",
+                            "expertise": [
+                                "Applied Macroeconomics",
+                                "Monetary Economics",
+                                "General Equilibrium (DSGE) Modelling",
+                                "Business Cycle Theory"
+                            ]
+                        },
+                        {
+                            "name": "Dr Gemma Xu",
+                            "url": "https://www.swansea.ac.uk/staff/chen.xu/",
+                            "expertise": [
+                                "Regional Economics",
+                                "Industrial Economics",
+                                "Digital technologies and regional development",
+                                "Semiconductors industry policy and strategy",
+                                "Economic impact of tourism industries",
+                                "Welsh Economy",
+                                "Input Output tables and CGE modelling",
+                                "Servitization"
+                            ]
+                        }
                     ]
-                },
+                }
+            ]
+        },
+        {
+            "key": "criminology_sociology",
+            "name": "Criminology, Sociology, Social Policy",
+            "departments": [
                 {
-                    "name": "Dr Gerard Clarke",
-                    "url": "https://www.swansea.ac.uk/staff/g.clarke/",
-                    "expertise": [
-                        "Politics and International Development",
-                        "Politics in the Global South",
-                        "International development policy",
-                        "Civil society and international development",
-                        "Human rights and international development"
+                    "key": "criminology_sociology",
+                    "name": "Criminology, Sociology, Social Policy",
+                    "staff": [
+                        {
+                            "name": "Dr Gulzat Botoeva",
+                            "url": "https://www.swansea.ac.uk/staff/humanities-and-socialsciences/social-sciences-staff/criminology-sociology-social-policy-staff/botoeva-g/#d.en.203303",
+                            "expertise": [
+                                "Illegal economies",
+                                "Small-scale illegal drug production",
+                                "Small-scale artisanal (illegal) gold mining",
+                                "Ethnographies of crime and deviance",
+                                "Drug trafficking in Central Asia"
+                            ]
+                        },
+                        {
+                            "name": "Dr Gideon Calder",
+                            "url": "https://www.swansea.ac.uk/staff/g.j.calder/",
+                            "expertise": [
+                                "Political philosophy",
+                                "Social theory",
+                                "Childhood, the family and social justice",
+                                "Co-production",
+                                "Social welfare in theory and policy",
+                                "Applied and professional ethics"
+                            ]
+                        },
+                        {
+                            "name": "Dr Anthony Charles",
+                            "url": "https://www.swansea.ac.uk/staff/a.d.charles/",
+                            "expertise": [
+                                "Youth justice",
+                                "Children's participation in decision making",
+                                "Children's rights",
+                                "Consultation with children and young people",
+                                "Youth crime prevention",
+                                "Multi-agency crime prevention",
+                                "Young people's use of substances",
+                                "Youth offending"
+                            ]
+                        },
+                        {
+                            "name": "Dr Jordan Dawson",
+                            "url": "https://www.swansea.ac.uk/staff/j.l.dawson/",
+                            "expertise": [
+                                "Male sex work",
+                                "Masculinity",
+                                "Gender",
+                                "Policing"
+                            ]
+                        },
+                        {
+                            "name": "Mr Andrew Dunning",
+                            "url": "https://www.swansea.ac.uk/staff/a.m.dunning/",
+                            "expertise": []
+                        },
+                        {
+                            "name": "Dr Daniel Evans",
+                            "url": "https://www.swansea.ac.uk/staff/daniel.j.evans/",
+                            "expertise": [
+                                "Social Class",
+                                "Wales and Devolution",
+                                "British Politics/Political Economy",
+                                "Trade Unions",
+                                "Sociology of Education",
+                                "Critical Military Studies",
+                                "Ethnographic Methods",
+                                "Critical Criminology"
+                            ]
+                        },
+                        {
+                            "name": "Dr Steve Garner",
+                            "url": "https://www.swansea.ac.uk/staff/humanities-and-socialsciences/social-sciences-staff/criminology-sociology-social-policy-staff/garner-s/#d.en.203429",
+                            "expertise": [
+                                "Racisms (in international comparative context)",
+                                "Nation",
+                                "Ethnicity",
+                                "White identities",
+                                "Class",
+                                "Immigration",
+                                "Political sociology",
+                                "Irish studies"
+                            ]
+                        },
+                        {
+                            "name": "Dr Sam Hanks",
+                            "url": "https://www.swansea.ac.uk/staff/s.j.hanks/",
+                            "expertise": [
+                                "Social Control",
+                                "Policing",
+                                "Carceral Abolition",
+                                "Socio-criminological theory",
+                                "Sex work"
+                            ]
+                        },
+                        {
+                            "name": "Mr Joseph Janes",
+                            "url": "https://www.swansea.ac.uk/staff/j.d.janes/",
+                            "expertise": [
+                                "Youth Justice",
+                                "Devolution",
+                                "Elite Interviewing",
+                                "Project Evaluation",
+                                "Welsh Policy"
+                            ]
+                        },
+                        {
+                            "name": "Dr Charlotte Jones",
+                            "url": "https://www.swansea.ac.uk/staff/charlotte.jones2",
+                            "expertise": [
+                                "Variations of sex characteristics (VSCs) and intersex studies",
+                                "Gender, feminism and social justice",
+                                "Sex and embodiment",
+                                "Sexuality, LGBT+, and queer studies",
+                                "Critical disability studies",
+                                "Health, diagnosis, and medicalisation",
+                                "Toilet politics"
+                            ]
+                        },
+                        {
+                            "name": "Professor Deborah Jones",
+                            "url": "https://www.swansea.ac.uk/staff/deborah.a.jones/",
+                            "expertise": [
+                                "Regulation of the sex industry",
+                                "Higher Education and Desistance from Offending",
+                                "Innovative and Participatory Methodologies",
+                                "Criminology and Public Education",
+                                "Teaching and Learning"
+                            ]
+                        },
+                        {
+                            "name": "Professor Rick Lines",
+                            "url": "https://www.swansea.ac.uk/staff/richard.lines/",
+                            "expertise": [
+                                "International Drug Control Law",
+                                "Human Rights and Drug Policy",
+                                "International Human Rights Law",
+                                "Harm Reduction",
+                                "Prisoners' Rights and Prison Reform",
+                                "Capital Punishment",
+                                "HIV and Human Rights"
+                            ]
+                        },
+                        {
+                            "name": "Dr Phatsimo Mabophiwa",
+                            "url": "https://www.swansea.ac.uk/staff/p.g.mabophiwa/",
+                            "expertise": []
+                        },
+                        {
+                            "name": "Dr Reza Montasari",
+                            "url": "https://www.swansea.ac.uk/staff/reza.montasari/",
+                            "expertise": [
+                                "Digital Forensics",
+                                "Cyber Security",
+                                "Cyber Threats",
+                                "Cyber Terrorism",
+                                "Digital Forensic Investigation of UAVs and IoT Devices",
+                                "Data Visualisation",
+                                "Methods, Guideline, Policies and Standardisation",
+                                "Dark Web and Open Source Intelligence"
+                            ]
+                        },
+                        {
+                            "name": "Dr Gemma Morgan",
+                            "url": "https://www.swansea.ac.uk/staff/g.h.morgan/",
+                            "expertise": [
+                                "Digital technology & desistance",
+                                "Digital technology & the CJS",
+                                "Offender rehabilitation",
+                                "Desistance",
+                                "Supervision skills",
+                                "Youth justice",
+                                "Youth offending",
+                                "Evaluation research"
+                            ]
+                        },
+                        {
+                            "name": "Professor Ryan Murphy",
+                            "url": "https://www.swansea.ac.uk/staff/ryan.murphy/",
+                            "expertise": [
+                                "English and Welsh Legal System",
+                                "Legal Education",
+                                "European Union Law",
+                                "Employment Law",
+                                "The free movement of capital in the EU"
+                            ]
+                        },
+                        {
+                            "name": "Dr Daniel Nehring",
+                            "url": "https://www.swansea.ac.uk/staff/d.f.nehring/",
+                            "expertise": [
+                                "Transnationalism",
+                                "Globalisation",
+                                "Cultural sociology",
+                                "Migration",
+                                "Critical psychology",
+                                "Qualitative methods",
+                                "East Asia",
+                                "Latin America and the Caribbean"
+                            ]
+                        },
+                        {
+                            "name": "Dr Lella Nouri",
+                            "url": "https://www.swansea.ac.uk/staff/l.m.nouri/",
+                            "expertise": [
+                                "Counter-terrorism",
+                                "Extreme right",
+                                "Terrorist use of the internet",
+                                "Radicalisation",
+                                "Hate crime",
+                                "Anti-racism",
+                                "Race equality & the CJS"
+                            ]
+                        },
+                        {
+                            "name": "Dr Maria Pournara",
+                            "url": "https://www.swansea.ac.uk/staff/maria.pournara/",
+                            "expertise": [
+                                "Policing",
+                                "Organised crime",
+                                "Intelligence",
+                                "Social problems"
+                            ]
+                        },
+                        {
+                            "name": "Professor Peter Raynor",
+                            "url": "https://www.swansea.ac.uk/staff/p.raynor/",
+                            "expertise": []
+                        },
+                        {
+                            "name": "Dr Alastair Reed",
+                            "url": "https://www.swansea.ac.uk/staff/alastair.reed/",
+                            "expertise": []
+                        },
+                        {
+                            "name": "Professor Tracey Sagar",
+                            "url": "https://www.swansea.ac.uk/staff/t.sagar/",
+                            "expertise": []
+                        },
+                        {
+                            "name": "Dr Alexandra Sardani",
+                            "url": "https://www.swansea.ac.uk/staff/a.v.sardani/",
+                            "expertise": []
+                        },
+                        {
+                            "name": "Dr Amaha Senu",
+                            "url": "https://www.swansea.ac.uk/staff/a.f.senu/",
+                            "expertise": [
+                                "Global shipping",
+                                "Globalisation",
+                                "Maritime security and crime",
+                                "Migration"
+                            ]
+                        },
+                        {
+                            "name": "Dr Victoria Silverwood",
+                            "url": "https://www.swansea.ac.uk/staff/v.s.m.silverwood/",
+                            "expertise": []
+                        },
+                        {
+                            "name": "Dr Kris Stoddart",
+                            "url": "https://www.swansea.ac.uk/staff/k.d.stoddart/",
+                            "expertise": [
+                                "Cybersecurity",
+                                "Cyberwarfare",
+                                "Cyberespionage",
+                                "Cyber terrorism",
+                                "Cybercrime and the law",
+                                "International security",
+                                "Intelligence Studies",
+                                "Nuclear weapons"
+                            ]
+                        },
+                        {
+                            "name": "Dr Mengwei Tu",
+                            "url": "https://www.swansea.ac.uk/staff/mengwei.tu/",
+                            "expertise": [
+                                "Transnationalism",
+                                "International migration",
+                                "International student mobility",
+                                "Families and social changes in China",
+                                "Qualitative methods"
+                            ]
+                        },
+                        {
+                            "name": "Professor Maurice Vanstone",
+                            "url": "https://www.swansea.ac.uk/staff/m.t.vanstone/",
+                            "expertise": [
+                                "Effectiveness of community sentences",
+                                "Probation theory and practice",
+                                "The international origins of probation",
+                                "Programme Integrity",
+                                "Observation and analysis of practitioner skills",
+                                "Prisoner resettlement",
+                                "Perpetrators of child sexual abuse",
+                                "Day Reporting Centres"
+                            ]
+                        },
+                        {
+                            "name": "Dr Joe Whittaker",
+                            "url": "https://www.swansea.ac.uk/staff/j.j.whittaker/",
+                            "expertise": [
+                                "Terrorists’ and extremists’ use of the Internet",
+                                "Filter bubbles and terrorism",
+                                "Propaganda",
+                                "Countering violent extremism",
+                                "Terror finance",
+                                "Video games and extremism"
+                            ]
+                        },
+                        {
+                            "name": "Dr Matthew Howell",
+                            "url": "https://www.swansea.ac.uk/staff/matthew.howell/#d.en.173004",
+                            "expertise": [
+                                "Ethnography",
+                                "Youth Culture",
+                                "Institutional Culture",
+                                "Social Theory",
+                                "Research Methodology",
+                                "Social exclusion",
+                                "Social Justice",
+                                "Cultural Sociology"
+                            ]
+                        },
+                        {
+                            "name": "Dr Michael Harrison",
+                            "url": "https://www.swansea.ac.uk/staff/m.g.harrison/#d.en.173042",
+                            "expertise": [
+                                "Public order policing",
+                                "Crowd disorder",
+                                "Policing and criminal justice in Wales",
+                                "Justice in the devolved nations of the U.K.",
+                                "Neoliberalism",
+                                "Police identity and culture"
+                            ]
+                        },
+                        {
+                            "name": "Dr Zoe John",
+                            "url": "https://www.swansea.ac.uk/staff/z.e.john/#d.en.173046",
+                            "expertise": [
+                                "Gender",
+                                "Gender relations",
+                                "Embodiment",
+                                "Sporting violence",
+                                "Creative methods"
+                            ]
+                        },
+                        {
+                            "name": "Mrs Ella Rabaiotti",
+                            "url": "https://www.swansea.ac.uk/staff/e.c.rabaiotti/#d.en.173047",
+                            "expertise": [
+                                "Probation and Social Justice",
+                                "Youth Justice and Young Adults",
+                                "User Voice and Engagement",
+                                "Community Safety & Partnership working",
+                                "Pluralisation of Policing",
+                                "Integrated Offender Management (IOM)",
+                                "Media & Crime"
+                            ]
+                        }
                     ]
-                },
+                }
+            ]
+        },
+        {
+            "key": "accounting_finance",
+            "name": "Account & Finance",
+            "departments": [
                 {
-                    "name": "Professor Krijn Peters",
-                    "url": "https://www.swansea.ac.uk/staff/k.peters/",
-                    "expertise": [
-                        "Armed conflict",
-                        "Post-war reconstruction",
-                        "Disarmament, demobilisation and reintegration",
-                        "International development",
-                        "Urban and rural transport services",
-                        "Rural access",
-                        "Appropriate and sustainable Technologies"
+                    "key": "accounting_finance",
+                    "name": "Account & Finance",
+                    "staff": [
+                        {
+                            "name": "Dr Richard Baylis",
+                            "url": "https://www.swansea.ac.uk/staff/r.m.baylis/",
+                            "expertise": [
+                                "Accounting",
+                                "International financial reporting",
+                                "Audit and assurance",
+                                "Public sector accounting",
+                                "Accounting education",
+                                "Executive education"
+                            ]
+                        },
+                        {
+                            "name": "Professor Sabri Boubaker",
+                            "url": "https://www.swansea.ac.uk/staff/sabri.boubaker/",
+                            "expertise": [
+                                "Ownership structure",
+                                "Control of listed companies"
+                            ]
+                        },
+                        {
+                            "name": "Professor Mike Buckle",
+                            "url": "https://www.swansea.ac.uk/staff/m.j.buckle/",
+                            "expertise": [
+                                "Trend following strategies",
+                                "ESG investing",
+                                "Jump detection in financial data",
+                                "Fintech"
+                            ]
+                        },
+                        {
+                            "name": "Dr Yuzhi Cai",
+                            "url": "https://www.swansea.ac.uk/staff/y.cai/",
+                            "expertise": [
+                                "Financial econometrics",
+                                "Quantitative finance",
+                                "Quantile regression and quantile function modelling",
+                                "Statistical modelling for quantitative data"
+                            ]
+                        },
+                        {
+                            "name": "Dr Rongxin Chen",
+                            "url": "https://www.swansea.ac.uk/staff/rongxin.chen/",
+                            "expertise": [
+                                "Behavioural Finance",
+                                "Asset Pricing",
+                                "Financial Markets",
+                                "Cryptocurrencies",
+                                "Big Data & Machine Learning in Finance",
+                                "Corporate Finance & Governance"
+                            ]
+                        },
+                        {
+                            "name": "Dr Bryan Collings",
+                            "url": "https://www.swansea.ac.uk/staff/b.a.c.collings/",
+                            "expertise": [
+                                "Applied Corporate Governance and Agency Theory in Finance",
+                                "Machine Learning & Artificial Intelligence applications",
+                                "Investment in Emerging Markets"
+                            ]
+                        },
+                        {
+                            "name": "Mrs Lesley Davies",
+                            "url": "https://www.swansea.ac.uk/staff/l.p.davies/",
+                            "expertise": [
+                                "Audit and Assurance"
+                            ]
+                        },
+                        {
+                            "name": "Mr Johan de Rooy",
+                            "url": "https://www.swansea.ac.uk/staff/j.p.derooy/",
+                            "expertise": [
+                                "Financial accounting theory",
+                                "Combining positive psychology to accountancy",
+                                "Explaining accounting to non-accountancy audiences",
+                                "Motivating learners to aspire",
+                                "Training in employment readiness, especially for the more able and well-rounded young learners"
+                            ]
+                        },
+                        {
+                            "name": "Dr Ashraf Elbakry",
+                            "url": "https://www.swansea.ac.uk/staff/a.e.elbakry/",
+                            "expertise": [
+                                "Financial reporting",
+                                "International financial reporting standards",
+                                "Capital markets",
+                                "Management accounting",
+                                "Cost control",
+                                "Value relevance of accounting information"
+                            ]
+                        },
+                        {
+                            "name": "Dr Mohamed Elmagrhi",
+                            "url": "https://www.swansea.ac.uk/staff/m.h.a.elmagrhi/",
+                            "expertise": [
+                                "Governance",
+                                "Accountability and Ethics",
+                                "Risk management",
+                                "Executive Pay",
+                                "Social and Environmental Accounting",
+                                "Financial Reporting",
+                                "Quantitative Research",
+                                "Data Analysis"
+                            ]
+                        },
+                        {
+                            "name": "Ms Sue Evans",
+                            "url": "https://www.swansea.ac.uk/staff/p.s.evans/",
+                            "expertise": [
+                                "Management accounting",
+                                "Employability",
+                                "Accessibility",
+                                "Inclusivity",
+                                "Digital collaboration",
+                                "Active learning spaces"
+                            ]
+                        },
+                        {
+                            "name": "Dr Giulia Fantini",
+                            "url": "https://www.swansea.ac.uk/staff/g.fantini/",
+                            "expertise": [
+                                "Risk Management",
+                                "Corporate Governance",
+                                "Corporate Finance",
+                                "Executive Compensation",
+                                "Small and Medium-Sized Enterprises"
+                            ]
+                        },
+                        {
+                            "name": "Ms Terry Filer",
+                            "url": "https://www.swansea.ac.uk/staff/t.filer/",
+                            "expertise": [
+                                "UK Taxation",
+                                "Welsh Devolved Taxes",
+                                "Financial Accounting",
+                                "Pedagogic research",
+                                "Virtual Reality"
+                            ]
+                        },
+                        {
+                            "name": "Dr Cigdem Gedikli",
+                            "url": "https://www.swansea.ac.uk/staff/cigdem.gedikli/",
+                            "expertise": [
+                                "Labour and household economics",
+                                "Household finance",
+                                "Economics of gender",
+                                "Wellbeing",
+                                "Equality and diversity in corporate boards"
+                            ]
+                        },
+                        {
+                            "name": "Name Not Found",
+                            "url": "https://www.swansea.ac.uk/staff/a.g.hawkes/",
+                            "expertise": []
+                        },
+                        {
+                            "name": "Dr Lukas Helikum",
+                            "url": "https://www.swansea.ac.uk/staff/l.j.helikum/",
+                            "expertise": [
+                                "Behavioural Accounting",
+                                "Judgement and Decision-Making",
+                                "Earnings Management",
+                                "Corporate Social Responsibility (CSR) Reporting",
+                                "Non-GAAP Accounting",
+                                "Data Analytics"
+                            ]
+                        },
+                        {
+                            "name": "Professor Hafiz Hoque",
+                            "url": "https://www.swansea.ac.uk/staff/h.hoque/",
+                            "expertise": [
+                                "Corporate Finance",
+                                "Corporate boards",
+                                "Director’s network",
+                                "Islamic/Ethical Finance",
+                                "Bank Regulations",
+                                "Credit default Swaps",
+                                "Green innovation",
+                                "Climate change and finance",
+                                "ESG"
+                            ]
+                        },
+                        {
+                            "name": "Dr Fangzhou Huang",
+                            "url": "https://www.swansea.ac.uk/staff/f.huang/",
+                            "expertise": [
+                                "Asset pricing",
+                                "Downside risk of stock market",
+                                "Data analysis",
+                                "Pedagogical research"
+                            ]
+                        },
+                        {
+                            "name": "Miss Emma James",
+                            "url": "https://www.swansea.ac.uk/staff/e.m.james/",
+                            "expertise": [
+                                "International Financial Reporting Standards (IFRS)",
+                                "Financial Accounting",
+                                "Computerised Accounting Systems"
+                            ]
+                        },
+                        {
+                            "name": "Dr Joy Jia",
+                            "url": "https://www.swansea.ac.uk/staff/y.jia/",
+                            "expertise": [
+                                "Risk Management",
+                                "Corporate Governance",
+                                "Financial Management",
+                                "Asset Pricing"
+                            ]
+                        },
+                        {
+                            "name": "Professor Sarah Jones",
+                            "url": "https://www.swansea.ac.uk/staff/sarah.j.jones/",
+                            "expertise": [
+                                "Management Accounting",
+                                "Business Decision Making"
+                            ]
+                        },
+                        {
+                            "name": "Mr Andrew Miller",
+                            "url": "https://www.swansea.ac.uk/staff/andrew.j.miller/",
+                            "expertise": [
+                                "Strategy development",
+                                "Managing strategic change",
+                                "Corporate governance",
+                                "Leadership development",
+                                "Performance management",
+                                "Executive coaching",
+                                "Project management",
+                                "Business growth"
+                            ]
+                        },
+                        {
+                            "name": "Dr Hanh Nguyen",
+                            "url": "https://www.swansea.ac.uk/staff/t.h.h.nguyen/",
+                            "expertise": [
+                                "Governance",
+                                "Board diversity",
+                                "Accountability and Disclosure",
+                                "Executive compensation",
+                                "Environmental management accounting",
+                                "Quantitative and qualitative research",
+                                "Data analysis",
+                                "Corporate Finance"
+                            ]
+                        },
+                        {
+                            "name": "Dr Louise Obara",
+                            "url": "https://www.swansea.ac.uk/staff/l.j.obara/",
+                            "expertise": [
+                                "Business ethics, CSR, sustainability and human rights",
+                                "Corporate governance",
+                                "Qualitative research methods"
+                            ]
+                        },
+                        {
+                            "name": "Dr Jafar Ojra",
+                            "url": "https://www.swansea.ac.uk/staff/j.y.ojra/",
+                            "expertise": [
+                                "Strategic Management Accounting",
+                                "Performance Measurement",
+                                "Corporate Governance",
+                                "Entrepreneurship and SMEs"
+                            ]
+                        },
+                        {
+                            "name": "Dr Tim Pryce-Brown",
+                            "url": "https://www.swansea.ac.uk/staff/t.j.pryce-brown/",
+                            "expertise": [
+                                "Company Law",
+                                "International Corporate Governance"
+                            ]
+                        },
+                        {
+                            "name": "Dr Anh Do",
+                            "url": "https://www.swansea.ac.uk/staff/q.a.do/",
+                            "expertise": [
+                                "Corporate finance",
+                                "Corporate governance",
+                                "Sustainability",
+                                "Corporate social responsibility",
+                                "Banking",
+                                "Risk management"
+                            ]
+                        },
+                        {
+                            "name": "Dr Boru Ren",
+                            "url": "https://www.swansea.ac.uk/staff/humanities-and-socialsciences/management-staff/accounting-finance-staff/ren-b/",
+                            "expertise": [
+                                "Textual analysis",
+                                "Sentiment analysis",
+                                "Spillover effects",
+                                "Herd behaviour",
+                                "Price forecasting",
+                                "Applied machine learning"
+                            ]
+                        },
+                        {
+                            "name": "Dr Ruth Sagay",
+                            "url": "https://www.swansea.ac.uk/staff/r.o.sagay/",
+                            "expertise": [
+                                "Corporate Governance",
+                                "Initial Public Offering (IPO) Firms",
+                                "Empirical Corporate Finance",
+                                "Data Analysis"
+                            ]
+                        },
+                        {
+                            "name": "Dr Sarosh Shabi",
+                            "url": "https://www.swansea.ac.uk/staff/s.shabi/",
+                            "expertise": [
+                                "International Financial Markets",
+                                "Uncertainty and Financial Crisis",
+                                "Nonlinear Time Series"
+                            ]
+                        },
+                        {
+                            "name": "Dr Syed Shabi-Ul-Hassan",
+                            "url": "https://www.swansea.ac.uk/staff/s.shabi-ul-hassan/",
+                            "expertise": [
+                                "Financial Modelling",
+                                "Economic Uncertainty",
+                                "Asset Pricing Models",
+                                "Asymmetries and Nonlinearities in the Financial Time Series"
+                            ]
+                        },
+                        {
+                            "name": "Mrs Ellen Spender",
+                            "url": "https://www.swansea.ac.uk/staff/e.t.spender/",
+                            "expertise": [
+                                "Financial Accounting",
+                                "Financial Statement Analysis",
+                                "Forensic Accounting",
+                                "Corporate Finance"
+                            ]
+                        },
+                        {
+                            "name": "Dr Linh Tran",
+                            "url": "https://www.swansea.ac.uk/staff/l.t.t.tran/",
+                            "expertise": [
+                                "Corporate Governance",
+                                "Banking",
+                                "Fintech"
+                            ]
+                        },
+                        {
+                            "name": "Dr Katerina Tsakou",
+                            "url": "https://www.swansea.ac.uk/staff/katerina.tsakou/",
+                            "expertise": [
+                                "Volatility Modelling and Forecasting",
+                                "Financial Econometrics",
+                                "Risk Management",
+                                "High-Frequency Data"
+                            ]
+                        },
+                        {
+                            "name": "Dr Vineet Upreti",
+                            "url": "https://www.swansea.ac.uk/staff/v.upreti/",
+                            "expertise": [
+                                "Financial risk management",
+                                "Financial asset pricing",
+                                "Volatility forecasting"
+                            ]
+                        },
+                        {
+                            "name": "Dr Nader Virk",
+                            "url": "https://www.swansea.ac.uk/staff/n.s.virk/",
+                            "expertise": [
+                                "Asset pricing: factor models and anomalies",
+                                "Volatility modelling",
+                                "Religious governance in Islamic finance",
+                                "Peer-to-peer business lending in DeFi",
+                                "high frequency data analytics and financial market stability"
+                            ]
+                        },
+                        {
+                            "name": "Mrs Tracey Williams",
+                            "url": "https://www.swansea.ac.uk/staff/t.m.williams/",
+                            "expertise": [
+                                "Financial Accounting",
+                                "Management Accounting"
+                            ]
+                        },
+                        {
+                            "name": "Dr Okan Yilmaz",
+                            "url": "https://www.swansea.ac.uk/staff/okan.yilmaz/",
+                            "expertise": [
+                                "Labour and Development Economics",
+                                "Real Estate Finance and Pricing",
+                                "Data Analysis",
+                                "Applied Econometrics"
+                            ]
+                        },
+                        {
+                            "name": "Dr Tim Zhou",
+                            "url": "https://www.swansea.ac.uk/staff/t.zhou/",
+                            "expertise": [
+                                "Bank mergers and acquisitions",
+                                "Banking regulation",
+                                "Banking crisis and regulatory intervention"
+                            ]
+                        },
+                        {
+                            "name": "Dr Matt Wilson",
+                            "url": "https://www.swansea.ac.uk/staff/matthew.wilson/",
+                            "expertise": [
+                                "Alternative Organising",
+                                "Cultural Theory",
+                                "Applied Ethics",
+                                "Social Movements",
+                                "Political theory"
+                            ]
+                        }
                     ]
-                },
+                }
+            ]
+        },
+        {
+            "key": "business",
+            "name": "Business Management",
+            "departments": [
                 {
-                    "name": "Ms Leah Owen",
-                    "url": "https://www.swansea.ac.uk/staff/leah.owen/",
-                    "expertise": [
-                        "Security studies",
-                        "Genocide",
-                        "Post-conflict justice",
-                        "International institutions",
-                        "Archival research methods",
-                        "LGBT/queer politics"
+                    "key": "business",
+                    "name": "Business Management",
+                    "staff": [
+                        {
+                            "name": "Ms Sarah Atkinson",
+                            "url": "https://www.swansea.ac.uk/staff/s.j.atkinson/",
+                            "expertise": [
+                                "Air Quality",
+                                "Corporate Sustainability",
+                                "Environmental Impact Assessment",
+                                "Environmental Management"
+                            ]
+                        },
+                        {
+                            "name": "Dr Emily Bacon",
+                            "url": "https://www.swansea.ac.uk/staff/e.c.bacon/",
+                            "expertise": [
+                                "Open innovation",
+                                "Business and Innovation ecosystems",
+                                "Coopetition",
+                                "FsQCA",
+                                "Knowledge transfer"
+                            ]
+                        },
+                        {
+                            "name": "Mr David Bolton",
+                            "url": "https://www.swansea.ac.uk/staff/d.r.bolton/",
+                            "expertise": [
+                                "Business Management",
+                                "Business Start-up and Development",
+                                "Entrepreneurship Education",
+                                "Sales and Marketing",
+                                "Project Management"
+                            ]
+                        },
+                        {
+                            "name": "Dr Frederic Boy",
+                            "url": "https://www.swansea.ac.uk/staff/f.a.boy/",
+                            "expertise": [
+                                "Digital epidemiology",
+                                "Mental heath",
+                                "Neuromanagement / Neuromarketing",
+                                "Data science",
+                                "Neuroscience",
+                                "Cognitive Psychology",
+                                "Datamining"
+                            ]
+                        },
+                        {
+                            "name": "Dr Simon Brooks",
+                            "url": "https://www.swansea.ac.uk/staff/s.brooks/",
+                            "expertise": [
+                                "Welsh history after the Enlightenment",
+                                "Multiculturalism in Wales",
+                                "Language planning",
+                                "History of ideas",
+                                "History of the Welsh diaspora in England",
+                                "Political theory in Wales",
+                                "Welsh-language literature, particularly modernism"
+                            ]
+                        },
+                        {
+                            "name": "Dr Simon Brooks",
+                            "url": "https://www.swansea.ac.uk/staff/s.b.brooks/",
+                            "expertise": [
+                                "Corporate Social Responsibility",
+                                "Strategic Analysis",
+                                "Strategic Agility",
+                                "Shared Value",
+                                "Business Ethics",
+                                "Stakeholder Mapping",
+                                "Value-Based Healthcare"
+                            ]
+                        },
+                        {
+                            "name": "Mr Anthony Burnett",
+                            "url": "https://www.swansea.ac.uk/staff/a.m.burnett/",
+                            "expertise": [
+                                "Organisational behaviour",
+                                "Foundational economy",
+                                "Leadership development",
+                                "Performance management",
+                                "Executive coaching",
+                                "Project management",
+                                "Innovation dynamics",
+                                "Social wisdom"
+                            ]
+                        },
+                        {
+                            "name": "Dr Samantha Burvill",
+                            "url": "https://www.swansea.ac.uk/staff/s.m.burvill/",
+                            "expertise": [
+                                "SME Growth",
+                                "Innovation",
+                                "Knowledge based firms",
+                                "SME policy",
+                                "Entrepreneurship",
+                                "Open innovation",
+                                "Economic and regional development"
+                            ]
+                        },
+                        {
+                            "name": "Dr Sam Buxton",
+                            "url": "https://www.swansea.ac.uk/staff/s.l.buxton/",
+                            "expertise": [
+                                "Quantitative Data Analysis",
+                                "Forecasting",
+                                "Research Methods",
+                                "Pedagogical Research",
+                                "Pharmaceutical Research",
+                                "MarketingConsumer Psychology"
+                            ]
+                        },
+                        {
+                            "name": "Dr Carl Cater",
+                            "url": "https://www.swansea.ac.uk/staff/carl.cater/",
+                            "expertise": [
+                                "Tourism Development",
+                                "Adventure tourism",
+                                "Ecotourism",
+                                "Marine tourism"
+                            ]
+                        },
+                        {
+                            "name": "Mr Dafydd Cotterell",
+                            "url": "https://www.swansea.ac.uk/staff/d.j.cotterell/",
+                            "expertise": [
+                                "Organisational Resilience",
+                                "Crisis Management",
+                                "Business Continuity Management",
+                                "International Management Standards"
+                            ]
+                        },
+                        {
+                            "name": "Dr Desireé Cranfield",
+                            "url": "https://www.swansea.ac.uk/staff/d.j.cranfield/",
+                            "expertise": [
+                                "Knowledge and Information Management",
+                                "Higher Education Management",
+                                "Grounded Theory",
+                                "Technology use within education",
+                                "Project Management within Higher Education Context"
+                            ]
+                        },
+                        {
+                            "name": "Ms Beth Cummings",
+                            "url": "https://www.swansea.ac.uk/staff/beth.cummings/",
+                            "expertise": [
+                                "Marketing strategy",
+                                "Consumer behaviour",
+                                "Marketing communications",
+                                "Digital and social media marketing"
+                            ]
+                        },
+                        {
+                            "name": "Dr Fern Davies",
+                            "url": "https://www.swansea.ac.uk/staff/f.b.davies/",
+                            "expertise": [
+                                "Strategy",
+                                "Innovation management",
+                                "Innovation ecosystems",
+                                "Knowledge transfer",
+                                "Small and medium-sized enterprises",
+                                "Entrepreneurship",
+                                "Corporate social responsibility",
+                                "Business ethics"
+                            ]
+                        },
+                        {
+                            "name": "Professor Gareth Davies",
+                            "url": "https://www.swansea.ac.uk/staff/g.h.davies/",
+                            "expertise": [
+                                "Innovation Management",
+                                "Regional Innovation Systems",
+                                "University-Industry Interaction",
+                                "Regional Economic Development"
+                            ]
+                        },
+                        {
+                            "name": "Mr Paul Davies",
+                            "url": "https://www.swansea.ac.uk/staff/p.a.davies/",
+                            "expertise": [
+                                "Digital Marketing",
+                                "Strategic Selling and Sales Management",
+                                "Application & Platform Development",
+                                "Social Marketing / Marketing in Society",
+                                "Innovation",
+                                "Technology commercialisation & startup"
+                            ]
+                        },
+                        {
+                            "name": "Dr Paul Davies",
+                            "url": "https://www.swansea.ac.uk/staff/paul.g.davies/",
+                            "expertise": [
+                                "Strategy",
+                                "Systems Thinking",
+                                "Communities of Practice",
+                                "Collaborative practice"
+                            ]
+                        },
+                        {
+                            "name": "Dr Sandra Dettmer",
+                            "url": "https://www.swansea.ac.uk/staff/s.p.l.dettmer/",
+                            "expertise": [
+                                "People Management",
+                                "Labour Economics",
+                                "Strategy",
+                                "Circular Economy"
+                            ]
+                        },
+                        {
+                            "name": "Dr Daniele Doneddu",
+                            "url": "https://www.swansea.ac.uk/staff/d.doneddu/",
+                            "expertise": [
+                                "Human-Centred technology development and adoption",
+                                "Digital Economy and wellbeing",
+                                "AI & Big Data",
+                                "Enterprise, Innovation and New Venture Creation"
+                            ]
+                        },
+                        {
+                            "name": "Professor Yogesh Dwivedi",
+                            "url": "https://www.swansea.ac.uk/staff/y.k.dwivedi/",
+                            "expertise": [
+                                "Digital Business/Electronic Commerce",
+                                "Digital/Electronic Government",
+                                "Digital/Mobile Payment Methods",
+                                "Digital and Social Media Marketing",
+                                "Emerging Technologies for Business and Management: AI, Blockchain and Social Media",
+                                "Information Systems (IS)"
+                            ]
+                        },
+                        {
+                            "name": "Dr Samuel Ebie",
+                            "url": "https://www.swansea.ac.uk/staff/samuel.ebie/",
+                            "expertise": [
+                                "Entrepreneurship",
+                                "Innovation",
+                                "Strategy",
+                                "Leadership",
+                                "International Business Management",
+                                "Human Resource Management (HRM)",
+                                "Equality & diversity Management",
+                                "Agro based SMEs",
+                                "Sustainable Development"
+                            ]
+                        },
+                        {
+                            "name": "Ms Corina Edwards",
+                            "url": "https://www.swansea.ac.uk/staff/c.j.edwards/",
+                            "expertise": [
+                                "Entrepreneurship",
+                                "Business planning",
+                                "Business start-up",
+                                "Work-based learning",
+                                "Higher education degree programme design"
+                            ]
+                        },
+                        {
+                            "name": "Dr Hadar Elraz",
+                            "url": "https://www.swansea.ac.uk/staff/hadar.elraz/",
+                            "expertise": [
+                                "Critical management studies",
+                                "Disabilities in the workplace",
+                                "Mental health conditions",
+                                "Organisation Studies",
+                                "Identity",
+                                "Mental wellbeing",
+                                "Invisible health conditions"
+                            ]
+                        },
+                        {
+                            "name": "Dr Hamid Eskandari",
+                            "url": "https://www.swansea.ac.uk/staff/hamidreza.eskandari/",
+                            "expertise": [
+                                "Big Data Analytics",
+                                "Artificial Intelligence and Machine Learning",
+                                "Evolutionary Multi-objective Optimization",
+                                "Multiple Criteria Decision Making",
+                                "Simulation and Statistical Modeling",
+                                "Healthcare Operations",
+                                "Logistics and Supply Chain",
+                                "Complex Systems Analysis"
+                            ]
+                        },
+                        {
+                            "name": "Dr Jocelyn Finniear",
+                            "url": "https://www.swansea.ac.uk/staff/j.finniear/",
+                            "expertise": [
+                                "Qualitative Research",
+                                "Experiences of Work",
+                                "Employee Engagement",
+                                "Human Resource Management"
+                            ]
+                        },
+                        {
+                            "name": "Mr Will Fleming",
+                            "url": "https://www.swansea.ac.uk/staff/w.j.i.fleming/",
+                            "expertise": [
+                                "Marketing Information systems",
+                                "Sponsorship",
+                                "The Beer industry",
+                                "Marketing partnerships and networks",
+                                "The Sustainability agenda"
+                            ]
+                        },
+                        {
+                            "name": "Professor Brian Garrod",
+                            "url": "https://www.swansea.ac.uk/staff/brian.garrod/",
+                            "expertise": [
+                                "Tourism destination marketing",
+                                "Tourism and well-being",
+                                "Sustainable tourism",
+                                "Eco-tourism",
+                                "Heritage tourism",
+                                "Use of photography in tourism research",
+                                "Marketing cultural events"
+                            ]
+                        },
+                        {
+                            "name": "Dr Leanne Greening",
+                            "url": "https://www.swansea.ac.uk/staff/leanne.greening/#d.en.202979",
+                            "expertise": [
+                                "The voluntary sector and voluntary work",
+                                "Organisations and institutions delivering public services",
+                                "Critical management and organisation studies",
+                                "Conceptualising work and the boundaries between paid and unpaid labour",
+                                "Qualitative research methods"
+                            ]
+                        },
+                        {
+                            "name": "Miss Lucy Griffiths",
+                            "url": "https://www.swansea.ac.uk/staff/lucy.a.griffiths/",
+                            "expertise": [
+                                "Strategic Marketing",
+                                "Digital Marketing",
+                                "Consumer Behaviour",
+                                "SaaS Marketing",
+                                "Design Thinking",
+                                "Value Proposition Design",
+                                "Start-up and Enterprise Development"
+                            ]
+                        },
+                        {
+                            "name": "Dr Catherine Groves",
+                            "url": "https://www.swansea.ac.uk/staff/c.j.groves/",
+                            "expertise": [
+                                "Occupational psychology",
+                                "SMEs",
+                                "Entrepreneurship",
+                                "Psychometrics",
+                                "Executive coaching",
+                                "Coaching",
+                                "Team development",
+                                "Critical Reflection",
+                                "Action learning"
+                            ]
+                        },
+                        {
+                            "name": "Mr Rhydian Harry",
+                            "url": "https://www.swansea.ac.uk/staff/rhydian.harry/",
+                            "expertise": [
+                                "Marketing Communication",
+                                "Strategic Marketing",
+                                "Brand Positioning",
+                                "International Marketing",
+                                "Business to Business Marketing",
+                                "Bilingual Marketing"
+                            ]
+                        },
+                        {
+                            "name": "Professor Louisa Huxtable-Thomas",
+                            "url": "https://www.swansea.ac.uk/staff/l.a.huxtable-thomas/",
+                            "expertise": [
+                                "Entrepreneurship",
+                                "Leadership",
+                                "Entrepreneurial leadership",
+                                "Innovation systems",
+                                "Collaboration",
+                                "Affordances",
+                                "Pedagogy",
+                                "Higher Education"
+                            ]
+                        },
+                        {
+                            "name": "Professor Paul Jones",
+                            "url": "https://www.swansea.ac.uk/staff/w.p.jones/",
+                            "expertise": [
+                                "Entrepreneurship",
+                                "Enterprise Education",
+                                "Information Communication Technology",
+                                "Small Business Management"
+                            ]
+                        },
+                        {
+                            "name": "Dr Fiona Jordan",
+                            "url": "https://www.swansea.ac.uk/staff/f.j.jordan/",
+                            "expertise": [
+                                "Gender and tourism",
+                                "Social and cultural geographies of tourism",
+                                "Sustainable tourism and events",
+                                "Qualitative research methods",
+                                "Research-teaching links"
+                            ]
+                        },
+                        {
+                            "name": "Dr Simon Kimber",
+                            "url": "https://www.swansea.ac.uk/staff/s.m.g.kimber/",
+                            "expertise": [
+                                "Critical tourism theory – Performance and Performativity",
+                                "Tourist Photography and tourism performances",
+                                "Chinese independent travellers and backpackers",
+                                "Destination Marketing",
+                                "Qualitative research methods"
+                            ]
+                        },
+                        {
+                            "name": "Mr Sebastian Kitching",
+                            "url": "https://www.swansea.ac.uk/staff/s.w.kitching/",
+                            "expertise": [
+                                "System dynamics",
+                                "Systems thinking methodologies",
+                                "Inventory management of perishable goods",
+                                "Japanese management of service operations",
+                                "Demand-driven supply chain management",
+                                "Use of simulation software in higher education"
+                            ]
+                        },
+                        {
+                            "name": "Professor Hamish Laing",
+                            "url": "https://www.swansea.ac.uk/staff/hamish.laing/",
+                            "expertise": [
+                                "Value-Based Healthcare",
+                                "Digital Inclusion",
+                                "Digital Healthcare",
+                                "Leadership in Healthcare"
+                            ]
+                        },
+                        {
+                            "name": "Dr Jia Li",
+                            "url": "https://www.swansea.ac.uk/staff/jia.li/",
+                            "expertise": [
+                                "International Business",
+                                "Emerging Markets",
+                                "Exporting behaviours",
+                                "Entrepreneurship",
+                                "Global strategy",
+                                "Institutional theory"
+                            ]
+                        },
+                        {
+                            "name": "Dr Tiffany Low",
+                            "url": "https://www.swansea.ac.uk/staff/t.a.low/",
+                            "expertise": [
+                                "Luxury Tourism",
+                                "Tourism Branding and Consumer Values",
+                                "Sustainable Development",
+                                "Critical Tourism Studies",
+                                "Outdoor and Adventure Recreation Studies"
+                            ]
+                        },
+                        {
+                            "name": "Dr Tegwen Malik",
+                            "url": "https://www.swansea.ac.uk/staff/f.t.malik/",
+                            "expertise": [
+                                "International Standards",
+                                "Maths and Analytics for Business",
+                                "Operations Management",
+                                "Water Management",
+                                "Biomimetics"
+                            ]
+                        },
+                        {
+                            "name": "Dr Maggie Miller",
+                            "url": "https://www.swansea.ac.uk/staff/maggie.miller/",
+                            "expertise": [
+                                "Socio-cultural dimensions of sustainability",
+                                "Adventure tourism and recreation",
+                                "Ethics and responsibility in tourism",
+                                "Visual and sensorial methodologies",
+                                "Social media representations and gender",
+                                "Critical and experiential pedagogies"
+                            ]
+                        },
+                        {
+                            "name": "Dr Pouya Sarvghad Moghadam",
+                            "url": "https://www.swansea.ac.uk/staff/p.sarvghadmoghadam/",
+                            "expertise": [
+                                "Analytical tools application within Operations Management",
+                                "Cross-functionally Integrated business structures",
+                                "New Product Development (NPD)",
+                                "Service Operations and structure",
+                                "E-platform Development"
+                            ]
+                        },
+                        {
+                            "name": "Dr John Mulyata",
+                            "url": "https://www.swansea.ac.uk/staff/john.mulyata/",
+                            "expertise": [
+                                "Operations and process management",
+                                "Strategic management",
+                                "Procurement & Logistic",
+                                "Healthcare Financing",
+                                "International Management"
+                            ]
+                        },
+                        {
+                            "name": "Professor Sarah Nicholls",
+                            "url": "https://www.swansea.ac.uk/staff/sarah.nicholls/",
+                            "expertise": [
+                                "Planning, development and management of parks, recreation and tourism resources",
+                                "Tourism as a development strategy",
+                                "Implications of environmental and climate change for parks, recreation and tourism resources, and for recreation/travel behaviour"
+                            ]
+                        },
+                        {
+                            "name": "Dr Kate Organ",
+                            "url": "https://www.swansea.ac.uk/staff/k.l.organ/",
+                            "expertise": [
+                                "Sustainable events management",
+                                "Sustainable tourism",
+                                "Local food",
+                                "Emotions",
+                                "Co-creation of value"
+                            ]
+                        },
+                        {
+                            "name": "Ms Sarah Owens",
+                            "url": "https://www.swansea.ac.uk/staff/s.j.owens/",
+                            "expertise": [
+                                "Marketing Management",
+                                "Strategic marketing Planning",
+                                "Strategy",
+                                "Digital learning",
+                                "Placements / research with industry",
+                                "Consultancy",
+                                "Student engagement",
+                                "Communication"
+                            ]
+                        },
+                        {
+                            "name": "Professor David Pickernell",
+                            "url": "https://www.swansea.ac.uk/staff/d.g.pickernell/",
+                            "expertise": [
+                                "Small Business Resilience",
+                                "Small Business Finance",
+                                "Enterprise Development Policy",
+                                "Entrepreneurial Universities",
+                                "Foreign Direct Investment Strategies",
+                                "Regional Economic Development Ecosystems",
+                                "Innovation networks",
+                                "Female Entrepreneurship",
+                                "Clustering"
+                            ]
+                        },
+                        {
+                            "name": "Mr Alan Price",
+                            "url": "https://www.swansea.ac.uk/staff/a.h.price/",
+                            "expertise": [
+                                "Management Consulting and Change Management",
+                                "Lean Operations",
+                                "Operations Management/Supply Chain Management",
+                                "Aerospace and Aviation Management",
+                                "Strategic Analysis and Strategy",
+                                "African Economies",
+                                "Development Economics",
+                                "Offshore Finance"
+                            ]
+                        },
+                        {
+                            "name": "Professor Katrina Pritchard",
+                            "url": "https://www.swansea.ac.uk/staff/k.l.pritchard/",
+                            "expertise": [
+                                "Identity",
+                                "Digital media/devices at work",
+                                "Diversity at work (age and gender)",
+                                "Leadership",
+                                "Entrepreneurial activity",
+                                "Volunteering"
+                            ]
+                        },
+                        {
+                            "name": "Professor Nicholas Rich",
+                            "url": "https://www.swansea.ac.uk/staff/n.l.rich/",
+                            "expertise": [
+                                "The management of patient safety",
+                                "The management of healthcare flows",
+                                "Sustainability of lean/quality working practices",
+                                "Systems theory as applied to financial institutional process performance"
+                            ]
+                        },
+                        {
+                            "name": "Dr Sian Roderick",
+                            "url": "https://www.swansea.ac.uk/staff/s.roderick/",
+                            "expertise": [
+                                "Organisational behaviour, in particular the behaviours attitudes and perceptions of contingent workers",
+                                "Innovation management",
+                                "Research methods – both qualitative and quantitative",
+                                "Consumer psychology"
+                            ]
+                        },
+                        {
+                            "name": "Dr Jennifer Rudd",
+                            "url": "https://www.swansea.ac.uk/staff/j.a.rudd/",
+                            "expertise": [
+                                "Carbon capture, storage and utilisation",
+                                "Circular economy",
+                                "Climate change mitigation",
+                                "Climate change education"
+                            ]
+                        },
+                        {
+                            "name": "Dr Alan Sandry",
+                            "url": "https://www.swansea.ac.uk/staff/a.sandry/",
+                            "expertise": [
+                                "Political Philosophy",
+                                "Welsh Politics",
+                                "European Territorial Politics",
+                                "Ideologies",
+                                "Ludwig Wittgenstein",
+                                "Identities and Societal Change",
+                                "Revolutions and Dissent",
+                                "Existentialism and anti-Establishment movements."
+                            ]
+                        },
+                        {
+                            "name": "Dr Balaussa Shaimakhanova",
+                            "url": "https://www.swansea.ac.uk/staff/b.shaimakhanova/",
+                            "expertise": [
+                                "Strategic Marketing",
+                                "Brand Management",
+                                "Labor Economics",
+                                "Cultural Theory (Bourdieu)",
+                                "Entrepreneurship"
+                            ]
+                        },
+                        {
+                            "name": "Professor Antonios Simintiras",
+                            "url": "https://www.swansea.ac.uk/staff/a.c.simintiras/",
+                            "expertise": [
+                                "Personal Selling / Sales Negotiations",
+                                "Sales Management",
+                                "Consumer Behaviour",
+                                "New Consumer",
+                                "Entrepreneurship"
+                            ]
+                        },
+                        {
+                            "name": "Dr Roderick Thomas",
+                            "url": "https://www.swansea.ac.uk/staff/roderick.a.thomas/",
+                            "expertise": [
+                                "Operational Management",
+                                "Condition monitoring",
+                                "Predictive Maintenance",
+                                "Value Based Healthcare",
+                                "Asset Management",
+                                "Project Management",
+                                "Research Methodology"
+                            ]
+                        },
+                        {
+                            "name": "Dr Gary Walpole",
+                            "url": "https://www.swansea.ac.uk/staff/g.l.r.walpole/",
+                            "expertise": [
+                                "Leadership Development",
+                                "Management Development",
+                                "Innovation Management"
+                            ]
+                        },
+                        {
+                            "name": "Dr Bo Wen",
+                            "url": "https://www.swansea.ac.uk/staff/bo.wen/",
+                            "expertise": [
+                                "Knowledge sharing or transfer",
+                                "Knowledge hiding",
+                                "Employee motivations",
+                                "Business ethics",
+                                "Qualitative research methods"
+                            ]
+                        },
+                        {
+                            "name": "Dr Paul White",
+                            "url": "https://www.swansea.ac.uk/staff/p.j.white/",
+                            "expertise": [
+                                "Sociology",
+                                "Social theory",
+                                "Ethnography",
+                                "Organisation Studies"
+                            ]
+                        },
+                        {
+                            "name": "Dr Helen Williams",
+                            "url": "https://www.swansea.ac.uk/staff/helen.c.williams/",
+                            "expertise": [
+                                "Creative and visual methods",
+                                "Critical entrepreneurship studies",
+                                "Phenomenology",
+                                "Human resources management",
+                                "Diversity and inclusion at work"
+                            ]
+                        },
+                        {
+                            "name": "Professor Michael Williams",
+                            "url": "https://www.swansea.ac.uk/staff/m.d.williams/",
+                            "expertise": [
+                                "Innovation Acceptance (particularly digital)",
+                                "The impact of technology on behaviour and society",
+                                "Digital marketing and online consumer behaviour",
+                                "Data analysis (SEM, fsQCA, ISM, various AI approaches)"
+                            ]
+                        },
+                        {
+                            "name": "Dr Matt Wilson",
+                            "url": "https://www.swansea.ac.uk/staff/matthew.wilson/#d.en.202883",
+                            "expertise": [
+                                "Alternative Organising",
+                                "Cultural Theory",
+                                "Applied Ethics",
+                                "Social Movements",
+                                "Political theory"
+                            ]
+                        },
+                        {
+                            "name": "Dr Helen Yu",
+                            "url": "https://www.swansea.ac.uk/staff/h.w.yu/",
+                            "expertise": [
+                                "Intellectual Property Law",
+                                "Health Law and Policy",
+                                "Responsible Research and Sustainable Innovation",
+                                "Value-Based Procurement",
+                                "Translation and Commercialization",
+                                "Technology and Data Management",
+                                "Responsive Stakeholder Engagement"
+                            ]
+                        },
+                        {
+                            "name": "Dr Bibi Zhang",
+                            "url": "https://www.swansea.ac.uk/staff/bibi.zhang/",
+                            "expertise": [
+                                "•\tPower",
+                                "•\tObjectification",
+                                "•\tMotivation",
+                                "•\tOrganisational Justice",
+                                "•\tEthical Leadership Behaviour"
+                            ]
+                        },
+                        {
+                            "name": "Dr Anita Zhao",
+                            "url": "https://www.swansea.ac.uk/staff/a.l.zhao/",
+                            "expertise": [
+                                "Online financial services adoption",
+                                "Sustainable consumption behaviours",
+                                "Political engagement among young voters"
+                            ]
+                        }
                     ]
-                },
+                }
+            ]
+        },
+        {
+            "key": "law",
+            "name": "Law",
+            "departments": [
                 {
-                    "name": "Dr Luca Trenta",
-                    "url": "https://www.swansea.ac.uk/staff/l.trenta/",
-                    "expertise": [
-                        "International Relations",
-                        "US Foreign Policy",
-                        "Cold War",
-                        "Covert Action",
-                        "Intelligence Studies",
-                        "Assassinations and targeted killing",
-                        "Drones"
-                    ]
-                },
-                {
-                    "name": "Dr Matthew Wall",
-                    "url": "https://www.swansea.ac.uk/staff/m.t.wall/",
-                    "expertise": [
-                        "Election campaign dynamics",
-                        "Online politics and the role of the Internet in contemporary campaigns",
-                        "Vote Advice Application Websites",
-                        "Election forecasting",
-                        "Political Party Policy Analysis",
-                        "Electoral System Consequences and Reform Dynamics"
-                    ]
-                },
-                {
-                    "name": "Dr Matthias Dilling",
-                    "url": "https://www.swansea.ac.uk/staff/matthias.dilling/",
-                    "expertise": [
-                        "Comparative politics",
-                        "European politics",
-                        "Political parties",
-                        "Political institutions",
-                        "Qualitative and historical methods"
-                    ]
-                },
-                {
-                    "name": "Dr Paddy McQueen",
-                    "url": "https://www.swansea.ac.uk/staff/paddy.mcqueen/",
-                    "expertise": [
-                        "The politics of recognition",
-                        "The ethics of identity",
-                        "Freedom and autonomy",
-                        "Applied ethics"
-                    ]
-                },
-                {
-                    "name": "Dr Patrick Cockburn",
-                    "url": "https://www.swansea.ac.uk/staff/p.j.l.cockburn/",
-                    "expertise": []
-                },
-                {
-                    "name": "Dr Pier-Luc Dupont Picard",
-                    "url": "https://www.swansea.ac.uk/staff/p.l.dupont/",
-                    "expertise": [
-                        "The politics of race, ethnicity, religion, gender, sexuality, class, disability and age",
-                        "Anti-discrimination policy",
-                        "Employment and education inequalities",
-                        "Grassroots activism",
-                        "Human rights law and institutions",
-                        "Multiculturalism",
-                        "Political theory"
-                    ]
-                },
-                {
-                    "name": "Mr Robert Bideleux",
-                    "url": "https://www.swansea.ac.uk/staff/r.j.bideleux/",
-                    "expertise": [
-                        "The history, politics and economic development of the eastern half of Europe.",
-                        "The evolution of Marxism/Communism.",
-                        "The global history of economic thinking",
-                        "Postcolonialism (including Orientalism)",
-                        "Genocide",
-                        "Latin American politics & economic development"
-                    ]
-                },
-                {
-                    "name": "Dr Rob Knowles",
-                    "url": "https://www.swansea.ac.uk/staff/r.f.knowles/",
-                    "expertise": [
-                        "Metaphysics",
-                        "Epistemology",
-                        "Philosophy of Language",
-                        "Philosophy of Mathematics",
-                        "Philosophy of Science"
-                    ]
-                },
-                {
-                    "name": "Professor Alan Collins",
-                    "url": "https://www.swansea.ac.uk/staff/a.collins/",
-                    "expertise": [
-                        "Theories of International Security",
-                        "Security Dilemma",
-                        "Constructivism",
-                        "Securitization",
-                        "ASEAN",
-                        "Southeast Asian Security"
-                    ]
-                },
-                {
-                    "name": "Professor David Bewley-Taylor",
-                    "url": "https://www.swansea.ac.uk/staff/d.r.taylor/",
-                    "expertise": []
-                },
-                {
-                    "name": "Professor Jonathan Bradbury",
-                    "url": "https://www.swansea.ac.uk/staff/j.p.bradbury/",
-                    "expertise": [
-                        "Comparative territorial politics",
-                        "UK territorial politics and devolution",
-                        "Constitutional policy and devolution",
-                        "Devolution, governance and public policy",
-                        "Party adaptation to devolution",
-                        "Multi-level politics and representation"
+                    "key": "law",
+                    "name": "Law",
+                    "staff": [
+                        {
+                            "name": "Dr Lia Amaxilati",
+                            "url": "https://www.swansea.ac.uk/staff/zoumpoulia.amaxilati/",
+                            "expertise": [
+                                "Maritime Labour Law",
+                                "Admiralty Law",
+                                "Maritime Piracy",
+                                "Carriage of Passengers by Sea",
+                                "Carriage of Goods by Land, Sea, and Air",
+                                "Charterparties",
+                                "Personal Injury Claims",
+                                "Tort Law"
+                            ]
+                        },
+                        {
+                            "name": "Dr Val Aston",
+                            "url": "https://www.swansea.ac.uk/staff/val.aston/",
+                            "expertise": []
+                        },
+                        {
+                            "name": "Dr Ruth Atkins",
+                            "url": "https://www.swansea.ac.uk/staff/r.d.atkins/",
+                            "expertise": [
+                                "Contract law",
+                                "Contract management",
+                                "Commercial law",
+                                "B2B software contracts"
+                            ]
+                        },
+                        {
+                            "name": "Professor Simon Baughen",
+                            "url": "https://www.swansea.ac.uk/staff/s.j.baughen/",
+                            "expertise": [
+                                "Maritime Law",
+                                "Trusts Law",
+                                "Human Rights Litigation against Multinational Companies",
+                                "Climate change and law"
+                            ]
+                        },
+                        {
+                            "name": "Dr Patrick Bishop",
+                            "url": "https://www.swansea.ac.uk/staff/p.bishop/",
+                            "expertise": [
+                                "Cybercrime",
+                                "Crime control strategies",
+                                "Regulation and enforcement",
+                                "Deterrence theory",
+                                "Environmental law",
+                                "Science and legal decision making"
+                            ]
+                        },
+                        {
+                            "name": "Dr Emma Borland",
+                            "url": "https://www.swansea.ac.uk/staff/e.j.borland/",
+                            "expertise": []
+                        },
+                        {
+                            "name": "Dr Lloyd Brown",
+                            "url": "https://www.swansea.ac.uk/staff/lloyd.a.brown/",
+                            "expertise": [
+                                "Environmental Protection Act 1990, Part IIA",
+                                "Lender liability",
+                                "Environmental risks",
+                                "Due diligence",
+                                "Fiduciary obligations and ethical investment",
+                                "Environmental Social Governance (ESG)",
+                                "Empirical research and semi-structured interviewing"
+                            ]
+                        },
+                        {
+                            "name": "Dr Michelle Coleman",
+                            "url": "https://www.swansea.ac.uk/staff/m.a.coleman/",
+                            "expertise": [
+                                "Criminal Law",
+                                "Criminal Procedure",
+                                "Evidence and Proof",
+                                "International Criminal Law",
+                                "Fair Trial Rights",
+                                "Human Rights"
+                            ]
+                        },
+                        {
+                            "name": "Professor Maura Conway",
+                            "url": "https://www.swansea.ac.uk/staff/maura.conway/",
+                            "expertise": [
+                                "Online Extremism",
+                                "Online Terrorism",
+                                "Online Radicalisation",
+                                "Cyberterrorism",
+                                "Online Counterterrorism"
+                            ]
+                        },
+                        {
+                            "name": "Dr Sara Correia-Hopkins",
+                            "url": "https://www.swansea.ac.uk/staff/s.correia/",
+                            "expertise": [
+                                "Fraud",
+                                "Computer crime",
+                                "Victims of crime",
+                                "Tech law",
+                                "Policing",
+                                "Data ethics"
+                            ]
+                        },
+                        {
+                            "name": "Professor Ruth Costigan",
+                            "url": "https://www.swansea.ac.uk/staff/r.s.costigan/",
+                            "expertise": [
+                                "Criminal evidence law",
+                                "Human Rights Law (UK and ECHR)"
+                            ]
+                        },
+                        {
+                            "name": "Dr Simon Crabtree",
+                            "url": "https://www.swansea.ac.uk/staff/s.e.crabtree/",
+                            "expertise": []
+                        },
+                        {
+                            "name": "Dr Arwel Davies",
+                            "url": "https://www.swansea.ac.uk/staff/a.p.davies/",
+                            "expertise": [
+                                "International Economic Law",
+                                "World Trade Law",
+                                "International Public Procurement Regulation",
+                                "Investment Law"
+                            ]
+                        },
+                        {
+                            "name": "Ms Cerys Davies",
+                            "url": "https://www.swansea.ac.uk/staff/c.s.e.davies/",
+                            "expertise": []
+                        },
+                        {
+                            "name": "Dr Lowri Davies",
+                            "url": "https://www.swansea.ac.uk/staff/l.e.g.davies/",
+                            "expertise": []
+                        },
+                        {
+                            "name": "Professor Angela Devereux",
+                            "url": "https://www.swansea.ac.uk/staff/a.m.devereux/",
+                            "expertise": []
+                        },
+                        {
+                            "name": "Professor Michael Draper",
+                            "url": "https://www.swansea.ac.uk/staff/m.j.draper/",
+                            "expertise": []
+                        },
+                        {
+                            "name": "Mr Ogulcan Ekiz",
+                            "url": "https://www.swansea.ac.uk/staff/ogulcan.ekiz/",
+                            "expertise": [
+                                "Intellectual Property Law",
+                                "Creative Industries (particularly photography, visual arts, and theory)",
+                                "Legal Theory and Culture",
+                                "Law and Communities"
+                            ]
+                        },
+                        {
+                            "name": "Miss Cerys Evans",
+                            "url": "https://www.swansea.ac.uk/staff/c.l.evans/",
+                            "expertise": []
+                        },
+                        {
+                            "name": "Dr Gareth Evans",
+                            "url": "https://www.swansea.ac.uk/staff/gareth.p.evans/",
+                            "expertise": [
+                                "Political History",
+                                "Constitutional Theory",
+                                "Devolution",
+                                "Political Theory",
+                                "Public Law"
+                            ]
+                        },
+                        {
+                            "name": "Dr Tom Hannant",
+                            "url": "https://www.swansea.ac.uk/staff/t.w.hannant/",
+                            "expertise": [
+                                "Public Law",
+                                "Legal Theory",
+                                "Political Theory",
+                                "Human Rights",
+                                "Devolution"
+                            ]
+                        },
+                        {
+                            "name": "Professor Simon Hoffman",
+                            "url": "https://www.swansea.ac.uk/staff/s.hoffman/",
+                            "expertise": [
+                                "Human Rights",
+                                "Children's Rights",
+                                "Implementing Human Rights",
+                                "Economic and Social Rights",
+                                "Poverty"
+                            ]
+                        },
+                        {
+                            "name": "Mrs Rebecca Howarth",
+                            "url": "https://www.swansea.ac.uk/staff/r.f.howarth/",
+                            "expertise": [
+                                "Criminal Law"
+                            ]
+                        },
+                        {
+                            "name": "Dr Andrew Iwobi",
+                            "url": "https://www.swansea.ac.uk/staff/a.u.iwobi/",
+                            "expertise": []
+                        },
+                        {
+                            "name": "Mrs Trilby James",
+                            "url": "https://www.swansea.ac.uk/staff/t.k.james/",
+                            "expertise": []
+                        },
+                        {
+                            "name": "Dr Victoria Jenkins",
+                            "url": "https://www.swansea.ac.uk/staff/v.a.jenkins/",
+                            "expertise": [
+                                "Sustainable Land Management Law",
+                                "Law and Nature Recovery",
+                                "Land Use Planning Law",
+                                "European Union Law",
+                                "Landscape and Law",
+                                "Legal Skills",
+                                "Environmental Law"
+                            ]
+                        },
+                        {
+                            "name": "Dr Caroline Jones",
+                            "url": "https://www.swansea.ac.uk/staff/caroline.jones/",
+                            "expertise": [
+                                "Health Care Law",
+                                "Family Law",
+                                "Hidden law-making",
+                                "Test case litigation",
+                                "Case biographies",
+                                "Trust, trustworthiness, AI and clinical decision support systems",
+                                "Legal parenthood and kinship",
+                                "Regulation of assisted conception"
+                            ]
+                        },
+                        {
+                            "name": "Mrs Rhian Jones",
+                            "url": "https://www.swansea.ac.uk/staff/rhian.jones2/",
+                            "expertise": [
+                                "Postgraduate Legal Education",
+                                "Legal Practice",
+                                "Professional Conduct and Regulation",
+                                "Commercial Litigation"
+                            ]
+                        },
+                        {
+                            "name": "Dr Tabetha Kurtz-Shefford",
+                            "url": "https://www.swansea.ac.uk/staff/t.c.kurtz-shefford/",
+                            "expertise": [
+                                "International Renewable Energy Law",
+                                "Offshore Oil and Gas Contracts and Liabilities",
+                                "Admiralty Law"
+                            ]
+                        },
+                        {
+                            "name": "Professor Georgios Leloudas",
+                            "url": "https://www.swansea.ac.uk/staff/g.leloudas/",
+                            "expertise": [
+                                "Carriage of goods and passengers by air and road",
+                                "Law of aviation and marine insurance",
+                                "Multimodal transport",
+                                "Aircraft finance",
+                                "Autonomous transport systems",
+                                "Cyber risks in the transport sector",
+                                "Risk perceptions and transport law",
+                                "Arbitration law"
+                            ]
+                        },
+                        {
+                            "name": "Mr Richard Leonard-Davies",
+                            "url": "https://www.swansea.ac.uk/staff/r.s.leonard-davies/",
+                            "expertise": [
+                                "Business Law",
+                                "Company Law",
+                                "Employment Law",
+                                "Property Law",
+                                "Competition Law",
+                                "Professional Legal Practice"
+                            ]
+                        },
+                        {
+                            "name": "Ms Michaela Leyshon",
+                            "url": "https://www.swansea.ac.uk/staff/m.e.leyshon/",
+                            "expertise": []
+                        },
+                        {
+                            "name": "Dr Alice Liefgreen",
+                            "url": "https://www.swansea.ac.uk/staff/alice.liefgreen/",
+                            "expertise": [
+                                "Causal reasoning",
+                                "Evidential reasoning",
+                                "Causal Bayesian Networks",
+                                "Judgment and Decision-Making",
+                                "Legal reasoning",
+                                "Information seeking",
+                                "Explanation",
+                                "Mixed research methods"
+                            ]
+                        },
+                        {
+                            "name": "Professor Elizabeth Macdonald",
+                            "url": "https://www.swansea.ac.uk/staff/e.a.macdonald/",
+                            "expertise": [
+                                "contract law",
+                                "E-commerce law (particularly e-contracting)"
+                            ]
+                        },
+                        {
+                            "name": "Professor Stuart Macdonald",
+                            "url": "https://www.swansea.ac.uk/staff/s.macdonald/",
+                            "expertise": [
+                                "Criminal law",
+                                "Criminal justice",
+                                "Human rights",
+                                "Counterterrorism",
+                                "Terrorists’ use of the internet",
+                                "Cyberterrorism"
+                            ]
+                        },
+                        {
+                            "name": "Dr Aygun Mammadzada",
+                            "url": "https://www.swansea.ac.uk/staff/aygun.mammadzada/",
+                            "expertise": [
+                                "Private international law",
+                                "Commercial conflict of laws",
+                                "International business, trade law, and maritime law",
+                                "International commercial dispute resolution",
+                                "International commercial arbitration and litigation",
+                                "Digitalisation, legal innovation, and tech"
+                            ]
+                        },
+                        {
+                            "name": "Dr Ashley Mattheis",
+                            "url": "https://www.swansea.ac.uk/staff/ashley.mattheis/",
+                            "expertise": [
+                                "Digital Extremist Cultures",
+                                "Social and “New” Media",
+                                "Intersectional and Black Feminist Theory",
+                                "Visual Media",
+                                "Propaganda",
+                                "Publics and the Public Sphere",
+                                "Popular Culture",
+                                "Influencer Cultures"
+                            ]
+                        },
+                        {
+                            "name": "Professor Yvonne McDermott Rees",
+                            "url": "https://www.swansea.ac.uk/staff/yvonne.mcdermottrees/",
+                            "expertise": [
+                                "International criminal law",
+                                "Evidence and proof",
+                                "Human rights",
+                                "Fair trial rights"
+                            ]
+                        },
+                        {
+                            "name": "Dr Miraji Mohamed",
+                            "url": "https://www.swansea.ac.uk/staff/humanities-and-socialsciences/law-staff/staff/m.h.mohamed/",
+                            "expertise": [
+                                "Extremism and the New Media",
+                                "Gender and Extremism",
+                                "Critical Discourse Analysis",
+                                "Content Analysis",
+                                "Preventing/Countering Violent Extremism",
+                                "Radicalisation",
+                                "Youth, Peace and Security",
+                                "Media Representations of Gender"
+                            ]
+                        },
+                        {
+                            "name": "Professor Karen Morrow",
+                            "url": "https://www.swansea.ac.uk/staff/k.morrow/",
+                            "expertise": [
+                                "Environmental Law",
+                                "Ecofeminism",
+                                "Human Rights and Environment",
+                                "Public Participation"
+                            ]
+                        },
+                        {
+                            "name": "Professor Richard Owen",
+                            "url": "https://www.swansea.ac.uk/staff/w.r.owen/",
+                            "expertise": [
+                                "Clinical legal education",
+                                "Legal advice services",
+                                "Welsh law",
+                                "Access to justice"
+                            ]
+                        },
+                        {
+                            "name": "Mr Matthew Parry",
+                            "url": "https://www.swansea.ac.uk/staff/m.j.parry/",
+                            "expertise": [
+                                "Sports Law",
+                                "Land Law",
+                                "Alternative Dispute Resolution",
+                                "Legal Communication Skills"
+                            ]
+                        },
+                        {
+                            "name": "Professor Alison Perry",
+                            "url": "https://www.swansea.ac.uk/staff/a.perry/",
+                            "expertise": [
+                                "Family Law",
+                                "Law of Property"
+                            ]
+                        },
+                        {
+                            "name": "Dr Ida Petretta",
+                            "url": "https://www.swansea.ac.uk/staff/humanities-and-socialsciences/law-staff/staff/ida.petretta/",
+                            "expertise": [
+                                "Legal Theory",
+                                "Comparative law approaches",
+                                "Philosophy of Technology",
+                                "Science and Technology Studies",
+                                "Law and Technology"
+                            ]
+                        },
+                        {
+                            "name": "Professor Helen Quane",
+                            "url": "https://www.swansea.ac.uk/staff/h.quane/",
+                            "expertise": [
+                                "Self-determination",
+                                "Minority rights",
+                                "Rights of Indigenous Peoples",
+                                "Legal pluralism"
+                            ]
+                        },
+                        {
+                            "name": "Dr Osian Rees",
+                            "url": "https://www.swansea.ac.uk/staff/o.d.rees/",
+                            "expertise": []
+                        },
+                        {
+                            "name": "Ms Trish Rees",
+                            "url": "https://www.swansea.ac.uk/staff/e.p.rees/",
+                            "expertise": []
+                        },
+                        {
+                            "name": "Miss Emma Richards",
+                            "url": "https://www.swansea.ac.uk/staff/emma.l.richards/",
+                            "expertise": [
+                                "Criminal Law",
+                                "Criminology",
+                                "Youth Justice",
+                                "Human Rights",
+                                "Equity & Trusts",
+                                "Land Law"
+                            ]
+                        },
+                        {
+                            "name": "Dr Livio Robaldo",
+                            "url": "https://www.swansea.ac.uk/staff/livio.robaldo/",
+                            "expertise": [
+                                "Computational Law",
+                                "Natural Language Processing",
+                                "Knowledge Representation",
+                                "Artificial Intelligence and Law",
+                                "Natural Language Semantics",
+                                "Legal Ontologies",
+                                "Deontic Logic",
+                                "Automatic Reasoning"
+                            ]
+                        },
+                        {
+                            "name": "Mr Chris Rowe",
+                            "url": "https://www.swansea.ac.uk/staff/christopher.b.rowe",
+                            "expertise": [
+                                "Social security law",
+                                "Immigration law",
+                                "Public law",
+                                "Human rights law"
+                            ]
+                        },
+                        {
+                            "name": "Professor Baris Soyer",
+                            "url": "https://www.swansea.ac.uk/staff/b.soyer/",
+                            "expertise": [
+                                "Commercial and Maritime Law",
+                                "Insurance Law",
+                                "Law of Obligations",
+                                "Charterparties"
+                            ]
+                        },
+                        {
+                            "name": "Professor Andrew Tettenborn",
+                            "url": "https://www.swansea.ac.uk/staff/a.m.tettenborn/",
+                            "expertise": []
+                        },
+                        {
+                            "name": "Dr Katy Vaughan",
+                            "url": "https://www.swansea.ac.uk/staff/k.e.vaughan/",
+                            "expertise": [
+                                "Counterterrorism",
+                                "Human Rights",
+                                "Public Law",
+                                "Legal Education"
+                            ]
+                        },
+                        {
+                            "name": "Ms Jia Wang",
+                            "url": "https://www.swansea.ac.uk/staff/jia.wang/",
+                            "expertise": [
+                                "Marine Insurance Law",
+                                "International Trade Law",
+                                "Contract Law",
+                                "Comparative Law",
+                                "Socio-legal theories"
+                            ]
+                        },
+                        {
+                            "name": "Dr Shuangge Wen",
+                            "url": "https://www.swansea.ac.uk/staff/s.wen/",
+                            "expertise": [
+                                "Company Law",
+                                "Corporate Governance",
+                                "Business Ethics",
+                                "and general aspects of Business Law"
+                            ]
+                        },
+                        {
+                            "name": "Dr Emyr Wile",
+                            "url": "https://www.swansea.ac.uk/staff/e.o.wile/",
+                            "expertise": [
+                                "Medical Law",
+                                "Empirical Socio-legal Research",
+                                "Law of Torts",
+                                "Clinical Negligence",
+                                "Consent",
+                                "Qualitative and Quantitative Research Methods",
+                                "Bioethics",
+                                "Medical Ethics"
+                            ]
+                        },
+                        {
+                            "name": "Professor Jane Williams",
+                            "url": "https://www.swansea.ac.uk/staff/jane.m.williams/",
+                            "expertise": [
+                                "Public Law",
+                                "Human Rights",
+                                "Legal status and agency of children",
+                                "Participative rights and co-production",
+                                "Law and public policy",
+                                "Public legal education",
+                                "Devolution and multi-level governance",
+                                "Administrative justice"
+                            ]
+                        },
+                        {
+                            "name": "Dr Kamil Yilmaz",
+                            "url": "https://www.swansea.ac.uk/staff/kamil.yilmaz/",
+                            "expertise": [
+                                "Terrorism and political violence",
+                                "Radicalization/Deradicalization/Disengagement",
+                                "Counterterrorism",
+                                "Terrorists’ use of the Internet and social media",
+                                "Discourse analysis"
+                            ]
+                        }
                     ]
                 }
             ]
