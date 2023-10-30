@@ -4,9 +4,9 @@ import './directory.scss';
 import Filter from './filter';
 
 function DirectoryRow(props) {
-  // Split the title by the first comma and take the first part
-  const titleParts = props.staff_member.title.split(', ');
-  const formattedTitle = titleParts.length > 0 ? titleParts[0] : props.staff_member.title;
+  // Extract the part before the first comma
+  const titleParts = props.staff_member.title.split(',');
+  const formattedTitle = titleParts.length > 0 ? titleParts[0].trim() : props.staff_member.title;
 
   return (
     <>
