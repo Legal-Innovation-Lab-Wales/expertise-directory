@@ -9,18 +9,22 @@ function DirectoryRow(props) {
   const formattedTitle = titleParts.length > 0 ? titleParts[0] : props.staff_member.title;
 
   return (
-    <tr className={`${props.college.key} ${props.department.key}`}>
-      <td nowrap='true' className='staff-name'>
-        <a href={props.staff_member.url} target='_blank' rel='noreferrer'>
-          {props.staff_member.name}
-        </a>
-        <br />
-        {formattedTitle} {/* Display the formatted title */}
-      </td>
-      <td className='college'>{props.college.name}</td>
-      <td>{props.department.name}</td>
-      <td>{props.staff_member.expertise.join(', ')}</td>
-    </tr>
+    <>
+      {props.staff_member.expertise.length > 0 && (
+        <tr className={`${props.college.key} ${props.department.key}`}>
+          <td nowrap='true' className='staff-name'>
+            <a href={props.staff_member.url} target='_blank' rel='noreferrer'>
+              {props.staff_member.name}
+            </a>
+            <br />
+            {formattedTitle} {/* Display the formatted title */}
+          </td>
+          <td className='college'>{props.college.name}</td>
+          <td>{props.department.name}</td>
+          <td>{props.staff_member.expertise.join(', ')}</td>
+        </tr>
+      )}
+    </>
   );
 }
 
