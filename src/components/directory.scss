@@ -1,6 +1,12 @@
+.custom-header {
+  color: white;
+  text-transform: uppercase;
+  position: absolute;
+  top: 0;
+  right: 0;
+}
 
 .staff-name {
-  max-width: 40%;
   white-space: normal; /* Allow text to wrap */
 }
 
