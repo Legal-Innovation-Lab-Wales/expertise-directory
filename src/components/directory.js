@@ -3,10 +3,13 @@ import { Col, Container, Row } from 'react-bootstrap';
 import './directory.scss';
 import Filter from './filter';
 
+function formatTitle(title) {
+  const titleParts = title.split(',')[0].trim().toLowerCase().split(' ');
+  return titleParts.map((part) => part.charAt(0).toUpperCase() + part.slice(1)).join(' ');
+}
+
 function DirectoryRow(props) {
-  // Extract the part before the first comma
-  const titleParts = props.staff_member.title.split(',');
-  const formattedTitle = titleParts.length > 0 ? titleParts[0].trim() : props.staff_member.title;
+  const formattedTitle = formatTitle(props.staff_member.title);
 
   return (
     <>
