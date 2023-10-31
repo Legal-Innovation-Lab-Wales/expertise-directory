@@ -7,30 +7,32 @@
   font-family: "Open Sans", sans-serif; /* Set font to Open Sans */
 }
 
-.custom-header-text {
-  font-family: "Open Sans", sans-serif;
+.custom-logos {
+  display: flex;
+  align-items: center;
 }
 
 .custom-logo {
-  max-width: 150px;
-  max-height: 150px;
-  margin-right: 20px; /* Add some margin between the logos and text */
+  max-width: 200px;
+  max-height: 200px;
+  margin-right: 20px; /* Add some spacing between the logos */
 }
 
-.container {
-  margin-top: 20px;
+.swansea-logo,
+.lilw-logo {
+  max-width: 100%;
+  height: auto;
 }
 
-.lilw-logo, .swansea-logo {
-  max-width: 150x;
-  max-height: 150px;
+.customer-header-text {
+  flex: 1; /* Allow the header text to take up available space */
 }
-
 
 .custom-header-text {
-  color: white;
-  margin-right: 20px;
+  margin: 0; /* Remove default margin */
+  color: white; /* Set text color to white */
 }
+
 
 
 .staff-name {
