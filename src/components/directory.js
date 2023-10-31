@@ -55,7 +55,7 @@ export default class Directory extends React.Component {
       <Container>
         <Row>
           <Col xs={12}>
-            <Filter data={this.state} />
+            <Filter data={this.state} style={{ marginTop: '20px' } />
             <div>Last Updated at: {this.state.last_update}</div>
             <table className='table'>
               <thead>
