@@ -54,11 +54,9 @@ export default class Directory extends React.Component {
     return (
       <Container>
        <Row>
-          <Col xs={6} className="text-left">
+          <Col xs={6} className="text-center">
             <h2>Directory of Expertise</h2>
-          </Col>
-          <Col xs={6} className="text-right">
-            <div className='update-div'>Last Updated at: {this.state.last_update}</div>
+              <div className='update-div'>Last Updated at: {this.state.last_update}</div>
           </Col>
       </Row>
         <Row>
