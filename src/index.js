@@ -15,6 +15,9 @@ ReactDOM.render([
         />
       </a>
     </div>
+    <div className="customer-header-text">
+            <h2 className="custom-header-text">Directory of Expertise</h2>
+    </div>
     <div className="custom-logo">
       <a href="https://legaltech.wales">
         <img
@@ -24,7 +27,7 @@ ReactDOM.render([
         />
       </a>
     </div>
-    <h2 className="custom-header-text">Directory of Expertise</h2>
+    
   </div></heading>,
     <main>
     <Directory/>
