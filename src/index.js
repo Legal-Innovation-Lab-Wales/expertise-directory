@@ -1,40 +1,14 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
-import Directory from './components/directory';
-import { Footer } from 'lilw-react-components'; // Import the footer component
+import React from 'react'
+import ReactDOM from 'react-dom'
+import Directory from './components/directory'
+import {Header,Footer} from 'lilw-react-components'
 
 ReactDOM.render([
-  <heading>
-    <div className="custom-header-container" style={{ width: '100%' }}>
-      <div className="custom-logo">
-        <a href="https://swansea.ac.uk">
-          <img
-            src="https://intranet.swan.ac.uk/cdn/suds/images/logo/application-custom/logo-white-en.png"
-            className="swansea-logo"
-            alt="Swansea University Logo"
-          />
-        </a>
-      </div>
-      <div className="customer-header-text">
-        <h2 className="custom-header-text">Directory of Expertise</h2>
-      </div>
-      <div className="custom-logo">
-        <a href="https://legaltech.wales">
-          <img
-            src="/static/media/lilw-logo-white.2c58d3c3.png"
-            className="lilw-logo"
-            alt="LILW Logo"
-          />
-        </a>
-      </div>
-    </div>
-  </heading>,
+  <Header a11y_header_desc='Expertise Directory'/>,
   <main>
-    <div className="table-responsive">
-      <Directory />
-    </div>
+    <Directory/>
   </main>,
-  <Footer />,
+  <Footer/>
   ],
   document.getElementById('root')
-);
+)
