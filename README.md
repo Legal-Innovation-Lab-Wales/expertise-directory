@@ -12,7 +12,7 @@
 
 ## Update
 
-This project has now bee retired and is no longer live updating.
+This project was last updated on 31/10/2023
 
 ### Introduction
 
@@ -29,9 +29,7 @@ The front end is a React web application that pulls the data out of the JSON int
 There are quite a few limitations to this work. As it is a web scraper it is dependent on the Swansea University 
 website for its information, if the website structure changes it will stop working.  
 
-At the moment it only covers the Hillary Rodham Clinton School of Law, the College of Science and the College of Arts
-and Humanities, the other colleges display their staff profiles in a different structure and so will need to be added 
-in time. 
+This application covers the Faculty of Humanities and Social Sciences at Swansea University.
 
 ---
 ### Build
