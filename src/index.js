@@ -24,7 +24,7 @@ ReactDOM.render([
         />
       </a>
     </div>
-    <h1 className="custom-header-text">Expertise Directory</h1>
+    <h2 className="custom-header-text">Directory of Expertise</h2>
   </div></heading>,
     <main>
     <Directory/>
