@@ -53,7 +53,7 @@ export default class Directory extends React.Component {
   render() {
     return (
       <Container>
-        <div className='title-div'>
+        <div className='title-div text-center'>
             <h2>Directory of Expertise</h2>
             Last Updated {this.state.last_update}
       </div>
