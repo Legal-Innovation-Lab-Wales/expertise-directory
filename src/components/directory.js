@@ -55,7 +55,7 @@ export default class Directory extends React.Component {
       <Container>
         <div className='title-div text-center'>
             <h2>Directory of Expertise</h2>
-        <div className='text-small'>
+        <div className='text-small text-center'>
             Last Updated {this.state.last_update}
         </div>
       </div>
