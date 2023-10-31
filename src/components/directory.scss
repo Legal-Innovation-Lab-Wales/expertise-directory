@@ -1,10 +1,16 @@
-.custom-header {
-  color: white;
-  text-transform: uppercase;
-  position: absolute;
-  top: 0;
-  right: 0;
+.custom-header-container {
+  background-color: navy;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  padding: 10px;
 }
+
+.custom-header-text {
+  color: white;
+  margin-right: 20px;
+}
+
 
 .staff-name {
   white-space: normal; /* Allow text to wrap */
