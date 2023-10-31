@@ -53,7 +53,7 @@ export default class Directory extends React.Component {
   render() {
     return (
       <Container>
-      <div className='update-div'>Last Updated at: {this.state.last_update}</div>
+      <div className='update-div text-right'>Last Updated at: {this.state.last_update}</div>
         <Row>
           <Col xs={12}>
             <Filter data={this.state} />
