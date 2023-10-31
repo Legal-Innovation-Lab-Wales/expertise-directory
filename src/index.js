@@ -2,7 +2,6 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import Directory from './components/directory';
 import { Footer } from 'lilw-react-components'; // Import the footer component
-import './your-css-file.css'; // Import your custom CSS file
 
 ReactDOM.render([
   <heading>
