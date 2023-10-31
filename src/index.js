@@ -3,7 +3,8 @@ import ReactDOM from 'react-dom';
 import Directory from './components/directory';
 import { Footer } from 'lilw-react-components'; // Import the footer component
 
-ReactDOM.render(
+ReactDOM.render([
+  <heading>
   <div className="custom-header-container">
     <div className="custom-logo">
       <a href="https://swansea.ac.uk">
@@ -22,6 +23,11 @@ ReactDOM.render(
       </a>
     </div>
     <h1 className="custom-header-text">Expertise Directory</h1>
-  </div>,
+  </div></heading>,
+    <main>
+    <Directory/>
+  </main>,
+  <Footer/>
+  ],
   document.getElementById('root')
 );
