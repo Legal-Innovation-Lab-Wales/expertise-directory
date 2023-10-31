@@ -10,6 +10,7 @@ ReactDOM.render([
       <a href="https://swansea.ac.uk">
         <img
           src="https://intranet.swan.ac.uk/cdn/suds/images/logo/application-custom/logo-white-en.png"
+          className="swansea-logo"
           alt="Swansea University Logo"
         />
       </a>
@@ -18,6 +19,7 @@ ReactDOM.render([
       <a href="https://legaltech.wales">
         <img
           src="/static/media/lilw-logo-white.2c58d3c3.png"
+          className="lilw-logo"
           alt="LILW Logo"
         />
       </a>
