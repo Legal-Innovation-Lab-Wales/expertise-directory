@@ -1,10 +1,16 @@
 .custom-header-container {
-  background-color: navy;
+  background-color: #242f60;
   display: flex;
   align-items: center;
   justify-content: flex-end;
   padding: 10px;
 }
+
+.lilw-logo, .swansea-logo {
+  max-width: 200px;
+  max-height: 200px;
+}
+
 
 .custom-header-text {
   color: white;
