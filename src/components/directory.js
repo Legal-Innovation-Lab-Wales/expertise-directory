@@ -9,42 +9,43 @@ function formatTitle(title) {
 }
 
 function DirectoryRow(props) {
-  // Check if expertise is present
-  if (props.staff_member.expertise && props.staff_member.expertise.length > 0) {
-    const formattedTitle = formatTitle(props.staff_member.title);
+  const formattedTitle = formatTitle(props.staff_member.title);
 
-    // Calculate the midpoint of the expertise list
-    const midpoint = Math.ceil(props.staff_member.expertise.length / 2);
-
-    return (
-      <tr className={`${props.college.key} ${props.department.key}`}>
-        <td nowrap='true' className='staff-name'>
-          <a href={props.staff_member.url} target='_blank' rel='noreferrer'>
-            {props.staff_member.name}
-          </a>
-          <br />
-          {formattedTitle} {/* Display the formatted title */}
-        </td>
-        <td className='college'>{props.college.name}</td>
-        <td>{props.department.name}</td>
-        <td>
-          <ul>
-            {props.staff_member.expertise.slice(0, midpoint).map((expertise, index) => (
-              <li key={index}>{expertise}</li>
-            ))}
-          </ul>
-          <ul>
-            {props.staff_member.expertise.slice(midpoint).map((expertise, index) => (
-              <li key={index}>{expertise}</li>
-            ))}
-          </ul>
-        </td>
-      </tr>
-    );
-  } else {
-    // If no expertise, return null (render nothing)
-    return null;
-  }
+  return (
+    <>
+      {props.staff_member.expertise.length > 0 && (
+        <tr className={`${props.college.key} ${props.department.key}`}>
+          <td nowrap='true' className='staff-name'>
+            <a href={props.staff_member.url} target='_blank' rel='noreferrer'>
+              {props.staff_member.name}
+            </a>
+            <br />
+            {formattedTitle} {/* Display the formatted title */}
+          </td>
+          <td className='college'>{props.college.name}</td>
+          <td>{props.department.name}</td>
+          <td>
+            <div className="expertise-columns">
+              <div className="expertise-column">
+                <ul>
+                  {props.staff_member.expertise.slice(0, Math.ceil(props.staff_member.expertise.length / 2)).map((expertise, index) => (
+                    <li key={index}>{expertise}</li>
+                  ))}
+                </ul>
+              </div>
+              <div className="expertise-column">
+                <ul>
+                  {props.staff_member.expertise.slice(Math.ceil(props.staff_member.expertise.length / 2)).map((expertise, index) => (
+                    <li key={index}>{expertise}</li>
+                  ))}
+                </ul>
+              </div>
+            </div>
+          </td>
+        </tr>
+      )}
+    </>
+  );
 }
 
 export default class Directory extends React.Component {
