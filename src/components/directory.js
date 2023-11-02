@@ -25,22 +25,11 @@ function DirectoryRow(props) {
           <td className='college'>{props.college.name}</td>
           <td>{props.department.name}</td>
           <td>
-            <div className="expertise-columns">
-              <div className="expertise-column">
-                <ul>
-                  {props.staff_member.expertise.slice(0, Math.ceil(props.staff_member.expertise.length / 2)).map((expertise, index) => (
-                    <li key={index}>{expertise}</li>
-                  ))}
-                </ul>
-              </div>
-              <div className="expertise-column">
-                <ul>
-                  {props.staff_member.expertise.slice(Math.ceil(props.staff_member.expertise.length / 2)).map((expertise, index) => (
-                    <li key={index}>{expertise}</li>
-                  ))}
-                </ul>
-              </div>
-            </div>
+            <ul>
+              {props.staff_member.expertise.map((expertise, index) => (
+                <li key={index}>{expertise}</li>
+              ))}
+            </ul>
           </td>
         </tr>
       )}
