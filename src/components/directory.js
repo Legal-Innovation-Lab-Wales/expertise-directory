@@ -4,22 +4,38 @@ import './directory.scss'
 import Filter from "./filter"
 
 function DirectoryRow(props) {
-  return (
-    <tr className={`${props.college.key} ${props.department.key}`}>
-      <td nowrap='true' className='staff-name'>
-        <a href={props.staff_member.url} target='_blank' rel='noreferrer'>{props.staff_member.name}</a></td>
-      <td className='college'>{props.college.name}</td>
-      <td>{props.department.name}</td>
-      <td>
-        <ul>
-          {props.staff_member.expertise.map((expertise, index) => (
-            <li key={index}>{expertise}</li>
-          ))}
-        </ul>
-      </td>
-    </tr>
-  )
+  // Check if expertise is present
+  if (props.staff_member.expertise && props.staff_member.expertise.length > 0) {
+    // Calculate the midpoint of the expertise list
+    const midpoint = Math.ceil(props.staff_member.expertise.length / 2);
+
+    return (
+      <tr className={`${props.college.key} ${props.department.key}`}>
+        <td nowrap='true' className='staff-name'>
+          <a href={props.staff_member.url} target='_blank' rel='noreferrer'>{props.staff_member.name}</a>
+        </td>
+        <td className='college'>{props.college.name}</td>
+        <td>{props.department.name}</td>
+        <td>
+          <ul>
+            {props.staff_member.expertise.slice(0, midpoint).map((expertise, index) => (
+              <li key={index}>{expertise}</li>
+            ))}
+          </ul>
+          <ul>
+            {props.staff_member.expertise.slice(midpoint).map((expertise, index) => (
+              <li key={index}>{expertise}</li>
+            ))}
+          </ul>
+        </td>
+      </tr>
+    );
+  } else {
+    // If no expertise, return null (render nothing)
+    return null;
+  }
 }
+
 
 export default class Directory extends React.Component {
   constructor(props) {
