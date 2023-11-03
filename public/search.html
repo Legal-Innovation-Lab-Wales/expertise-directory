@@ -111,6 +111,8 @@
         <div ng-if="loading" class="loading-container">
             <div class="spinner"></div>
         </div>
+ 
+        <div ng-if="!loading">
             <ul class="list-group mt-4">
                 <li ng-repeat="result in filteredResults" class="list-group-item">
                     <div class="staff-details" style="display: flex; justify-content: space-between;">
