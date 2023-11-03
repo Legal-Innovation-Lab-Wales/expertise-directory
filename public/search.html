@@ -62,17 +62,18 @@
         </div>
       </div>
       <div class="custom-header-text">
-        <!-- Optional: Any text content here -->
+        "Expertise Search"
       </div>
     </div>
   </header>
     <div class="container">
         <h1>Search Expertise</h1>
-        <div>
-            <input type="text" ng-model="searchTerm" placeholder="Search" class="form-control"/>
+        <div class="form-inline mb-2">
+            <input type="text" ng-model="searchTerm" placeholder="Search" class="form-control mr-2"/>
             <button ng-click="search()" class="btn btn-primary">Search</button>
         </div>
         <div class="mt-4">
+            <label class="mb-2">Filter</label>
             <input type="text" ng-model="additionalSearchTerm" ng-change="filterResults()" placeholder="Filter Results" class="form-control"/>
         </div>
         <ul class="list-group mt-4">
