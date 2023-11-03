@@ -45,11 +45,7 @@ app.controller('SearchController', ['$scope', '$http', function ($scope, $http) 
 
   function searchPage(searchTerm, start = 1) {
     const FUNCTION_ENDPOINT = '/.netlify/functions/fetchData';
-    const LOCAL_ENDPOINT = `http://localhost:5000/mockApi?q=${encodeURIComponent(searchTerm)}&s=${(start - 1) * 10}`;
-    const isLocal = window.location.hostname === 'localhost';
-    const url = isLocal ? LOCAL_ENDPOINT : FUNCTION_ENDPOINT;
-    
-    return $http.get(url, { params: { q: searchTerm, s: start } })
+    return $http.get(FUNCTION_ENDPOINT, { params: { q: searchTerm, s: start } })
       .then(response => {
         if (!response.data || response.data.length === 0) {
           return $scope.results;
