@@ -10,12 +10,25 @@ exports.handler = async function (event) {
     const $ = cheerio.load(data);
 
     // Extract and format data from the HTML
-    const results = $('ul.site-search-results-list li.site-search-results-list-item').map((index, element) => {
+    const results = await Promise.all($('ul.site-search-results-list li.site-search-results-list-item').map(async (index, element) => {
       const name = $(element).find('h3 a').text().trim();
       const profileUrl = $(element).find('h3 a').attr('href');
       const additionalInfo = $(element).find('.site-search-results-list-item-additional-information').text().trim();
-      return { name, profileUrl, additionalInfo };
-    }).get();
+
+      // Fetch the areas of expertise for each profile
+      let expertise = [];
+      try {
+        const { data: profileData } = await axios.get(profileUrl);
+        const profile$ = cheerio.load(profileData);
+        profile$('.staff-profile-areas-of-expertise ul li').each((i, el) => {
+          expertise.push(profile$(el).text());
+        });
+      } catch (error) {
+        console.error(`Failed to fetch expertise for ${profileUrl}`);
+      }
+
+      return { name, profileUrl, additionalInfo, expertise };
+    }).get());
 
     return {
       statusCode: 200,
