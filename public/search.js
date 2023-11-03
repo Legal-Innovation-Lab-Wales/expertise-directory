@@ -45,10 +45,13 @@ app.controller('SearchController', ['$scope', '$http', function ($scope, $http) 
 
 function searchPage(searchTerm, start = 1) {
   const baseUrl = `/.netlify/functions/fetchData?q=${encodeURIComponent(searchTerm)}&s=${(start - 1) * 10}`;
+  console.log(`Fetching page ${start}...`);  // Debug information
   return $http.get(baseUrl)
     .then(response => {
       const resultsFromApi = response.data.results;
       const totalPages = response.data.totalPages;
+
+      console.log(`Fetched ${resultsFromApi.length} results from page ${start}.`);  // Debug information
 
       if (!resultsFromApi || resultsFromApi.length === 0) {
         return $scope.results;
@@ -62,4 +65,5 @@ function searchPage(searchTerm, start = 1) {
       return start < totalPages ? searchPage(searchTerm, start + 1) : $scope.results;
     });
 }
+
 }]);
