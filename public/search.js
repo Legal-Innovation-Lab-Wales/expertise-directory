@@ -3,23 +3,24 @@ const app = angular.module('SearchApp', []);
 app.controller('SearchController', ['$scope', '$http', function ($scope, $http) {
   $scope.results = [];
   $scope.filteredResults = [];
-  $scope.loading = false;
+
+  function searchPage(searchTerm, start = 1) {
+    const FUNCTION_ENDPOINT = '/.netlify/functions/fetchData';
+    $scope.loading = true; // Set loading to true when fetching data
+    return $http.get(FUNCTION_ENDPOINT, { params: { q: searchTerm, s: start } })
+      .then(response => {
+        $scope.results = $scope.results.concat(response.data);
+        $scope.filteredResults = $scope.results;
+        $scope.loading = false; // Set loading to false when data has been fetched
+        $scope.$apply();
+        return response.data.length > 0 ? searchPage(searchTerm, start + 10) : $scope.results;
+      });
+  }
 
   $scope.search = function () {
-    $scope.loading = true; // Set loading to true when fetching data
-    const FUNCTION_ENDPOINT = '/.netlify/functions/fetchData';
+    $scope.results = [];
     const searchTerm = $scope.searchTerm;
-
-    $http.get(FUNCTION_ENDPOINT, { params: { q: searchTerm } })
-      .then(response => {
-        $scope.results = response.data.results; // Fetch the results from the response
-        $scope.filteredResults = $scope.results; // Initially, filtered results are same as all results
-        $scope.loading = false; // Set loading to false when data has been fetched
-      })
-      .catch(error => {
-        console.error('Error fetching data:', error);
-        $scope.loading = false;
-      });
+    searchPage(searchTerm);
   };
 
   $scope.filterResults = function () {
