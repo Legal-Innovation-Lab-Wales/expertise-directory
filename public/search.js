@@ -58,11 +58,11 @@ function searchPage(searchTerm, page = 1) {
         return $scope.results;
       }
 
-      // Concatenate results and check if total is over 100
+      // Concatenate results and check if total is over 75
       const newResults = $scope.results.concat(response.data.results);
-      if (newResults.length > 3) {
+      if (newResults.length > 75) {
         $scope.exceededLimit = true;
-        $scope.results = newResults.slice(0, 3);
+        $scope.results = newResults.slice(0, 75);
       } else {
         $scope.results = newResults;
       }
@@ -71,7 +71,7 @@ function searchPage(searchTerm, page = 1) {
       const currentPage = page;
 
       // Stop fetching if we've reached 100 results or more
-      return (currentPage < totalPages && newResults.length < 100) ? searchPage(searchTerm, page + 1) : $scope.results;
+      return (currentPage < totalPages && newResults.length < 75) ? searchPage(searchTerm, page + 1) : $scope.results;
     });
 }
 
