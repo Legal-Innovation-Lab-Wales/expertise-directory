@@ -42,16 +42,32 @@ async function fetchPageResults(url) {
 
 exports.handler = async function (event) {
   const searchTerm = event.queryStringParameters.q;
-  const start = parseInt(event.queryStringParameters.s) || 0;
   const baseUrl = `https://www.swansea.ac.uk/search/?c=www-en-meta&q=${encodeURIComponent(searchTerm)}&f[page type]=staff profile`;
 
   try {
-    const pageUrl = `${baseUrl}&s=${start}`;
-    const results = await fetchPageResults(pageUrl);
+    // Fetch the first page to get the total number of pages
+    const firstPageUrl = `${baseUrl}&s=0`;
+    const { data: firstPageData } = await axios.get(firstPageUrl);
+    const $ = cheerio.load(firstPageData);
+
+    // Extract total pages information from pagination
+    let totalPages = 1;
+    $('ul.site-search-results-pagination li.site-search-results-pagination-item').each((i, el) => {
+      const pageNum = parseInt($(el).find('a.site-search-results-pagination-item-link').text(), 10);
+      totalPages = Math.max(totalPages, pageNum || 1);
+    });
+
+    // Fetch all pages
+    const allPagesPromises = Array.from({ length: totalPages }, (_, i) => {
+      const pageUrl = `${baseUrl}&s=${i * 10}`;
+      return fetchPageResults(pageUrl);
+    });
+
+    const allResults = (await Promise.all(allPagesPromises)).flat();
 
     return {
       statusCode: 200,
-      body: JSON.stringify(results)
+      body: JSON.stringify(allResults)
     };
   } catch (error) {
     return {
