@@ -1,78 +1,62 @@
-const axios = require('axios');
-const cheerio = require('cheerio');
+const app = angular.module('SearchApp', []);
 
-async function fetchPageResults(url) {
-  const { data } = await axios.get(url);
-  const $ = cheerio.load(data);
+app.controller('SearchController', ['$scope', '$http', function ($scope, $http) {
+  $scope.results = [];
+  $scope.filteredResults = [];
+  $scope.totalResults = 0;
+  $scope.errorMessage = '';  // Added error message
 
-  const results = await Promise.all($('ul.site-search-results-list li.site-search-results-list-item').map(async (index, element) => {
-    const name = $(element).find('h3 a').text().trim();
-    const profileUrl = $(element).find('h3 a').attr('href');
-    const additionalInfo = $(element).find('.site-search-results-list-item-additional-information').text().trim();
+  $scope.search = function() {
+    $scope.loading = true;
+    $scope.results = [];
+    $scope.totalResults = 0;
+    $scope.errorMessage = '';  // Reset error message
+    const searchTerm = $scope.searchTerm;
 
-    let expertise = [];
-    let photoUrl = '';
-    let photoAlt = '';
+    searchPage(searchTerm).then(function(results) {
+      $scope.results = results;
+      $scope.totalResults = $scope.results.length;
+      $scope.filterResults();
 
-    try {
-      const { data: profileData } = await axios.get(profileUrl);
-      const profile$ = cheerio.load(profileData);
+    }).catch(function(error) {
+      console.error("Error fetching data", error);
+      $scope.errorMessage = 'Failed to fetch data. Please try again.';  // Set error message
 
-      profile$('.staff-profile-areas-of-expertise ul li').each((i, el) => {
-        expertise.push(profile$(el).text());
-      });
+    }).finally(function() {
+      $scope.loading = false;
+    });
+  };
 
-      photoUrl = profile$('.staff-profile-overview-profile-picture img').attr('src');
-      photoAlt = profile$('.staff-profile-overview-profile-picture img').attr('alt');
+  $scope.filterResults = function() {
+    const additionalSearchTerm = $scope.additionalSearchTerm ? $scope.additionalSearchTerm.toLowerCase() : '';
+    $scope.filteredResults = $scope.results.filter(result =>
+      result.name.toLowerCase().includes(additionalSearchTerm) ||
+      result.additionalInfo.toLowerCase().includes(additionalSearchTerm) ||
+      (result.expertise && result.expertise.some(e => e.toLowerCase().includes(additionalSearchTerm)))
+    );
+  };
 
-      // Prepend the domain if the URL is a relative path
-      if (photoUrl && !photoUrl.startsWith('http')) {
-        photoUrl = `https://www.swansea.ac.uk${photoUrl}`;
-      }
-
-    } catch (error) {
-      console.error(`Failed to fetch details for ${profileUrl}`);
+  $scope.filterString = function() {
+    if ($scope.additionalSearchTerm) {
+      return $scope.filteredResults.length + ' / ' + $scope.totalResults;
     }
+    return $scope.totalResults + ' Results';
+  };
 
-    return { name, profileUrl, additionalInfo, expertise, photoUrl, photoAlt };
-  }).get());
+  function searchPage(searchTerm, start = 1) {
+    const baseUrl = `http://localhost:5000/mockApi?q=${encodeURIComponent(searchTerm)}&s=${(start - 1) * 10}`;
+    return $http.get(baseUrl)
+      .then(response => {
+        if (!response.data || !Array.isArray(response.data) || response.data.length === 0) {
+          return $scope.results;
+        }
+        
+        $scope.results = $scope.results.concat(response.data);
+        $scope.totalResults = $scope.results.length;
+        $scope.filteredResults = $scope.results;
 
-  return results;
-}
-
-exports.handler = async function (event) {
-  const searchTerm = event.queryStringParameters.q;
-  const baseUrl = `https://www.swansea.ac.uk/search/?c=www-en-meta&q=${encodeURIComponent(searchTerm)}&f[page type]=staff profile`;
-
-  try {
-    // Fetch the first page to get the total number of pages
-    const firstPageUrl = `${baseUrl}&s=0`;
-    const { data: firstPageData } = await axios.get(firstPageUrl);
-    const $ = cheerio.load(firstPageData);
-    
-    // Extract total pages information from pagination
-    let totalPages = 1;
-    $('ul.site-search-results-pagination li.site-search-results-pagination-item').each((i, el) => {
-      const pageNum = parseInt($(el).find('a.site-search-results-pagination-item-link').text(), 10);
-      totalPages = Math.max(totalPages, pageNum || 1);
-    });
-
-    // Fetch all pages
-    const allPagesPromises = Array.from({ length: totalPages }, (_, i) => {
-      const pageUrl = `${baseUrl}&s=${i * 10}`;
-      return fetchPageResults(pageUrl);
-    });
-
-    const allResults = (await Promise.all(allPagesPromises)).flat();
-
-    return {
-      statusCode: 200,
-      body: JSON.stringify(allResults)
-    };
-  } catch (error) {
-    return {
-      statusCode: 500,
-      body: JSON.stringify({ error: 'Failed fetching data' })
-    };
+        
+        return response.data.length === 10 ? searchPage(searchTerm, start + 10) : $scope.results;
+      });
   }
-};
+}]);
