@@ -4,11 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Search Expertise</title>
-    <!-- Include AngularJS -->
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular.min.js"></script>
-    <!-- Link to custom scripts -->
     <script src="search.js"></script>
-    <!-- Include other dependencies -->
     <link href="https://fonts.googleapis.com/css?family=Lato:400,700%7COpen+Sans:400,600" rel="stylesheet">
     <link rel="apple-touch-icon" sizes="180x180" href="https://intranet.swan.ac.uk/cdn/suds/images/icons/favicon/apple-touch-icon.png">
     <link rel="icon" type="image/png" sizes="32x32" href="https://intranet.swan.ac.uk/cdn/suds/images/icons/favicon/favicon-32x32.png">
@@ -25,7 +22,7 @@
             <button ng-click="search()" class="btn btn-primary">Search</button>
         </div>
         <div class="mt-4">
-            <input type="text" ng-model="additionalSearchTerm" ng-change="filterResults()" placeholder="Filter results" class="form-control"/>
+            <input type="text" ng-model="additionalSearchTerm" ng-change="filterResults()" placeholder="Filter Results" class="form-control"/>
         </div>
         <ul class="list-group mt-4">
             <li ng-repeat="result in filteredResults" class="list-group-item">
