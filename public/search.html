@@ -62,7 +62,7 @@
             border-radius: 50%;
             width: 80px;
             height: 80px;
-            margin-left: 10px;
+            margin-right: 10px;
         }
         .staff-details {
             display: flex;
@@ -79,13 +79,13 @@
         <div class="custom-header-container">
             <div class="custom-logos">
                 <div class="custom-logo">
-                    <a href="https://swansea.ac.uk">
-                        <img src="https://intranet.swan.ac.uk/cdn/suds/images/logo/application-custom/logo-white-en.png" class="swansea-logo img-fluid" alt="Swansea University Logo" />
+                    <a href="https://legaltech.wales">
+                        <img src="/static/media/lilw-logo-white.2c58d3c3.png" class="lilw-logo img-fluid" alt="LILW Logo" />
                     </a>
                 </div>
                 <div class="custom-logo">
-                    <a href="https://legaltech.wales">
-                        <img src="/static/media/lilw-logo-white.2c58d3c3.png" class="lilw-logo img-fluid" alt="LILW Logo" />
+                    <a href="https://swansea.ac.uk">
+                        <img src="https://intranet.swan.ac.uk/cdn/suds/images/logo/application-custom/logo-white-en.png" class="swansea-logo img-fluid" alt="Swansea University Logo" />
                     </a>
                 </div>
             </div>
@@ -95,34 +95,44 @@
         </div>
     </header>
     <div class="container">
-        <!-- ... search and filter inputs ... -->
+        <div class="mb-4">
+            <h3>Search Term:</h3>
+            <form ng-submit="search()">
+                <div class="form-inline">
+                    <input type="text" ng-model="searchTerm" placeholder="Search" class="form-control flex-grow-1 mr-2"/>
+                    <button type="submit" class="btn btn-primary">Search</button>
+                </div>
+            </form>
+        </div>
+        <div class="mt-4">
+            <h3>Filter:</h3>
+            <input type="text" ng-model="additionalSearchTerm" ng-change="filterResults()" placeholder="Filter Results" class="form-control"/>
+        </div>
         <div ng-if="loading" class="loading-container">
             <div class="spinner"></div>
         </div>
-        <table class="table table-striped" ng-show="filteredResults.length > 0">
-            <tr>
-                <th scope="col">Areas of Expertise</th>
-                <th scope="col">Staff Details</th>
-            </tr>
-            <tr ng-repeat="result in filteredResults">
-                <td>
-                    <ul>
-                        <li ng-repeat="expertise in result.expertise">{{expertise}}</li>
-                    </ul>
-                </td>
-                <td style="vertical-align: middle;">
-                    <div class="staff-details">
+            <ul class="list-group mt-4">
+                <li ng-repeat="result in filteredResults" class="list-group-item">
+                    <div class="staff-details" style="display: flex; justify-content: space-between;">
                         <div class="info">
                             <a href="{{result.profileUrl}}" target="_blank">
                                 <h4>{{result.name}}</h4>
                             </a>
                             <p>{{result.additionalInfo}}</p>
+                            <div ng-if="result.expertise && result.expertise.length > 0">
+                                <strong>Areas of Expertise:</strong>
+                                <ul>
+                                    <li ng-repeat="area in result.expertise">{{area}}</li>
+                                </ul>
+                            </div>
                         </div>
-                        <img class="profile-pic" ng-src="{{result.photoUrl}}" alt="{{result.photoAlt}}" />
+                        <img class="profile-pic" ng-src="{{result.photoUrl}}" alt="{{result.name}}" />
                     </div>
-                </td>
-            </tr>
-        </table>
+                </li>
+            </ul>
+    </div>
+            </li>
+        </ul>
     </div>
 </body>
 </html>
