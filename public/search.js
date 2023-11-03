@@ -3,30 +3,23 @@ const app = angular.module('SearchApp', []);
 app.controller('SearchController', ['$scope', '$http', function ($scope, $http) {
   $scope.results = [];
   $scope.filteredResults = [];
-  $scope.totalResults = 0;
-
-  function searchPage(searchTerm, start = 1) {
-    const FUNCTION_ENDPOINT = '/.netlify/functions/fetchData';
-    $scope.loading = true;
-    return $http.get(FUNCTION_ENDPOINT, { params: { q: searchTerm, s: start } })
-      .then(response => {
-        const { results, totalPages } = response.data;
-        $scope.results = $scope.results.concat(results);
-        $scope.filteredResults = $scope.results;
-        $scope.totalResults = totalPages * 10; // Assuming there are 10 results per page
-        $scope.loading = false;
-        $scope.$apply();
-
-        // Check if the current start index is less than total results
-        return start < $scope.totalResults ? searchPage(searchTerm, start + 10) : $scope.results;
-      });
-  }
+  $scope.loading = false;
 
   $scope.search = function () {
-    $scope.results = [];
-    $scope.totalResults = 0;
+    $scope.loading = true; // Set loading to true when fetching data
+    const FUNCTION_ENDPOINT = '/.netlify/functions/fetchData';
     const searchTerm = $scope.searchTerm;
-    searchPage(searchTerm);
+
+    $http.get(FUNCTION_ENDPOINT, { params: { q: searchTerm } })
+      .then(response => {
+        $scope.results = response.data.results; // Fetch the results from the response
+        $scope.filteredResults = $scope.results; // Initially, filtered results are same as all results
+        $scope.loading = false; // Set loading to false when data has been fetched
+      })
+      .catch(error => {
+        console.error('Error fetching data:', error);
+        $scope.loading = false;
+      });
   };
 
   $scope.filterResults = function () {
@@ -36,8 +29,5 @@ app.controller('SearchController', ['$scope', '$http', function ($scope, $http) 
       result.additionalInfo.toLowerCase().includes(additionalSearchTerm) ||
       (result.expertise && result.expertise.some(e => e.toLowerCase().includes(additionalSearchTerm)))
     );
-
-    // Update totalResults to reflect the count of filtered results
-    $scope.totalResults = $scope.filteredResults.length;
   };
 }]);
