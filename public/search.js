@@ -1,36 +1,36 @@
-angular.module('SearchApp', [])
-    .controller('SearchController', ['$scope', '$http', function($scope, $http) {
-        $scope.searchTerm = "";
-        $scope.results = [];
-        $scope.filteredResults = [];
-        $scope.page = 1;
-        $scope.additionalSearchTerm = "";
+const app = angular.module('SearchApp', []);
 
-        $scope.search = function() {
-            // Recursive function to fetch data from each page
-            function fetchPage(page) {
-                var url = `/expertise.json?page=${page}&query=${$scope.searchTerm}`;
-                $http.get(url).then(function(response) {
-                    $scope.results = $scope.results.concat(response.data.results);
-                    if (response.data.nextPage) {
-                        fetchPage(page + 1);
-                    } else {
-                        $scope.filterResults();  // Filtering once all data is fetched
-                    }
-                });
-            }
+app.controller('SearchController', ['$scope', '$http', function ($scope, $http) {
+  $scope.results = [];
+  $scope.searchTerm = '';
+  $scope.additionalSearchTerm = '';
+  $scope.filteredResults = [];
 
-            fetchPage(1);  // Start fetching from page 1
-        };
+  $scope.search = function () {
+    $scope.results = [];
+    $scope.searchPage(1);
+  };
 
-        $scope.filterResults = function() {
-            if (!$scope.additionalSearchTerm) {
-                $scope.filteredResults = $scope.results;
-                return;
-            }
+  $scope.searchPage = function (page) {
+    const FUNCTION_ENDPOINT = '/.netlify/functions/fetchData';
+    const START_INDEX = (page - 1) * 10 + 1;
+    $http.get(FUNCTION_ENDPOINT, { params: { q: $scope.searchTerm, s: START_INDEX } })
+      .then(response => {
+        // Add new results to existing array
+        $scope.results = $scope.results.concat(response.data);
 
-            $scope.filteredResults = $scope.results.filter(function(item) {
-                return item.name.toLowerCase().includes($scope.additionalSearchTerm.toLowerCase());
-            });
-        };
-    }]);
+        // Check if there are more pages to fetch
+        if (response.data.length > 0) {
+          $scope.searchPage(page + 1);
+        } else {
+          $scope.filterResults();  // Call filter once all data is fetched
+        }
+      })
+      .catch(error => console.error('Error:', error));
+  };
+
+  $scope.filterResults = function () {
+    $scope.filteredResults = $scope.results.filter(item =>
+      item.name.toLowerCase().includes($scope.additionalSearchTerm.toLowerCase()));
+  };
+}]);
