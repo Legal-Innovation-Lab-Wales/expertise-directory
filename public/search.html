@@ -1,36 +1,35 @@
-<!doctype html>
-<html lang="en" ng-app="searchApp">
+<!DOCTYPE html>
+<html lang="en" ng-app="SearchApp">
 <head>
-    <title>Search - Legal Innovation Lab Wales</title>
-    <meta charset="utf-8">
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Search Expertise</title>
+    <!-- Include AngularJS -->
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular.min.js"></script>
-    <script src="app.js"></script>
+    <!-- Link to custom scripts -->
+    <script src="search.js"></script>
+    <!-- Include other dependencies -->
+    <link href="https://fonts.googleapis.com/css?family=Lato:400,700%7COpen+Sans:400,600" rel="stylesheet">
+    <link rel="apple-touch-icon" sizes="180x180" href="https://intranet.swan.ac.uk/cdn/suds/images/icons/favicon/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="https://intranet.swan.ac.uk/cdn/suds/images/icons/favicon/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="https://intranet.swan.ac.uk/cdn/suds/images/icons/favicon/favicon-16x16.png">
+    <link rel="mask-icon" href="https://intranet.swan.ac.uk/cdn/suds/images/icons/favicon/safari-pinned-tab.svg" color="#5bbad5">
+    <link rel="shortcut icon" href="https://intranet.swan.ac.uk/cdn/suds/images/icons/favicon/favicon.ico">
+    <link rel="stylesheet" href="https://intranet.swan.ac.uk/cdn/suds/css/suds.min.css">
 </head>
-<body>
-    <div ng-controller="SearchController" class="container mt-4">
-        <form ng-submit="search()">
-            <div class="form-group">
-                <input type="text" class="form-control" ng-model="query" placeholder="Enter search term">
-            </div>
-            <button type="submit" class="btn btn-primary">Search</button>
-        </form>
-        <table class="table mt-4" ng-if="results.length > 0">
-            <thead>
-                <tr>
-                    <th>Name</th>
-                    <th>URL</th>
-                    <th>Info</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr ng-repeat="result in results">
-                    <td>{{result.Name}}</td>
-                    <td><a href="{{result.URL}}" target="_blank">{{result.URL}}</a></td>
-                    <td>{{result.Info}}</td>
-                </tr>
-            </tbody>
-        </table>
+<body ng-controller="SearchController">
+    <div class="container">
+        <h1>Search Expertise</h1>
+        <div>
+            <input type="text" ng-model="query" placeholder="Search" class="form-control"/>
+            <button ng-click="search()" class="btn btn-primary">Search</button>
+        </div>
+        <ul class="list-group mt-4">
+            <li ng-repeat="result in results" class="list-group-item">
+                <a href="{{result.profileUrl}}">{{result.name}}</a>
+                <p>{{result.additionalInfo}}</p>
+            </li>
+        </ul>
     </div>
 </body>
 </html>
