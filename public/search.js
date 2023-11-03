@@ -8,6 +8,7 @@ app.controller('SearchController', ['$scope', '$http', function ($scope, $http) 
   $scope.search = function() {
     $scope.loading = true;
     $scope.results = [];
+    $scope.totalResults = 0; 
     const searchTerm = $scope.searchTerm;
 
     searchPage(searchTerm).then(function(results) {
