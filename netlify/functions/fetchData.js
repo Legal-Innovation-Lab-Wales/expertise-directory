@@ -1,8 +1,6 @@
 const axios = require('axios');
 const cheerio = require('cheerio');
 
-console.log('entering fetch');
-
 async function fetchPageResults(url) {
   console.log(`Fetching data from URL: ${url}`);
   const { data } = await axios.get(url);
@@ -45,11 +43,12 @@ async function fetchPageResults(url) {
 
 exports.handler = async function (event) {
   const searchTerm = event.queryStringParameters.q;
-  const start = parseInt(event.queryStringParameters.s, 10) || 0;
-  const baseUrl = `https://www.swansea.ac.uk/search/?c=www-en-meta&q=${encodeURIComponent(searchTerm)}&f[page type]=staff profile`;
+  const page = parseInt(event.queryStringParameters.p, 10) || 1;  // Default to 1
+  const start = (page - 1) * 10 + 1;
+  const baseUrl = `https://www.swansea.ac.uk/search/?c=www-en-meta&q=${encodeURIComponent(searchTerm)}&f[page%20type]=staff%20profile`;
 
   try {
-    const pageUrl = `${baseUrl}&s=${start * 10}`;
+    const pageUrl = `${baseUrl}&s=${start}`;
     console.log(`Fetching data from URL: ${pageUrl}`);
     const { data: pageData } = await axios.get(pageUrl);
     const $ = cheerio.load(pageData);
