@@ -3,17 +3,21 @@ const app = angular.module('SearchApp', []);
 app.controller('SearchController', ['$scope', '$http', function ($scope, $http) {
   $scope.results = [];
   $scope.filteredResults = [];
+  $scope.totalResults = 0; // Add this line to track total results
 
   function searchPage(searchTerm, start = 1) {
     const FUNCTION_ENDPOINT = '/.netlify/functions/fetchData';
-    $scope.loading = true; // Set loading to true when fetching data
+    $scope.loading = true;
     return $http.get(FUNCTION_ENDPOINT, { params: { q: searchTerm, s: start } })
       .then(response => {
-        $scope.results = $scope.results.concat(response.data);
+        $scope.results = $scope.results.concat(response.data.results);  // Update this line
         $scope.filteredResults = $scope.results;
-        $scope.loading = false; // Set loading to false when data has been fetched
+        $scope.totalResults = $scope.results.length; // Update this line to set total results
+        $scope.loading = false;
         $scope.$apply();
-        return response.data.length > 0 ? searchPage(searchTerm, start + 10) : $scope.results;
+        const totalPages = response.data.totalPages;  // Add this line
+        const currentPage = Math.ceil(start / 10);    // Add this line
+        return currentPage < totalPages ? searchPage(searchTerm, start + 10) : $scope.results;  // Update this line
       });
   }
 
@@ -30,5 +34,6 @@ app.controller('SearchController', ['$scope', '$http', function ($scope, $http) 
       result.additionalInfo.toLowerCase().includes(additionalSearchTerm) ||
       (result.expertise && result.expertise.some(e => e.toLowerCase().includes(additionalSearchTerm)))
     );
+    $scope.totalResults = $scope.filteredResults.length; // Add this line to set total results after filtering
   };
 }]);
