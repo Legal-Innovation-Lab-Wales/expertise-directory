@@ -48,6 +48,7 @@ function searchPage(searchTerm, start = 1) {
   return $http.get(baseUrl)
     .then(response => {
       const resultsFromApi = response.data.results;
+      const totalPages = response.data.totalPages;
 
       if (!resultsFromApi || resultsFromApi.length === 0) {
         return $scope.results;
@@ -57,11 +58,8 @@ function searchPage(searchTerm, start = 1) {
       $scope.totalResults = $scope.results.length;
       $scope.filteredResults = $scope.results;
 
-      // Continue to the next page if 10 results were returned
-      return resultsFromApi.length === 10 ? searchPage(searchTerm, start + 1) : $scope.results;
+      // Continue to the next page if there are more pages to fetch
+      return start < totalPages ? searchPage(searchTerm, start + 1) : $scope.results;
     });
 }
-
-
-
 }]);
