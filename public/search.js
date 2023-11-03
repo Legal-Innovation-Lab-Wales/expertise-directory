@@ -39,17 +39,32 @@ app.controller('SearchController', ['$scope', '$http', function ($scope, $http) 
     return $scope.totalResults + ' Results';
   };
 
-  function searchPage(searchTerm, start = 1) {
-    const FUNCTION_ENDPOINT = '/.netlify/functions/fetchData';
-    $scope.loading = true;
-    return $http.get(FUNCTION_ENDPOINT, { params: { q: searchTerm, s: start } })
-      .then(response => {
-        $scope.results = $scope.results.concat(response.data);
-        $scope.filteredResults = $scope.results;
-        $scope.loading = false;
-        $scope.$apply();
-        return response.data.length > 0 ? searchPage(searchTerm, start + 10) : $scope.results;
-      });
-  }
+function searchPage(searchTerm, start = 1) {
+  const FUNCTION_ENDPOINT = '/.netlify/functions/fetchData';
+  $scope.loading = true;
+  return $http.get(FUNCTION_ENDPOINT, { params: { q: searchTerm, s: start } })
+    .then(response => {
+      $scope.results = $scope.results.concat(response.data);
+      $scope.totalResults = $scope.results.length; // Update totalResults here
+      $scope.filteredResults = $scope.results;
+      $scope.loading = false;
+      return response.data.length > 0 ? searchPage(searchTerm, start + 10) : $scope.results;
+    });
+}
+
+$scope.search = function() {
+  $scope.loading = true;
+  $scope.results = [];
+  const searchTerm = $scope.searchTerm;
+
+  searchPage(searchTerm).then(function(results) {
+    $scope.results = results;
+    $scope.filterResults();
+  }).catch(function(error) {
+    console.error("Error fetching data", error);
+  }).finally(function() {
+    $scope.loading = false;
+  });
+};
 
 }]);
