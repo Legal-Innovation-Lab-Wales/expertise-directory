@@ -105,7 +105,7 @@
             </form>
         </div>
         <div class="mt-4">
-            <h3>Filter:</h3>
+            <label>Filter ({{totalResults}} Results):</label>
             <input type="text" ng-model="additionalSearchTerm" ng-change="filterResults()" placeholder="Filter Results" class="form-control"/>
         </div>
         <div ng-if="loading" class="loading-container">
