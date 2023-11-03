@@ -43,9 +43,8 @@ app.controller('SearchController', ['$scope', '$http', function ($scope, $http) 
     return $scope.totalResults + ' Results';
   };
 
-function searchPage(searchTerm, start = 1) {
-    // Change this URL to call your Netlify serverless function
-    const baseUrl = `/.netlify/functions/fetchData?q=${encodeURIComponent(searchTerm)}&s=${(start - 1) * 10}`;
+  function searchPage(searchTerm, start = 1) {
+    const baseUrl = `http://localhost:5000/mockApi?q=${encodeURIComponent(searchTerm)}&s=${(start - 1) * 10}`;
     return $http.get(baseUrl)
       .then(response => {
         if (!response.data || !Array.isArray(response.data) || response.data.length === 0) {
@@ -56,8 +55,9 @@ function searchPage(searchTerm, start = 1) {
         $scope.totalResults = $scope.results.length;
         $scope.filteredResults = $scope.results;
 
+        
         return response.data.length === 10 ? searchPage(searchTerm, start + 10) : $scope.results;
       });
-}
+  }
 
 }]);
