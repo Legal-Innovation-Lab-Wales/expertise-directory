@@ -1,39 +1,61 @@
-const app = angular.module('SearchApp', []);
+const axios = require('axios');
+const cheerio = require('cheerio');
 
-app.controller('SearchController', ['$scope', '$http', function ($scope, $http) {
-  $scope.results = [];
-  $scope.filteredResults = [];
-  $scope.totalResults = 0; // Add this line to track total results
+exports.handler = async function (event) {
+  const searchTerm = event.queryStringParameters.q;
+  const start = parseInt(event.queryStringParameters.s) || 1;
+  const url = `https://www.swansea.ac.uk/search/?c=www-en-meta&q=${encodeURIComponent(searchTerm)}&s=${start}&f[page type]=staff profile`;
 
-  function searchPage(searchTerm, start = 1) {
-    const FUNCTION_ENDPOINT = '/.netlify/functions/fetchData';
-    $scope.loading = true;
-    return $http.get(FUNCTION_ENDPOINT, { params: { q: searchTerm, s: start } })
-      .then(response => {
-        $scope.results = $scope.results.concat(response.data.results);  // Update this line
-        $scope.filteredResults = $scope.results;
-        $scope.totalResults = $scope.results.length; // Update this line to set total results
-        $scope.loading = false;
-        $scope.$apply();
-        const totalPages = response.data.totalPages;  // Add this line
-        const currentPage = Math.ceil(start / 10);    // Add this line
-        return currentPage < totalPages ? searchPage(searchTerm, start + 10) : $scope.results;  // Update this line
-      });
+  try {
+    const { data } = await axios.get(url);
+    const $ = cheerio.load(data);
+
+    // Extract total number of pages
+    const totalPages = $('ul.site-search-results-pagination li.site-search-results-pagination-item a')
+      .not('.current').length;
+
+    // Extract and format data from the HTML
+    const results = await Promise.all($('ul.site-search-results-list li.site-search-results-list-item').map(async (index, element) => {
+      const name = $(element).find('h3 a').text().trim();
+      const profileUrl = $(element).find('h3 a').attr('href');
+      const additionalInfo = $(element).find('.site-search-results-list-item-additional-information').text().trim();
+
+      // Initialize variables for expertise, photoUrl and photoAlt
+      let expertise = [];
+      let photoUrl = '';
+      let photoAlt = '';
+
+      try {
+        const { data: profileData } = await axios.get(profileUrl);
+        const profile$ = cheerio.load(profileData);
+
+        // Fetch the areas of expertise for each profile
+        profile$('.staff-profile-areas-of-expertise ul li').each((i, el) => {
+          expertise.push(profile$(el).text());
+        });
+
+        // Fetch the staff photo URL and alt text
+        photoUrl = profile$('.staff-profile-overview-profile-picture img').attr('src');
+        photoAlt = profile$('.staff-profile-overview-profile-picture img').attr('alt');
+
+      } catch (error) {
+        console.error(`Failed to fetch details for ${profileUrl}`);
+      }
+
+      // Return the extracted information including photoUrl and photoAlt
+      return { name, profileUrl, additionalInfo, expertise, photoUrl, photoAlt };
+    }).get());
+
+    // Return results along with total pages
+    return {
+      statusCode: 200,
+      body: JSON.stringify({ results, totalPages })
+    };
+
+  } catch (error) {
+    return {
+      statusCode: 500,
+      body: JSON.stringify({ error: 'Failed fetching data' })
+    };
   }
-
-  $scope.search = function () {
-    $scope.results = [];
-    const searchTerm = $scope.searchTerm;
-    searchPage(searchTerm);
-  };
-
-  $scope.filterResults = function () {
-    const additionalSearchTerm = $scope.additionalSearchTerm.toLowerCase();
-    $scope.filteredResults = $scope.results.filter(result =>
-      result.name.toLowerCase().includes(additionalSearchTerm) ||
-      result.additionalInfo.toLowerCase().includes(additionalSearchTerm) ||
-      (result.expertise && result.expertise.some(e => e.toLowerCase().includes(additionalSearchTerm)))
-    );
-    $scope.totalResults = $scope.filteredResults.length; // Add this line to set total results after filtering
-  };
-}]);
+};
