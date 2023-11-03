@@ -39,24 +39,20 @@ app.controller('SearchController', ['$scope', '$http', function ($scope, $http) 
     return $scope.totalResults + ' Results';
   };
 
-function searchPage(searchTerm, start = 1) {
-  const FUNCTION_ENDPOINT = '/.netlify/functions/fetchData';
-  return $http.get(FUNCTION_ENDPOINT, { params: { q: searchTerm, s: start } })
-    .then(response => {
-      if (!response.data || response.data.length === 0) {
-        return $scope.results;
-      }
-      
-      $scope.results = $scope.results.concat(response.data);
-      $scope.totalResults = $scope.results.length;
-      $scope.filteredResults = $scope.results;
-      $scope.$apply();
-      
-      return response.data.length === 10 ? searchPage(searchTerm, start + 10) : $scope.results;
-    });
-}
-
-}
-
-
+  function searchPage(searchTerm, start = 1) {
+    const FUNCTION_ENDPOINT = '/.netlify/functions/fetchData';
+    return $http.get(FUNCTION_ENDPOINT, { params: { q: searchTerm, s: start } })
+      .then(response => {
+        if (!response.data || response.data.length === 0) {
+          return $scope.results;
+        }
+        
+        $scope.results = $scope.results.concat(response.data);
+        $scope.totalResults = $scope.results.length;
+        $scope.filteredResults = $scope.results;
+        $scope.$apply();
+        
+        return response.data.length === 10 ? searchPage(searchTerm, start + 10) : $scope.results;
+      });
+  }
 }]);
