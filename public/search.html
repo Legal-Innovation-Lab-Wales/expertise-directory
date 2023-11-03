@@ -58,7 +58,12 @@
         0% { transform: rotate(0deg); }
         100% { transform: rotate(360deg); }
     }
-     
+    .loading-container {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        height: 200px;
+    }
   </style>
 </head>
 <body ng-controller="SearchController">
@@ -81,39 +86,34 @@
       </div>
     </div>
   </header>
-        <div class="container">
+ <div class="container">
     <div class="mb-4">
-        <!-- Wrap label with <h3> tags -->
-        <h4 class="d-block mb-1">Search Term:</h4>
-        <div class="form-inline">
-            <input type="text" ng-model="searchTerm" placeholder="Search" class="form-control flex-grow-1 mr-2"/>
-            <button ng-click="search()" class="btn btn-primary">Search</button>
-        </div>
+        <h3>Search Term:</h3> <!-- Updated label to h3 -->
+        <form ng-submit="search()"> <!-- Wrap input and button in form -->
+            <div class="form-inline">
+                <input type="text" ng-model="searchTerm" placeholder="Search" class="form-control flex-grow-1 mr-2"/>
+                <button type="submit" class="btn btn-primary">Search</button> <!-- Change ng-click to type="submit" -->
+            </div>
+        </form>
     </div>
     <div class="mt-4">
-        <!-- Wrap label with <h3> tags -->
-        <h4 class="mr-2">Filter:</h4>
+        <h3>Filter:</h3> <!-- Updated label to h3 -->
         <input type="text" ng-model="additionalSearchTerm" ng-change="filterResults()" placeholder="Filter Results" class="form-control"/>
     </div>
-    
-    <!-- Loading message -->
-        <div ng-if="loading" class="mt-4">
-            <div class="spinner"></div>
-        </div>
-        <ul class="list-group mt-4">
-    <li ng-repeat="result in filteredResults" class="list-group-item">
-        <a href="{{result.profileUrl}}">{{result.name}}</a>
-        <p>{{result.additionalInfo}}</p>
 
-        <!-- Add the following block to display areas of expertise -->
-        <div ng-if="result.expertise && result.expertise.length > 0">
-            <strong>Areas of Expertise:</strong>
-            <ul>
-                <li ng-repeat="area in result.expertise">{{area}}</li>
-            </ul>
-        </div>
-    </li>
-</ul>
+    <!-- Spinner -->
+    <div ng-if="loading" class="loading-container">
+        <div class="spinner"></div>
     </div>
+
+    <!-- Results -->
+    <ul ng-if="!loading" class="list-group mt-4"> <!-- Hide while loading -->
+        <li ng-repeat="result in filteredResults" class="list-group-item">
+            <a href="{{result.profileUrl}}">{{result.name}}</a>
+            <p>{{result.additionalInfo}}</p>
+            <p><strong>Areas of Expertise:</strong> {{result.areasOfExpertise.join(', ')}}</p>
+        </li>
+    </ul>
+</div>
 </body>
 </html>
