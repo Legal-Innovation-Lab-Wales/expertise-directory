@@ -50,7 +50,6 @@ app.controller('SearchController', ['$scope', '$http', function ($scope, $http) 
         $scope.results = $scope.results.concat(response.data);
         $scope.totalResults = $scope.results.length;
         $scope.filteredResults = $scope.results;
-        $scope.$apply();
         
         return response.data.length === 10 ? searchPage(searchTerm, start + 10) : $scope.results;
       });
