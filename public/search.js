@@ -50,21 +50,29 @@ app.controller('SearchController', ['$scope', '$http', function ($scope, $http) 
     return $scope.totalResults + ' Results';
   };
 
-  function searchPage(searchTerm, page = 1) {
-    const baseUrl = `/.netlify/functions/fetchData?q=${encodeURIComponent(searchTerm)}&p=${page}`;
-    return $http.get(baseUrl)
-      .then(response => {
-        if (!response.data || !Array.isArray(response.data.results) || response.data.results.length === 0) {
-          return $scope.results;
-        }
+function searchPage(searchTerm, page = 1) {
+  const baseUrl = `/.netlify/functions/fetchData?q=${encodeURIComponent(searchTerm)}&p=${page}`;
+  return $http.get(baseUrl)
+    .then(response => {
+      if (!response.data || !Array.isArray(response.data.results) || response.data.results.length === 0) {
+        return $scope.results;
+      }
 
-        $scope.results = $scope.results.concat(response.data.results);
+      // Concatenate results and check if total is over 100
+      const newResults = $scope.results.concat(response.data.results);
+      if (newResults.length > 100) {
+        $scope.exceededLimit = true;
+        $scope.results = newResults.slice(0, 100);
+      } else {
+        $scope.results = newResults;
+      }
 
-        const totalPages = response.data.totalPages;
-        const currentPage = page;
+      const totalPages = response.data.totalPages;
+      const currentPage = page;
 
-        // Stop fetching if we've reached 100 results
-        return (currentPage < totalPages && $scope.results.length < 100) ? searchPage(searchTerm, page + 1) : $scope.results;
-      });
-  }
+      // Stop fetching if we've reached 100 results or more
+      return (currentPage < totalPages && newResults.length < 100) ? searchPage(searchTerm, page + 1) : $scope.results;
+    });
+}
+
 }]);
