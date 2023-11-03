@@ -47,20 +47,21 @@ function searchPage(searchTerm, start = 1) {
   const baseUrl = `/.netlify/functions/fetchData?q=${encodeURIComponent(searchTerm)}&s=${(start - 1) * 10}`;
   return $http.get(baseUrl)
     .then(response => {
-      if (!response.data || !Array.isArray(response.data.results) || response.data.results.length === 0) {
+      const resultsFromApi = response.data.results;
+
+      if (!resultsFromApi || resultsFromApi.length === 0) {
         return $scope.results;
       }
-
-      $scope.results = $scope.results.concat(response.data.results);
+      
+      $scope.results = $scope.results.concat(resultsFromApi);
       $scope.totalResults = $scope.results.length;
       $scope.filteredResults = $scope.results;
 
-      const totalPages = response.data.totalPages;
-      const currentPage = start;
-
-      return (currentPage < totalPages) ? searchPage(searchTerm, start + 1) : $scope.results;
+      // Continue to the next page if 10 results were returned
+      return resultsFromApi.length === 10 ? searchPage(searchTerm, start + 1) : $scope.results;
     });
 }
+
 
 
 }]);
