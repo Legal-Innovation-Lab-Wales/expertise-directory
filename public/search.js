@@ -44,27 +44,21 @@ function searchPage(searchTerm, start = 1) {
   $scope.loading = true;
   return $http.get(FUNCTION_ENDPOINT, { params: { q: searchTerm, s: start } })
     .then(response => {
+      // Check if response data is empty
+      if (!response.data || response.data.length === 0) {
+        $scope.loading = false;
+        return $scope.results;
+      }
+      
       $scope.results = $scope.results.concat(response.data);
-      $scope.totalResults = $scope.results.length; // Update totalResults here
+      $scope.totalResults = $scope.results.length;
       $scope.filteredResults = $scope.results;
       $scope.loading = false;
-      return response.data.length > 0 ? searchPage(searchTerm, start + 10) : $scope.results;
+      
+      // Recursive call to fetch next set of data
+      return searchPage(searchTerm, start + 10);
     });
 }
 
-$scope.search = function() {
-  $scope.loading = true;
-  $scope.results = [];
-  const searchTerm = $scope.searchTerm;
-
-  searchPage(searchTerm).then(function(results) {
-    $scope.results = results;
-    $scope.filterResults();
-  }).catch(function(error) {
-    console.error("Error fetching data", error);
-  }).finally(function() {
-    $scope.loading = false;
-  });
-};
 
 }]);
