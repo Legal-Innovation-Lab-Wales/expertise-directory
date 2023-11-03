@@ -15,19 +15,30 @@ exports.handler = async function (event) {
       const profileUrl = $(element).find('h3 a').attr('href');
       const additionalInfo = $(element).find('.site-search-results-list-item-additional-information').text().trim();
 
-      // Fetch the areas of expertise for each profile
+      // Initialize variables for expertise, photoUrl and photoAlt
       let expertise = [];
+      let photoUrl = '';
+      let photoAlt = '';
+
       try {
         const { data: profileData } = await axios.get(profileUrl);
         const profile$ = cheerio.load(profileData);
+
+        // Fetch the areas of expertise for each profile
         profile$('.staff-profile-areas-of-expertise ul li').each((i, el) => {
           expertise.push(profile$(el).text());
         });
+
+        // Fetch the staff photo URL and alt text
+        photoUrl = profile$('.staff-profile-overview-profile-picture img').attr('src');
+        photoAlt = profile$('.staff-profile-overview-profile-picture img').attr('alt');
+
       } catch (error) {
-        console.error(`Failed to fetch expertise for ${profileUrl}`);
+        console.error(`Failed to fetch details for ${profileUrl}`);
       }
 
-      return { name, profileUrl, additionalInfo, expertise };
+      // Return the extracted information including photoUrl and photoAlt
+      return { name, profileUrl, additionalInfo, expertise, photoUrl, photoAlt };
     }).get());
 
     return {
