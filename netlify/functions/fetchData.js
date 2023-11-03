@@ -70,10 +70,9 @@ exports.handler = async function (event) {
     const allResults = (await Promise.all(allPagesPromises)).flat();
 
     console.log('Total records:', allResults.length);
-
     return {
       statusCode: 200,
-      body: JSON.stringify(allResults),
+      body: JSON.stringify({ results: allResults, totalPages: totalPages }),
     };
   } catch (error) {
     console.error('Error fetching page results:', error);
