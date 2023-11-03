@@ -23,7 +23,9 @@ app.controller('SearchController', ['$scope', '$http', function ($scope, $http) 
         if (response.data.length > 0) {
           $scope.searchPage(page + 1);
         } else {
-          $scope.filterResults();  // Call filter once all data is fetched
+          // Call filter once all data is fetched and update UI
+          $scope.filterResults();
+          $scope.$apply();  // Force UI update
         }
       })
       .catch(error => console.error('Error:', error));
