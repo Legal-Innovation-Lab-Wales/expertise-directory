@@ -13,19 +13,56 @@
     <link rel="mask-icon" href="https://intranet.swan.ac.uk/cdn/suds/images/icons/favicon/safari-pinned-tab.svg" color="#5bbad5">
     <link rel="shortcut icon" href="https://intranet.swan.ac.uk/cdn/suds/images/icons/favicon/favicon.ico">
     <link rel="stylesheet" href="https://intranet.swan.ac.uk/cdn/suds/css/suds.min.css">
+ <style>
+    .custom-header-container {
+      background-color: #242f60;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 10px;
+      font-family: "Open Sans", sans-serif;
+    }
+
+    .custom-logos {
+      display: flex;
+      align-items: center;
+    }
+
+    .custom-logo {
+      max-width: 200px;
+      max-height: 200px;
+      margin-right: 20px;
+    }
+
+    .swansea-logo,
+    .lilw-logo {
+      max-width: 100%;
+      height: auto;
+    }
+
+    .custom-header-text {
+      margin: 0;
+      color: white;
+    }
+  </style>
 </head>
 <body ng-controller="SearchController">
   <header>
-    <div class="custom-header-container" style="width: 100%;">
-      <div class="custom-logo">
-        <a href="https://legaltech.wales">
-          <img src="/static/media/lilw-logo-white.2c58d3c3.png" class="lilw-logo img-fluid" alt="LILW Logo" />
-        </a>
+    <div class="custom-header-container">
+      <div class="custom-logos">
+        <div class="custom-logo">
+          <a href="https://legaltech.wales">
+            <img src="/static/media/lilw-logo-white.2c58d3c3.png" class="lilw-logo img-fluid" alt="LILW Logo" />
+          </a>
+        </div>
+        <div class="custom-logo">
+          <a href="https://swansea.ac.uk">
+            <img src="https://intranet.swan.ac.uk/cdn/suds/images/logo/application-custom/logo-white-en.png" class="swansea-logo img-fluid" alt="Swansea University Logo" />
+          </a>
+        </div>
       </div>
-      <div class="custom-logo">
-        <a href="https://swansea.ac.uk">
-          <img src="https://intranet.swan.ac.uk/cdn/suds/images/logo/application-custom/logo-white-en.png" class="swansea-logo img-fluid" alt="Swansea University Logo" />
-        </a>
+      <div class="custom-header-text">
+        <!-- Optional: Any text content here -->
       </div>
     </div>
   </header>
