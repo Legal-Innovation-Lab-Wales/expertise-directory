@@ -1,15 +1,15 @@
-const app = angular.module('SearchApp', []);
-
 app.controller('SearchController', ['$scope', '$http', function ($scope, $http) {
   $scope.results = [];
   $scope.filteredResults = [];
   $scope.totalResults = 0;
   $scope.errorMessage = '';
+  $scope.exceededLimit = false;
 
   $scope.search = function() {
     $scope.loading = true;
     $scope.results = [];
     $scope.totalResults = 0;
+    $scope.exceededLimit = false;
     $scope.errorMessage = '';
     const searchTerm = $scope.searchTerm;
 
@@ -27,40 +27,32 @@ app.controller('SearchController', ['$scope', '$http', function ($scope, $http) 
     });
   };
 
-  $scope.filterResults = function() {
-    const additionalSearchTerm = $scope.additionalSearchTerm ? $scope.additionalSearchTerm.toLowerCase() : '';
-    $scope.filteredResults = $scope.results.filter(result =>
-      result.name.toLowerCase().includes(additionalSearchTerm) ||
-      result.additionalInfo.toLowerCase().includes(additionalSearchTerm) ||
-      (result.expertise && result.expertise.some(e => e.toLowerCase().includes(additionalSearchTerm)))
-    );
-  };
+  // ... rest of your code ...
 
-  $scope.filterString = function() {
-    if ($scope.additionalSearchTerm) {
-      return $scope.filteredResults.length + ' / ' + $scope.totalResults;
-    }
-    return $scope.totalResults + ' Results';
-  };
+  function searchPage(searchTerm, page = 1) {
+    const baseUrl = `/.netlify/functions/fetchData?q=${encodeURIComponent(searchTerm)}&p=${page}`;
+    return $http.get(baseUrl)
+      .then(response => {
+        if (!response.data || !Array.isArray(response.data.results) || response.data.results.length === 0) {
+          return $scope.results;
+        }
 
-function searchPage(searchTerm, page = 1) {
-  const baseUrl = `/.netlify/functions/fetchData?q=${encodeURIComponent(searchTerm)}&p=${page}`;
-  return $http.get(baseUrl)
-    .then(response => {
-      if (!response.data || !Array.isArray(response.data.results) || response.data.results.length === 0) {
-        return $scope.results;
-      }
+        $scope.results = $scope.results.concat(response.data.results);
+        $scope.totalResults = $scope.results.length;
 
-      $scope.results = $scope.results.concat(response.data.results);
-      $scope.totalResults = $scope.results.length;
-      $scope.filteredResults = $scope.results;
+        if ($scope.totalResults > 100) {
+          $scope.exceededLimit = true;
+          $scope.results = $scope.results.slice(0, 100);  // Limit results to 100
+          return $scope.results;
+        }
 
-      const totalPages = response.data.totalPages;
-      const currentPage = page;
+        $scope.filteredResults = $scope.results;
 
-      return (currentPage < totalPages) ? searchPage(searchTerm, page + 1) : $scope.results;
-    });
-}
+        const totalPages = response.data.totalPages;
+        const currentPage = page;
 
+        return (currentPage < totalPages) ? searchPage(searchTerm, page + 1) : $scope.results;
+      });
+  }
 
 }]);
