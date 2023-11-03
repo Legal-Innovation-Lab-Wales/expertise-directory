@@ -97,18 +97,25 @@
         <div ng-if="loading" class="loading-container">
             <div class="spinner"></div>
         </div>
-        <ul ng-if="!loading" class="list-group mt-4">
-            <li ng-repeat="result in filteredResults" class="list-group-item">
+            <ul class="list-group mt-4">
+              <li ng-repeat="result in filteredResults" class="list-group-item">
+                <!-- Display the staff photo -->
+                <div class="staff-profile-overview-profile-picture">
+                  <img ng-src="{{result.photoUrl}}" alt="{{result.name}}" style="width:100px; height:auto;">
+                </div>
+                
                 <a href="{{result.profileUrl}}">{{result.name}}</a>
                 <p>{{result.additionalInfo}}</p>
+                
+                <!-- Display areas of expertise -->
                 <div ng-if="result.expertise && result.expertise.length > 0">
-                    <strong>Areas of Expertise:</strong>
-                    <ul>
-                        <li ng-repeat="area in result.expertise">{{area}}</li>
-                    </ul>
+                  <strong>Areas of Expertise:</strong>
+                  <ul>
+                    <li ng-repeat="area in result.expertise">{{area}}</li>
+                  </ul>
                 </div>
-            </li>
-        </ul>
+              </li>
+            </ul>
     </div>
 </body>
 </html>
