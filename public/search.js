@@ -43,8 +43,8 @@ app.controller('SearchController', ['$scope', '$http', function ($scope, $http) 
     return $scope.totalResults + ' Results';
   };
 
-function searchPage(searchTerm, start = 1) {
-  const baseUrl = `/.netlify/functions/fetchData?q=${encodeURIComponent(searchTerm)}&s=${start}`;
+function searchPage(searchTerm, page = 1) {
+  const baseUrl = `/.netlify/functions/fetchData?q=${encodeURIComponent(searchTerm)}&p=${page}`;
   return $http.get(baseUrl)
     .then(response => {
       if (!response.data || !Array.isArray(response.data.results) || response.data.results.length === 0) {
@@ -56,10 +56,11 @@ function searchPage(searchTerm, start = 1) {
       $scope.filteredResults = $scope.results;
 
       const totalPages = response.data.totalPages;
-      const currentPage = Math.ceil(start / 10) + 1;
+      const currentPage = page;
 
-      return (currentPage < totalPages) ? searchPage(searchTerm, start + 10) : $scope.results;
+      return (currentPage < totalPages) ? searchPage(searchTerm, page + 1) : $scope.results;
     });
 }
+
 
 }]);
