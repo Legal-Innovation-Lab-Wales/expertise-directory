@@ -79,11 +79,19 @@
             <input type="text" ng-model="additionalSearchTerm" ng-change="filterResults()" placeholder="Filter Results" class="form-control"/>
         </div>
         <ul class="list-group mt-4">
-            <li ng-repeat="result in filteredResults" class="list-group-item">
-                <a href="{{result.profileUrl}}">{{result.name}}</a>
-                <p>{{result.additionalInfo}}</p>
-            </li>
-        </ul>
+    <li ng-repeat="result in filteredResults" class="list-group-item">
+        <a href="{{result.profileUrl}}">{{result.name}}</a>
+        <p>{{result.additionalInfo}}</p>
+
+        <!-- Add the following block to display areas of expertise -->
+        <div ng-if="result.expertise && result.expertise.length > 0">
+            <strong>Areas of Expertise:</strong>
+            <ul>
+                <li ng-repeat="area in result.expertise">{{area}}</li>
+            </ul>
+        </div>
+    </li>
+</ul>
     </div>
 </body>
 </html>
