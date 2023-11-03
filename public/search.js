@@ -25,7 +25,8 @@ app.controller('SearchController', ['$scope', '$http', function ($scope, $http) 
     const additionalSearchTerm = $scope.additionalSearchTerm.toLowerCase();
     $scope.filteredResults = $scope.results.filter(result =>
       result.name.toLowerCase().includes(additionalSearchTerm) ||
-      result.additionalInfo.toLowerCase().includes(additionalSearchTerm)
+      result.additionalInfo.toLowerCase().includes(additionalSearchTerm) ||
+      (result.expertise && result.expertise.some(e => e.toLowerCase().includes(additionalSearchTerm)))
     );
   };
 }]);
