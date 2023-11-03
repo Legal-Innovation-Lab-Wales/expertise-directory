@@ -16,12 +16,14 @@ app.controller('SearchController', ['$scope', '$http', function ($scope, $http) 
     const searchTerm = $scope.searchTerm;
 
     searchPage(searchTerm).then(function(results) {
-      $scope.results = results.slice(0, 100);  // Limit to 100 results
+      if(results.length > 100) {
+        $scope.exceededLimit = true;
+        $scope.results = results.slice(0, 100); // Limit to first 100 results
+      } else {
+        $scope.results = results;
+      }
       $scope.totalResults = $scope.results.length;
       $scope.filterResults();
-      if (results.length > 100) {
-        $scope.exceededLimit = true;
-      }
 
     }).catch(function(error) {
       console.error("Error fetching data", error);
@@ -48,8 +50,8 @@ app.controller('SearchController', ['$scope', '$http', function ($scope, $http) 
     return $scope.totalResults + ' Results';
   };
 
-  function searchPage(searchTerm, start = 1) {
-    const baseUrl = `/.netlify/functions/fetchData?q=${encodeURIComponent(searchTerm)}&s=${start}`;
+  function searchPage(searchTerm, page = 1) {
+    const baseUrl = `/.netlify/functions/fetchData?q=${encodeURIComponent(searchTerm)}&p=${page}`;
     return $http.get(baseUrl)
       .then(response => {
         if (!response.data || !Array.isArray(response.data.results) || response.data.results.length === 0) {
@@ -57,16 +59,12 @@ app.controller('SearchController', ['$scope', '$http', function ($scope, $http) 
         }
 
         $scope.results = $scope.results.concat(response.data.results);
-        $scope.totalResults = $scope.results.length;
-        $scope.filteredResults = $scope.results;
 
         const totalPages = response.data.totalPages;
-        const currentPage = Math.ceil(start / 10) + 1;
-        const nextStart = start + 10;
+        const currentPage = page;
 
-        // Stop fetching if we've reached 100 results or there are no more pages
-        return (currentPage < totalPages && $scope.results.length < 100) ? searchPage(searchTerm, nextStart) : $scope.results;
+        // Stop fetching if we've reached 100 results
+        return (currentPage < totalPages && $scope.results.length < 100) ? searchPage(searchTerm, page + 1) : $scope.results;
       });
   }
-
 }]);
