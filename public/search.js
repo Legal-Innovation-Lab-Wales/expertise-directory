@@ -43,21 +43,24 @@ app.controller('SearchController', ['$scope', '$http', function ($scope, $http) 
     return $scope.totalResults + ' Results';
   };
 
-  function searchPage(searchTerm, start = 1) {
-    const baseUrl = `http://localhost:5000/mockApi?q=${encodeURIComponent(searchTerm)}&s=${(start - 1) * 10}`;
-    return $http.get(baseUrl)
-      .then(response => {
-        if (!response.data || !Array.isArray(response.data) || response.data.length === 0) {
-          return $scope.results;
-        }
-        
-        $scope.results = $scope.results.concat(response.data);
-        $scope.totalResults = $scope.results.length;
-        $scope.filteredResults = $scope.results;
+function searchPage(searchTerm, start = 1) {
+  const baseUrl = `/.netlify/functions/fetchData?q=${encodeURIComponent(searchTerm)}&s=${(start - 1) * 10}`;
+  return $http.get(baseUrl)
+    .then(response => {
+      if (!response.data || !Array.isArray(response.data.results) || response.data.results.length === 0) {
+        return $scope.results;
+      }
 
-        
-        return response.data.length === 10 ? searchPage(searchTerm, start + 10) : $scope.results;
-      });
-  }
+      $scope.results = $scope.results.concat(response.data.results);
+      $scope.totalResults = $scope.results.length;
+      $scope.filteredResults = $scope.results;
+
+      const totalPages = response.data.totalPages;
+      const currentPage = start;
+
+      return (currentPage < totalPages) ? searchPage(searchTerm, start + 1) : $scope.results;
+    });
+}
+
 
 }]);
