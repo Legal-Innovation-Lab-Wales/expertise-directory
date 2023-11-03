@@ -44,6 +44,21 @@
         font-size: 2em;  /* Increase font size */
         color: white;    /* Set text color to white */
     }
+     
+    .spinner {
+        border: 8px solid #f3f3f3;
+        border-top: 8px solid #3498db;
+        border-radius: 50%;
+        width: 60px;
+        height: 60px;
+        animation: spin 2s linear infinite;
+    }
+
+    @keyframes spin {
+        0% { transform: rotate(0deg); }
+        100% { transform: rotate(360deg); }
+    }
+     
   </style>
 </head>
 <body ng-controller="SearchController">
@@ -69,7 +84,7 @@
         <div class="container">
     <div class="mb-4">
         <!-- Wrap label with <h3> tags -->
-        <h3 class="d-block mb-1">Search Term:</h3>
+        <h4 class="d-block mb-1">Search Term:</h4>
         <div class="form-inline">
             <input type="text" ng-model="searchTerm" placeholder="Search" class="form-control flex-grow-1 mr-2"/>
             <button ng-click="search()" class="btn btn-primary">Search</button>
@@ -77,14 +92,14 @@
     </div>
     <div class="mt-4">
         <!-- Wrap label with <h3> tags -->
-        <h3 class="mr-2">Filter:</h3>
+        <h4 class="mr-2">Filter:</h4>
         <input type="text" ng-model="additionalSearchTerm" ng-change="filterResults()" placeholder="Filter Results" class="form-control"/>
     </div>
     
     <!-- Loading message -->
-    <div ng-if="loading" class="mt-4">
-        <p>Loading...</p>
-    </div>
+        <div ng-if="loading" class="mt-4">
+            <div class="spinner"></div>
+        </div>
         <ul class="list-group mt-4">
     <li ng-repeat="result in filteredResults" class="list-group-item">
         <a href="{{result.profileUrl}}">{{result.name}}</a>
