@@ -41,8 +41,8 @@
     }
 
     .custom-header-text {
-      margin: 0;
-      color: white;
+        font-size: 2em;  /* Increase font size */
+        color: white;    /* Set text color to white */
     }
   </style>
 </head>
@@ -62,18 +62,20 @@
         </div>
       </div>
       <div class="custom-header-text">
-        "Expertise Search"
+        Academic Search
       </div>
     </div>
   </header>
-    <div class="container">
-        <h1>Search Expertise</h1>
-        <div class="form-inline mb-2">
-            <input type="text" ng-model="searchTerm" placeholder="Search" class="form-control mr-2"/>
-            <button ng-click="search()" class="btn btn-primary">Search</button>
+        <div class="container">
+        <div class="mb-4">
+            <label class="d-block mb-1">Search Term:</label>  <!-- Added label -->
+            <div class="form-inline">
+                <input type="text" ng-model="searchTerm" placeholder="Search" class="form-control flex-grow-1 mr-2"/>  <!-- Made input grow -->
+                <button ng-click="search()" class="btn btn-primary">Search</button>
+            </div>
         </div>
         <div class="mt-4">
-            <label class="mb-2">Filter</label>
+            <label class="mr-2">Filter:</label>  <!-- Moved label to same line -->
             <input type="text" ng-model="additionalSearchTerm" ng-change="filterResults()" placeholder="Filter Results" class="form-control"/>
         </div>
         <ul class="list-group mt-4">
