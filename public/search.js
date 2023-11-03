@@ -2,37 +2,30 @@ const app = angular.module('SearchApp', []);
 
 app.controller('SearchController', ['$scope', '$http', function ($scope, $http) {
   $scope.results = [];
-  $scope.searchTerm = '';
-  $scope.additionalSearchTerm = '';
   $scope.filteredResults = [];
+
+  function searchPage(searchTerm, start = 1) {
+    const FUNCTION_ENDPOINT = '/.netlify/functions/fetchData';
+    return $http.get(FUNCTION_ENDPOINT, { params: { q: searchTerm, s: start } })
+      .then(response => {
+        $scope.results = $scope.results.concat(response.data);
+        $scope.filteredResults = $scope.results;
+        $scope.$apply();  // Ensure UI updates
+        return response.data.length > 0 ? searchPage(searchTerm, start + 10) : $scope.results;
+      });
+  }
 
   $scope.search = function () {
     $scope.results = [];
-    $scope.searchPage(1);
-  };
-
-  $scope.searchPage = function (page) {
-    const FUNCTION_ENDPOINT = '/.netlify/functions/fetchData';
-    const START_INDEX = (page - 1) * 10 + 1;
-    $http.get(FUNCTION_ENDPOINT, { params: { q: $scope.searchTerm, s: START_INDEX } })
-      .then(response => {
-        // Add new results to existing array
-        $scope.results = $scope.results.concat(response.data);
-
-        // Check if there are more pages to fetch
-        if (response.data.length > 0) {
-          $scope.searchPage(page + 1);
-        } else {
-          // Call filter once all data is fetched and update UI
-          $scope.filterResults();
-          $scope.$apply();  // Force UI update
-        }
-      })
-      .catch(error => console.error('Error:', error));
+    const searchTerm = $scope.searchTerm;
+    searchPage(searchTerm);
   };
 
   $scope.filterResults = function () {
-    $scope.filteredResults = $scope.results.filter(item =>
-      item.name.toLowerCase().includes($scope.additionalSearchTerm.toLowerCase()));
+    const additionalSearchTerm = $scope.additionalSearchTerm.toLowerCase();
+    $scope.filteredResults = $scope.results.filter(result =>
+      result.name.toLowerCase().includes(additionalSearchTerm) ||
+      result.additionalInfo.toLowerCase().includes(additionalSearchTerm)
+    );
   };
 }]);
