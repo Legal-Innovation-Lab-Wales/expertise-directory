@@ -45,14 +45,14 @@ async function fetchPageResults(url) {
 
 exports.handler = async function (event) {
   const searchTerm = event.queryStringParameters.q;
+  const start = parseInt(event.queryStringParameters.s, 10) || 0;
   const baseUrl = `https://www.swansea.ac.uk/search/?c=www-en-meta&q=${encodeURIComponent(searchTerm)}&f[page type]=staff profile`;
-  console.log('trying to find pagination');
 
   try {
-    const firstPageUrl = `${baseUrl}&s=0`;
-    console.log(`Fetching data from first page URL: ${firstPageUrl}`);
-    const { data: firstPageData } = await axios.get(firstPageUrl);
-    const $ = cheerio.load(firstPageData);
+    const pageUrl = `${baseUrl}&s=${start}`;
+    console.log(`Fetching data from URL: ${pageUrl}`);
+    const { data: pageData } = await axios.get(pageUrl);
+    const $ = cheerio.load(pageData);
 
     let totalPages = 1;
     $('ul.site-search-results-pagination li.site-search-results-pagination-item').each((i, el) => {
@@ -62,17 +62,12 @@ exports.handler = async function (event) {
 
     console.log('Total pages:', totalPages);
 
-    const allPagesPromises = Array.from({ length: totalPages }, (_, i) => {
-      const pageUrl = `${baseUrl}&s=${i * 10}`;
-      return fetchPageResults(pageUrl);
-    });
+    const results = await fetchPageResults(pageUrl);
 
-    const allResults = (await Promise.all(allPagesPromises)).flat();
-
-    console.log('Total records:', allResults.length);
+    console.log('Total records:', results.length);
     return {
       statusCode: 200,
-      body: JSON.stringify({ results: allResults, totalPages: totalPages }),
+      body: JSON.stringify({ results: results, totalPages: totalPages }),
     };
   } catch (error) {
     console.error('Error fetching page results:', error);
