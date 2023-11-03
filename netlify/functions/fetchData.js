@@ -9,13 +9,11 @@ exports.handler = async function (event) {
     const { data } = await axios.get(url);
     const $ = cheerio.load(data);
 
-    // Extract and format data from the HTML
     const results = await Promise.all($('ul.site-search-results-list li.site-search-results-list-item').map(async (index, element) => {
       const name = $(element).find('h3 a').text().trim();
       const profileUrl = $(element).find('h3 a').attr('href');
       const additionalInfo = $(element).find('.site-search-results-list-item-additional-information').text().trim();
 
-      // Initialize variables for expertise, photoUrl and photoAlt
       let expertise = [];
       let photoUrl = '';
       let photoAlt = '';
@@ -24,20 +22,22 @@ exports.handler = async function (event) {
         const { data: profileData } = await axios.get(profileUrl);
         const profile$ = cheerio.load(profileData);
 
-        // Fetch the areas of expertise for each profile
         profile$('.staff-profile-areas-of-expertise ul li').each((i, el) => {
           expertise.push(profile$(el).text());
         });
 
-        // Fetch the staff photo URL and alt text
         photoUrl = profile$('.staff-profile-overview-profile-picture img').attr('src');
         photoAlt = profile$('.staff-profile-overview-profile-picture img').attr('alt');
+
+        // Prepend the domain if the URL is a relative path
+        if (photoUrl && !photoUrl.startsWith('http')) {
+          photoUrl = `https://www.swansea.ac.uk${photoUrl}`;
+        }
 
       } catch (error) {
         console.error(`Failed to fetch details for ${profileUrl}`);
       }
 
-      // Return the extracted information including photoUrl and photoAlt
       return { name, profileUrl, additionalInfo, expertise, photoUrl, photoAlt };
     }).get());
 
