@@ -17,31 +17,49 @@ app.controller('SearchController', ['$scope', '$http', function ($scope, $http) 
       });
   }
 
-  $scope.search = function () {
+$scope.search = function() {
+    $scope.loading = true;
     $scope.results = [];
     const searchTerm = $scope.searchTerm;
-    searchPage(searchTerm);
-    $scope.results = results.data; // Assuming results.data contains the fetched data
-    $scope.totalResults = $scope.results.length;
-    $scope.filterResults();
+
+    // Assume searchPage returns a promise that resolves to the fetched data
+    searchPage(searchTerm).then(function(results) {
+      $scope.results = results; // Update results once data is available
+      $scope.totalResults = $scope.results.length;
+      $scope.filterResults();
+
+    }).catch(function(error) {
+      console.error("Error fetching data", error);
+
+    }).finally(function() {
+      $scope.loading = false;
+    });
   };
 
-$scope.filterResults = function () {
+  $scope.filterResults = function() {
     const additionalSearchTerm = $scope.additionalSearchTerm.toLowerCase();
     $scope.filteredResults = $scope.results.filter(result =>
-        result.name.toLowerCase().includes(additionalSearchTerm) ||
-        result.additionalInfo.toLowerCase().includes(additionalSearchTerm) ||
-        (result.expertise && result.expertise.some(e => e.toLowerCase().includes(additionalSearchTerm)))
+      result.name.toLowerCase().includes(additionalSearchTerm) ||
+      result.additionalInfo.toLowerCase().includes(additionalSearchTerm) ||
+      (result.expertise && result.expertise.some(e => e.toLowerCase().includes(additionalSearchTerm)))
     );
-};
+  };
 
-// And the filterString function remains the same
-$scope.filterString = function() {
+  $scope.filterString = function() {
     if ($scope.additionalSearchTerm) {
-        return $scope.filteredResults.length + ' / ' + $scope.totalResults;
+      return $scope.filteredResults.length + ' / ' + $scope.totalResults;
     }
     return $scope.totalResults + ' Results';
-};
+  };
 
-  
+  // Define searchPage function here
+  function searchPage(searchTerm) {
+    // Process the data and return a promise
+    const deferred = $q.defer();
+    // ...fetch and process data here...
+    // Once data is ready, resolve the promise
+    deferred.resolve(processedData);
+    return deferred.promise;
+  }
+
 }]);
