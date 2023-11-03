@@ -43,12 +43,11 @@ app.controller('SearchController', ['$scope', '$http', function ($scope, $http) 
     return $scope.totalResults + ' Results';
   };
 
-  function searchPage(searchTerm, start = 1) {
-    // Updated baseUrl
-    const baseUrl = `https://www.swansea.ac.uk/search/?c=www-en-meta&q=${encodeURIComponent(searchTerm)}&f%5Bpage+type%5D=staff+profile`;
+function searchPage(searchTerm, start = 1) {
+    // Change this URL to call your Netlify serverless function
+    const baseUrl = `/.netlify/functions/fetchData?q=${encodeURIComponent(searchTerm)}&s=${(start - 1) * 10}`;
     return $http.get(baseUrl)
       .then(response => {
-        // Ensure that you adapt this part to handle the response from the new endpoint
         if (!response.data || !Array.isArray(response.data) || response.data.length === 0) {
           return $scope.results;
         }
@@ -59,5 +58,6 @@ app.controller('SearchController', ['$scope', '$http', function ($scope, $http) 
 
         return response.data.length === 10 ? searchPage(searchTerm, start + 10) : $scope.results;
       });
-  }
+}
+
 }]);
