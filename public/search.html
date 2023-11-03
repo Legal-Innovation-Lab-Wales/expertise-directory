@@ -1,0 +1,40 @@
+<!doctype html>
+<html lang="en" ng-app="searchApp">
+<head>
+    <title>Search - Legal Innovation Lab Wales</title>
+    <meta charset="utf-8">
+    <!-- Include Bootstrap, AngularJS and other necessary libraries -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular.min.js"></script>
+    <script src="app.js"></script>  <!-- Link to your AngularJS app script -->
+</head>
+<body>
+    <div ng-controller="SearchController" class="container mt-4">
+        <!-- Search Form -->
+        <form ng-submit="search()">
+            <div class="form-group">
+                <input type="text" class="form-control" ng-model="query" placeholder="Enter search term">
+            </div>
+            <button type="submit" class="btn btn-primary">Search</button>
+        </form>
+        
+        <!-- Results Table -->
+        <table class="table mt-4" ng-if="results.length > 0">
+            <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>URL</th>
+                    <th>Info</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr ng-repeat="result in results">
+                    <td>{{result.Name}}</td>
+                    <td><a href="{{result.URL}}" target="_blank">{{result.URL}}</a></td>
+                    <td>{{result.Info}}</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</body>
+</html>
