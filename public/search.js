@@ -41,23 +41,21 @@ app.controller('SearchController', ['$scope', '$http', function ($scope, $http) 
 
 function searchPage(searchTerm, start = 1) {
   const FUNCTION_ENDPOINT = '/.netlify/functions/fetchData';
-  $scope.loading = true;
   return $http.get(FUNCTION_ENDPOINT, { params: { q: searchTerm, s: start } })
     .then(response => {
-      // Check if response data is empty
       if (!response.data || response.data.length === 0) {
-        $scope.loading = false;
         return $scope.results;
       }
       
       $scope.results = $scope.results.concat(response.data);
       $scope.totalResults = $scope.results.length;
       $scope.filteredResults = $scope.results;
-      $scope.loading = false;
+      $scope.$apply();
       
-      // Recursive call to fetch next set of data
-      return searchPage(searchTerm, start + 10);
+      return response.data.length === 10 ? searchPage(searchTerm, start + 10) : $scope.results;
     });
+}
+
 }
 
 
