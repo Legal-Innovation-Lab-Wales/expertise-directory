@@ -113,6 +113,13 @@
         </div>
  
         <div ng-if="!loading">
+                    <div ng-if="exceededLimit" class="alert alert-info mt-4">
+            More than 100 results found. Please use the
+            <a ng-href="https://www.swansea.ac.uk/search/?c=www-en-meta&q={{searchTerm}}&f[page%20type]=staff%20profile" target="_blank">
+                University search function
+            </a> for further information.
+        </div>
+
             <ul class="list-group mt-4">
                 <li ng-repeat="result in filteredResults" class="list-group-item">
                     <div class="staff-details" style="display: flex; justify-content: space-between;">
