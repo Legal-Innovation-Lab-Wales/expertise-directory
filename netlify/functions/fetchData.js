@@ -67,12 +67,17 @@ exports.handler = async function (event) {
 
     return {
       statusCode: 200,
-      body: JSON.stringify(allResults)
+      body: JSON.stringify(allResults),
+      headers: {
+        'Access-Control-Allow-Origin': '*', // Allow requests from any origin (adjust this as needed for your use case)
+        'Content-Type': 'application/json',
+      },
     };
   } catch (error) {
+    console.error('Error fetching data:', error);
     return {
       statusCode: 500,
-      body: JSON.stringify({ error: 'Failed fetching data' })
+      body: JSON.stringify({ error: 'Failed fetching data' }),
     };
   }
 };
