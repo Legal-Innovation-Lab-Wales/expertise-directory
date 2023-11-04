@@ -10,6 +10,7 @@ app.controller('SearchController', ['$scope', '$http', function ($scope, $http) 
 
   $scope.search = function () {
     $scope.loading = true;
+    $scope.filteredResults = []; // Clear the filtered results array
     $scope.results = []; // Clear the results array
     $scope.totalResults = 0;
     $scope.errorMessage = '';
