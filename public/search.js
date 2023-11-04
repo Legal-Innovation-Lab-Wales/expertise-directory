@@ -90,7 +90,7 @@ function searchPage(searchTerm, start = 1, maxResults = 100) {
         $scope.totalResults = $scope.results.length;
         $scope.filteredResults = $scope.results;
 
-        return response.data.length === 10 ? searchPage(searchTerm, start + 10, maxPages) : $scope.results;
+        return response.data.length === 10 ? searchPage(searchTerm, start + 10, maxResults) : $scope.results;
 
       });
   }
