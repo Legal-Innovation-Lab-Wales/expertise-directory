@@ -21,7 +21,7 @@ app.controller('SearchController', ['$scope', '$http', function ($scope, $http) 
       $scope.filterResults();
 
       // Check for more than 3 results here
-      if ($scope.totalResults > 3) {
+      if ($scope.totalResults > 100) {
         $scope.exceedLimit = true;
       }
 
