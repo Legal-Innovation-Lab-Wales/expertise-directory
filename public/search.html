@@ -5,7 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Search Expertise</title>
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular.min.js"></script>
-    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular-resource.min.js"></script>
     <script src="search.js"></script>
     <link href="https://fonts.googleapis.com/css?family=Lato:400,700%7COpen+Sans:400,600" rel="stylesheet">
     <link rel="apple-touch-icon" sizes="180x180" href="https://intranet.swan.ac.uk/cdn/suds/images/icons/favicon/apple-touch-icon.png">
@@ -73,6 +72,96 @@
             margin: 0;
             font-size: 1.2em;
         }
+
+/* Add this CSS to your stylesheet or in a <style> tag in the HTML */
+
+    .table-collapse-button {
+    font-size: 8px; /* Set your desired font size */
+    cursor: pointer;
+    outline: none;
+    margin-left: 10px; /* Add spacing between the button and the number */
+    vertical-align: middle; /* Align the button vertically */
+    display: inline-block; /* Keep it inline with text */
+    text-align: center; /* Center the content horizontally */
+    line-height: 30px; /* Vertically align content within the button */
+    transition: font-color 0.3s ease, color 0.3s ease;
+}
+
+.table-collapse-button:hover {
+    font-color: white; /* Dark navy color on hover */
+}
+
+
+
+
+    .bold {
+    font-weight: bold;
+    font-size: 12px; /* Set your desired font size for bold text */
+}
+
+    .entry-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.expand-button {
+    background-color: transparent;
+    border: none;
+    width: 30px; /* Set your desired width */
+    height: 30px; /* Set your desired height */
+    font-size: 16px; /* Set your desired font size */
+    cursor: pointer;
+    outline: none;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-right: 10px; /* Add spacing between the button and the name */
+}
+
+.expand-button:hover {
+    background-color: #007bff; /* Change color on hover */
+    color: white;
+    border-radius: 50%; /* Make it circular on hover */
+}
+
+/* Add this CSS to your stylesheet or in a <style> tag in the HTML */
+
+    .expand-collapse-text {
+    font-size: 12px; /* Set your desired font size for small text */
+    cursor: pointer;
+    text-decoration: underline; /* Add underline for better click indication */
+}
+
+
+.pin-unpin-button {
+    display: flex;
+    align-items: center;
+}
+
+.pin-button {
+    background-color: transparent;
+    color: #007bff; /* Set your desired pin color */
+    border: none;
+    border-radius: 50%; /* Make it circular */
+    width: 30px; /* Set your desired width */
+    height: 30px; /* Set your desired height */
+    font-size: 16px; /* Set your desired font size */
+    cursor: pointer;
+    outline: none;
+    border: 2px solid #007bff; /* Add a border */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.pin-button:hover {
+    background-color: #007bff; /* Change color on hover */
+    color: white;
+}
+
+
+
     </style>
 </head>
 <body ng-controller="SearchController">
@@ -96,6 +185,58 @@
         </div>
     </header>
     <div class="container">
+
+        <h3 ng-click="togglePinnedResults()">
+            <span>
+                Pinned ({{ pinnedResults.length }}) 
+                <span class="table-collapse-button">
+                    {{ showPinnedResults ? '▼' : '▶' }}
+                </span>
+            </span>
+        </h3>
+        
+        
+
+
+
+<ul class="list-group mt-4" ng-show="showPinnedResults">
+    <li ng-repeat="result in pinnedResults" class="list-group-item">
+        <div class="entry-header">
+            <h4 ng-click="togglePinnedEntry(result)">
+                {{result.name}} 
+                <span ng-click="togglePinnedEntry(result)" class="expand-collapse-text">
+                    [{{ result.expanded ? 'collapse' : 'expand' }}]
+                </span>
+            </h4>
+            
+            <span class="pin-unpin-button">
+                <button ng-click="togglePin(result)" class="pin-button">
+                    {{ isPinned(result) ? '✖' : '📌' }}
+                </button>
+            </span>
+        </div>
+        <!-- Display additional details when expanded -->
+        <div ng-if="result.expanded">
+            <div class="staff-details" style="display: flex; align-items: center;">
+                <img class="profile-pic" ng-src="{{result.photoUrl}}" alt="{{result.name}}" />
+                <div class="info" style="flex: 1;">
+                    <a href="{{result.profileUrl}}" target="_blank">
+                        <p>{{result.additionalInfo}}</p>
+                    </a>
+                    <div ng-if="result.expertise && result.expertise.length > 0">
+                        <strong>Areas of Expertise:</strong>
+                        <ul>
+                            <li ng-repeat="area in result.expertise">{{area}}</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </li>
+</ul>
+
+
+
         <div class="mb-4">
             <h3>Search Term:</h3>
             <form ng-submit="search()">
@@ -113,13 +254,13 @@
             <div class="spinner"></div>
         </div>
  
-        <div ng-if="!loading">
-                    <div ng-if="exceedLimit" class="alert alert-info mt-4">
-           Too many results found. Please use the
+        <div ng-if="exceedLimit" class="alert alert-info mt-4">
+            Too many results found. Please use the
             <a ng-href="https://www.swansea.ac.uk/search/?c=www-en-meta&q={{searchTerm}}&f[page%20type]=staff%20profile" target="_blank">
-                University search function
+              University search function
             </a> for further information.
-        </div>
+          </div>
+          
 
             <ul class="list-group mt-4">
                 <li ng-repeat="result in filteredResults" class="list-group-item">
@@ -137,7 +278,10 @@
                             </div>
                         </div>
                         <img class="profile-pic" ng-src="{{result.photoUrl}}" alt="{{result.name}}" />
-                    </div>
+                    <button ng-click="togglePin(result)" class="pin-button">
+                        {{ isPinned(result) ? '✖' : '📌' }}
+                    </button>
+                </div>
                 </li>
             </ul>
     </div>
