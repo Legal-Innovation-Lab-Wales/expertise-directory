@@ -74,7 +74,11 @@ app.controller('SearchController', ['$scope', '$http', function ($scope, $http) 
 
 };
 
-  function searchPage(searchTerm, start = 1) {
+function searchPage(searchTerm, start = 1, maxPages = 10) {
+    if (start > maxPages) {
+      return Promise.resolve($scope.results);
+    }
+  
     const baseUrl = `/.netlify/functions/fetchData?q=${encodeURIComponent(searchTerm)}&s=${(start - 1) * 10}`;
     return $http.get(baseUrl)
       .then(response => {
@@ -86,7 +90,8 @@ app.controller('SearchController', ['$scope', '$http', function ($scope, $http) 
         $scope.totalResults = $scope.results.length;
         $scope.filteredResults = $scope.results;
 
-        return response.data.length === 10 ? searchPage(searchTerm, start + 10) : $scope.results;
+        return response.data.length === 10 ? searchPage(searchTerm, start + 10, maxPages) : $scope.results;
+
       });
   }
 }]);
