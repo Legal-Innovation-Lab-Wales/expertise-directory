@@ -88,13 +88,19 @@ function searchPage(searchTerm, start = 1, maxResults = 100) {
 
       // Ensure that we don't duplicate results from the same page
       const newResults = response.data.filter(newResult => !$scope.results.some(existingResult => existingResult.profileUrl === newResult.profileUrl));
-      
+
       $scope.results = $scope.results.concat(newResults);
       $scope.totalResults = $scope.results.length;
       $scope.filteredResults = $scope.results;
 
-      return response.data.length === 10 ? searchPage(searchTerm, start + 10, maxResults) : $scope.results;
+      // If the number of results on the current page is less than 10, it's the last page.
+      if (response.data.length < 10) {
+        return $scope.results;
+      } else {
+        return searchPage(searchTerm, start + 10, maxResults);
+      }
     });
 }
+
 
 }]);
