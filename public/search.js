@@ -75,23 +75,26 @@ app.controller('SearchController', ['$scope', '$http', function ($scope, $http) 
 };
 
 function searchPage(searchTerm, start = 1, maxResults = 100) {
-    if (start > maxResults) {
-      return Promise.resolve($scope.results);
-    }
-  
-    const baseUrl = `/.netlify/functions/fetchData?q=${encodeURIComponent(searchTerm)}&s=${(start - 1) * 10}`;
-    return $http.get(baseUrl)
-      .then(response => {
-        if (!response.data || !Array.isArray(response.data) || response.data.length === 0) {
-          return $scope.results;
-        }
-        
-        $scope.results = $scope.results.concat(response.data);
-        $scope.totalResults = $scope.results.length;
-        $scope.filteredResults = $scope.results;
-
-        return response.data.length === 10 ? searchPage(searchTerm, start + 10, maxResults) : $scope.results;
-
-      });
+  if (start > maxResults) {
+    return Promise.resolve($scope.results);
   }
+
+  const baseUrl = `/.netlify/functions/fetchData?q=${encodeURIComponent(searchTerm)}&s=${(start - 1) * 10}`;
+  return $http.get(baseUrl)
+    .then(response => {
+      if (!response.data || !Array.isArray(response.data) || response.data.length === 0) {
+        return $scope.results;
+      }
+
+      // Ensure that we don't duplicate results from the same page
+      const newResults = response.data.filter(newResult => !$scope.results.some(existingResult => existingResult.profileUrl === newResult.profileUrl));
+      
+      $scope.results = $scope.results.concat(newResults);
+      $scope.totalResults = $scope.results.length;
+      $scope.filteredResults = $scope.results;
+
+      return response.data.length === 10 ? searchPage(searchTerm, start + 10, maxResults) : $scope.results;
+    });
+}
+
 }]);
