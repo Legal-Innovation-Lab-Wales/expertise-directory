@@ -198,28 +198,28 @@
         
 
 
-
-<ul class="list-group mt-4" ng-show="showPinnedResults">
-    <li ng-repeat="result in pinnedResults" class="list-group-item">
-        <div class="entry-header">
-            <h4 ng-click="togglePinnedEntry(result)">
-                {{result.name}} 
-                <span ng-click="togglePinnedEntry(result)" class="expand-collapse-text">
-                    [{{ result.expanded ? 'collapsed' : 'expanded' }}]
-                </span>
-            </h4>
-            
-            <span class="pin-unpin-button">
-                <button ng-click="togglePin(result)" class="pin-button">
-                    {{ isPinned(result) ? '✖' : '📌' }}
-                </button>
-            </span>
-        </div>
+        <ul class="list-group mt-4" ng-show="showPinnedResults">
+            <li ng-repeat="result in pinnedResults" class="list-group-item" ng-click="togglePinnedEntry(result)">
+                <div class="entry-header">
+                    <h4>
+                        {{result.name}}
+                    </h4>
+                    
+                    <span class="pin-unpin-button">
+                        <button ng-click="togglePin(result); $event.stopPropagation();" class="pin-button">
+                            {{ isPinned(result) ? '✖' : '📌' }}
+                        </button>
+                    </span>
+                </div>
+                <hr />
         <!-- Display additional details when expanded -->
         <div ng-if="result.expanded">
             <div class="staff-details" style="display: flex; align-items: center;">
                 <img class="profile-pic" ng-src="{{result.photoUrl}}" alt="{{result.name}}" />
                 <div class="info" style="flex: 1;">
+                    <a href="{{result.profileUrl}}" target="_blank">
+                        <h4>{{result.name}}</h4>
+                    </a>
                     <a href="{{result.profileUrl}}" target="_blank">
                         <p>{{result.additionalInfo}}</p>
                     </a>
