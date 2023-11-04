@@ -1,8 +1,19 @@
 const axios = require('axios');
 const cheerio = require('cheerio');
+const NodeCache = require('node-cache');
+
+// Create a cache instance with a TTL (time to live) of 1 hour
+const cache = new NodeCache({ stdTTL: 3600 });
 
 // Export the fetchPageResults function
 exports.fetchPageResults = async function (url) {
+  // Check if the data is already cached
+  const cachedData = cache.get(url);
+  if (cachedData) {
+    console.log('Data found in cache.');
+    return cachedData;
+  }
+
   try {
     const { data } = await axios.get(url);
     const $ = cheerio.load(data);
@@ -18,6 +29,7 @@ exports.fetchPageResults = async function (url) {
         let photoAlt = '';
 
         try {
+          // Fetching profile data
           const { data: profileData } = await axios.get(profileUrl);
           const profile$ = cheerio.load(profileData);
 
@@ -39,6 +51,9 @@ exports.fetchPageResults = async function (url) {
       }).get()
     );
 
+    // Cache the results with the URL as the cache key
+    cache.set(url, results);
+
     return results;
   } catch (error) {
     console.error(`Failed to fetch data from ${url}`, error);
@@ -56,7 +71,13 @@ exports.handler = async function (event) {
 
   try {
     const firstPageUrl = `${baseUrl}&s=0`;
-    const { data: firstPageData } = await axios.get(firstPageUrl);
+    
+    // Check if the first page data is already cached
+    const cachedFirstPageData = cache.get(firstPageUrl);
+    const { data: firstPageData } = cachedFirstPageData
+      ? { data: cachedFirstPageData }
+      : await axios.get(firstPageUrl);
+    
     const $ = cheerio.load(firstPageData);
 
     let totalPages = 1;
