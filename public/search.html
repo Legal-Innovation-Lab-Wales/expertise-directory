@@ -205,7 +205,7 @@
             <h4 ng-click="togglePinnedEntry(result)">
                 {{result.name}} 
                 <span ng-click="togglePinnedEntry(result)" class="expand-collapse-text">
-                    [{{ result.expanded ? 'collapse' : 'expand' }}]
+                    [{{ result.expanded ? 'collapsed' : 'expanded' }}]
                 </span>
             </h4>
             
@@ -258,7 +258,7 @@
             Too many results found. Please use the
             <a ng-href="https://www.swansea.ac.uk/search/?c=www-en-meta&q={{searchTerm}}&f[page%20type]=staff%20profile" target="_blank">
               University search function
-            </a> for further information.
+            </a> for more results.
           </div>
           
 
