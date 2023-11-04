@@ -103,7 +103,12 @@ exports.fetchAllResults = async function (baseUrl) {
 
     console.log('Total num of pages:', totalPages);  // Debug statement
 
-    // Fetch all pages
+    // Limit the maximum number of pages and total results
+    const maxPages = 10;
+    const maxTotalResults = 100;
+    totalPages = Math.min(totalPages, maxPages);
+
+    // Fetch all pages up to the specified limit
     const allPagesPromises = Array.from({ length: totalPages }, (_, i) => {
       const s = 1 + 10 * i;  // Adjusted the calculation here to match standard pagination
       const urlWithPage = `${baseUrl}&s=${s}`;
@@ -114,9 +119,15 @@ exports.fetchAllResults = async function (baseUrl) {
 
     const allResults = (await Promise.all(allPagesPromises)).flat();
 
+    // Limit the total results to the specified maximum
+    if (allResults.length > maxTotalResults) {
+      allResults.length = maxTotalResults;
+    }
+
     return allResults;
   } catch (error) {
     console.error("Error fetching all results:", error);
     throw error;  // Re-throw the error so it can be caught and handled by the calling function
   }
 };
+
