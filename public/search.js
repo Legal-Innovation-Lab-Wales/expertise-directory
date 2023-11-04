@@ -1,51 +1,34 @@
-const app = angular.module('SearchApp', ['ngResource']);
+const app = angular.module('SearchApp', []);
 
-app.factory('SearchService', ['$resource', function($resource) {
-  return $resource('/.netlify/functions/fetchData', {}, {
-    search: {
-      method: 'GET',
-      isArray: true,
-    },
-  });
-}]);
-
-app.controller('SearchController', ['$scope', 'SearchService', '$window', function($scope, SearchService, $window) {
+app.controller('SearchController', ['$scope', '$http', function ($scope, $http) {
   $scope.results = [];
   $scope.filteredResults = [];
   $scope.totalResults = 0;
   $scope.errorMessage = '';
-  $scope.exceededLimit = false;
-  $scope.page = 1;
-  $scope.loading = false;
+  $scope.exceedLimit = false; // Added flag to control the message visibility
 
-  $scope.loadFirstResults = function() {
-    $scope.page = 1;
+  $scope.search = function() {
     $scope.loading = true;
     $scope.results = [];
     $scope.totalResults = 0;
     $scope.errorMessage = '';
-    $scope.exceededLimit = false;
+    $scope.exceedLimit = false; // Reset the flag
+    const searchTerm = $scope.searchTerm;
 
-    SearchService.search({
-      q: $scope.searchTerm,
-      p: $scope.page
-    }, function(data) {
-      if (data && data.results) {
-        $scope.results = data.results;
-        $scope.totalResults = $scope.results.length;
-        $scope.filterResults();
+    searchPage(searchTerm).then(function(results) {
+      $scope.results = results;
+      $scope.totalResults = $scope.results.length;
+      $scope.filterResults();
 
-        // Check for more than 100 results here
-        if ($scope.totalResults > 100) {
-          $scope.exceededLimit = true;
-          $scope.results = $scope.results.slice(0, 100); // Limit to first 100 results
-          $scope.totalResults = 100;
-        }
+      // Check for more than 3 results here
+      if ($scope.totalResults > 3) {
+        $scope.exceedLimit = true;
       }
-    }, function(error) {
+
+    }).catch(function(error) {
       console.error("Error fetching data", error);
       $scope.errorMessage = 'Failed to fetch data. Please try again.';
-    }).$promise.finally(function() {
+    }).finally(function() {
       $scope.loading = false;
     });
   };
@@ -66,44 +49,19 @@ app.controller('SearchController', ['$scope', 'SearchService', '$window', functi
     return $scope.totalResults + ' Results';
   };
 
-  $scope.loadMoreResults = function() {
-    if (!$scope.exceededLimit && !$scope.loading) {
-      $scope.page++;
-      $scope.loading = true;
-
-      SearchService.search({
-        q: $scope.searchTerm,
-        p: $scope.page
-      }, function(data) {
-        if (data && data.results) {
-          if (data.results.length > 0) {
-            $scope.results = $scope.results.concat(data.results);
-          } else {
-            $scope.exceededLimit = true;
-          }
-          $scope.filterResults();
+  function searchPage(searchTerm, start = 1) {
+    const baseUrl = `/.netlify/functions/fetchData?q=${encodeURIComponent(searchTerm)}&s=${(start - 1) * 10}`;
+    return $http.get(baseUrl)
+      .then(response => {
+        if (!response.data || !Array.isArray(response.data) || response.data.length === 0) {
+          return $scope.results;
         }
-      }, function(error) {
-        console.error("Error fetching more data", error);
-      }).$promise.finally(function() {
-        $scope.loading = false;
+        
+        $scope.results = $scope.results.concat(response.data);
+        $scope.totalResults = $scope.results.length;
+        $scope.filteredResults = $scope.results;
+
+        return response.data.length === 10 ? searchPage(searchTerm, start + 10) : $scope.results;
       });
-    }
-  };
-
-  // Lazy loading when user scrolls to the bottom of the page
-  angular.element($window).bind("scroll", function() {
-    if (!$scope.exceededLimit && !$scope.loading) {
-      if (
-        $window.innerHeight + $window.scrollY >=
-        $window.document.body.offsetHeight
-      ) {
-        $scope.loadMoreResults();
-        $scope.$apply();
-      }
-    }
-  });
-
-  // Initial search
-  $scope.loadFirstResults();
+  }
 }]);
