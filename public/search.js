@@ -1,35 +1,50 @@
-const app = angular.module('SearchApp', []);
+const app = angular.module('SearchApp', ['ngResource']);
 
-app.controller('SearchController', ['$scope', '$http', function ($scope, $http) {
+app.factory('SearchService', ['$resource', function($resource) {
+  return $resource('/.netlify/functions/fetchData', {}, {
+    search: {
+      method: 'GET',
+      isArray: true,
+    },
+  });
+}]);
+
+app.controller('SearchController', ['$scope', 'SearchService', '$window', function($scope, SearchService, $window) {
   $scope.results = [];
   $scope.filteredResults = [];
   $scope.totalResults = 0;
   $scope.errorMessage = '';
   $scope.exceededLimit = false;
+  $scope.page = 1;
+  $scope.loading = false;
+  $scope.hasMoreResults = false;
 
-  $scope.search = function() {
+  $scope.loadFirstResults = function() {
+    $scope.page = 1;
     $scope.loading = true;
     $scope.results = [];
     $scope.totalResults = 0;
     $scope.errorMessage = '';
     $scope.exceededLimit = false;
-    const searchTerm = $scope.searchTerm;
 
-    searchPage(searchTerm).then(function(results) {
-      if(results.length > 100) {
-        $scope.exceededLimit = true;
-        $scope.results = results.slice(0, 100); // Limit to first 100 results
-      } else {
-        $scope.results = results;
+    SearchService.search({
+      q: $scope.searchTerm,
+      p: $scope.page
+    }, function(data) {
+      if (data && data.results) {
+        if (data.results.length > 10) {
+          $scope.results = data.results.slice(0, 10); // Limit to first 10 results
+          $scope.hasMoreResults = true;
+        } else {
+          $scope.results = data.results;
+        }
+        $scope.totalResults = $scope.results.length;
+        $scope.filterResults();
       }
-      $scope.totalResults = $scope.results.length;
-      $scope.filterResults();
-
-    }).catch(function(error) {
+    }, function(error) {
       console.error("Error fetching data", error);
       $scope.errorMessage = 'Failed to fetch data. Please try again.';
-
-    }).finally(function() {
+    }).$promise.finally(function() {
       $scope.loading = false;
     });
   };
@@ -50,29 +65,44 @@ app.controller('SearchController', ['$scope', '$http', function ($scope, $http) 
     return $scope.totalResults + ' Results';
   };
 
-function searchPage(searchTerm, page = 1) {
-  const baseUrl = `/.netlify/functions/fetchData?q=${encodeURIComponent(searchTerm)}&p=${page}`;
-  return $http.get(baseUrl)
-    .then(response => {
-      if (!response.data || !Array.isArray(response.data.results) || response.data.results.length === 0) {
-        return $scope.results;
+  $scope.loadMoreResults = function() {
+    if (!$scope.exceededLimit && !$scope.loading) {
+      $scope.page++;
+      $scope.loading = true;
+
+      SearchService.search({
+        q: $scope.searchTerm,
+        p: $scope.page
+      }, function(data) {
+        if (data && data.results) {
+          if (data.results.length > 0) {
+            $scope.results = $scope.results.concat(data.results);
+          } else {
+            $scope.exceededLimit = true;
+          }
+          $scope.filterResults();
+        }
+      }, function(error) {
+        console.error("Error fetching more data", error);
+      }).$promise.finally(function() {
+        $scope.loading = false;
+      });
+    }
+  };
+
+  // Lazy loading when user scrolls to the bottom of the page
+  angular.element($window).bind("scroll", function() {
+    if (!$scope.exceededLimit && !$scope.loading) {
+      if (
+        $window.innerHeight + $window.scrollY >=
+        $window.document.body.offsetHeight
+      ) {
+        $scope.loadMoreResults();
+        $scope.$apply();
       }
+    }
+  });
 
-      // Concatenate results and check if total is over 75
-      const newResults = $scope.results.concat(response.data.results);
-      if (newResults.length > 75) {
-        $scope.exceededLimit = true;
-        $scope.results = newResults.slice(0, 75);
-      } else {
-        $scope.results = newResults;
-      }
-
-      const totalPages = response.data.totalPages;
-      const currentPage = page;
-
-      // Stop fetching if we've reached 100 results or more
-      return (currentPage < totalPages && newResults.length < 75) ? searchPage(searchTerm, page + 1) : $scope.results;
-    });
-}
-
+  // Initial search
+  $scope.loadFirstResults();
 }]);
