@@ -215,7 +215,9 @@
         <!-- Display additional details when expanded -->
         <div ng-if="result.expanded">
             <div class="staff-details" style="display: flex; align-items: center;">
+                <a href="{{result.profileUrl}}" target="_blank">
                 <img class="profile-pic" ng-src="{{result.photoUrl}}" alt="{{result.name}}" />
+                </a>
                 <div class="info" style="flex: 1;">
                     <a href="{{result.profileUrl}}" target="_blank">
                         <h4>{{result.name}}</h4>
