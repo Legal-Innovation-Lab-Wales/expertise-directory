@@ -99,11 +99,12 @@ exports.handler = async function (event) {
 
     // Use Promise.all to fetch data for multiple pages concurrently
     const fetchPagePromises = Array.from({ length: totalPages }, (_, i) => {
-      const s = 1 + 10 * (Math.pow(2, i) - 1);
+      const s = 1 + i * 10;  // Update this line to increment s by 10 for each page
       const url = new URL(baseUrl);
       url.searchParams.set('s', s);
       return exports.fetchPageResults(url.toString());
     });
+
 
     const allResults = await Promise.all(fetchPagePromises);
 
