@@ -5,14 +5,14 @@ app.controller('SearchController', ['$scope', '$http', function ($scope, $http) 
   $scope.filteredResults = [];
   $scope.totalResults = 0;
   $scope.errorMessage = '';
-  $scope.exceedLimit = false; // Added flag to control the message visibility
+  $scope.exceedLimit = false;
 
   $scope.search = function() {
     $scope.loading = true;
     $scope.results = [];
     $scope.totalResults = 0;
     $scope.errorMessage = '';
-    $scope.exceedLimit = false; // Reset the flag
+    $scope.exceedLimit = false;
     const searchTerm = $scope.searchTerm;
 
     searchPage(searchTerm).then(function(results) {
@@ -20,7 +20,6 @@ app.controller('SearchController', ['$scope', '$http', function ($scope, $http) 
       $scope.totalResults = $scope.results.length;
       $scope.filterResults();
 
-      // Check for more than 3 results here
       if ($scope.totalResults > 100) {
         $scope.exceedLimit = true;
       }
@@ -49,19 +48,14 @@ app.controller('SearchController', ['$scope', '$http', function ($scope, $http) 
     return $scope.totalResults + ' Results';
   };
 
-  function searchPage(searchTerm, start = 1) {
-    const baseUrl = `/.netlify/functions/fetchData?q=${encodeURIComponent(searchTerm)}&s=${(start - 1) * 10}`;
+  function searchPage(searchTerm) {
+    const baseUrl = `/.netlify/functions/fetchData?q=${encodeURIComponent(searchTerm)}`;
     return $http.get(baseUrl)
       .then(response => {
         if (!response.data || !Array.isArray(response.data) || response.data.length === 0) {
-          return $scope.results;
+          return [];
         }
-        
-        $scope.results = $scope.results.concat(response.data);
-        $scope.totalResults = $scope.results.length;
-        $scope.filteredResults = $scope.results;
-
-        return response.data.length === 10 ? searchPage(searchTerm, start + 10) : $scope.results;
+        return response.data;
       });
   }
 }]);
