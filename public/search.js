@@ -74,8 +74,8 @@ app.controller('SearchController', ['$scope', '$http', function ($scope, $http) 
 
 };
 
-function searchPage(searchTerm, start = 1, maxPages = 10) {
-    if (start > maxPages) {
+function searchPage(searchTerm, start = 1, maxResults = 100) {
+    if (start > maxResults) {
       return Promise.resolve($scope.results);
     }
   
