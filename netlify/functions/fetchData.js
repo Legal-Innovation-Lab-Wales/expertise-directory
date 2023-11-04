@@ -3,7 +3,7 @@ const cheerio = require('cheerio');
 const NodeCache = require('node-cache');
 
 // Create a cache instance with a TTL (time to live) of 1 hour
-const cache = new NodeCache({ stdTTL: 3600 });
+const cache = new NodeCache({ stdTTL: 1 });
 
 // Export the fetchPageResults function
 exports.fetchPageResults = async function (url) {
