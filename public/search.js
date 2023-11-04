@@ -2,17 +2,18 @@ const app = angular.module('SearchApp', []);
 
 app.controller('SearchController', ['$scope', '$http', function ($scope, $http) {
   $scope.results = [];
+  $scope.pinnedResults = [];
   $scope.filteredResults = [];
   $scope.totalResults = 0;
   $scope.errorMessage = '';
-  $scope.exceedLimit = false;
+  $scope.exceedLimit = false; // Added flag to control the message visibility
 
   $scope.search = function() {
     $scope.loading = true;
     $scope.results = [];
     $scope.totalResults = 0;
     $scope.errorMessage = '';
-    $scope.exceedLimit = false;
+    $scope.exceedLimit = false; // Reset the flag
     const searchTerm = $scope.searchTerm;
 
     searchPage(searchTerm).then(function(results) {
@@ -20,7 +21,8 @@ app.controller('SearchController', ['$scope', '$http', function ($scope, $http) 
       $scope.totalResults = $scope.results.length;
       $scope.filterResults();
 
-      if ($scope.totalResults > 100) {
+      // Check for more than 3 results here
+      if ($scope.totalResults > 99) {
         $scope.exceedLimit = true;
       }
 
@@ -48,14 +50,43 @@ app.controller('SearchController', ['$scope', '$http', function ($scope, $http) 
     return $scope.totalResults + ' Results';
   };
 
-  function searchPage(searchTerm) {
-    const baseUrl = `/.netlify/functions/fetchData?q=${encodeURIComponent(searchTerm)}`;
+  $scope.togglePin = function(result) {
+    const index = $scope.pinnedResults.indexOf(result);
+    if (index === -1) {
+        $scope.pinnedResults.push(result);
+    } else {
+        $scope.pinnedResults.splice(index, 1);
+    }
+
+  $scope.isPinned = function(result) {
+      return $scope.pinnedResults.includes(result);
+  };
+  
+  $scope.showPinnedResults = true; // Initialize as visible
+
+  $scope.togglePinnedResults = function () {
+      $scope.showPinnedResults = !$scope.showPinnedResults;
+  };
+
+  $scope.togglePinnedEntry = function (entry) {
+      entry.expanded = !entry.expanded;
+  };
+
+};
+
+  function searchPage(searchTerm, start = 1) {
+    const baseUrl = `/.netlify/functions/fetchData?q=${encodeURIComponent(searchTerm)}&s=${(start - 1) * 10}`;
     return $http.get(baseUrl)
       .then(response => {
         if (!response.data || !Array.isArray(response.data) || response.data.length === 0) {
-          return [];
+          return $scope.results;
         }
-        return response.data;
+        
+        $scope.results = $scope.results.concat(response.data);
+        $scope.totalResults = $scope.results.length;
+        $scope.filteredResults = $scope.results;
+
+        return response.data.length === 10 ? searchPage(searchTerm, start + 10) : $scope.results;
       });
   }
 }]);
