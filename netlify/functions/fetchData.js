@@ -98,12 +98,13 @@ exports.handler = async function (event) {
     console.log('Total pages:', totalPages);
 
     // Use Promise.all to fetch data for multiple pages concurrently
-    const fetchPagePromises = Array.from({ length: totalPages }, (_, i) => {
-    const s = 1 + i * 10;  // Updated line
+  const fetchPagePromises = Array.from({ length: totalPages }, (_, i) => {
+    const s = 1 + i * 10;  // Update this line to increment s by 10 for each page
     const url = new URL(baseUrl);
     url.searchParams.set('s', s);
     return exports.fetchPageResults(url.toString());
-    });
+  });
+
 
 
 
