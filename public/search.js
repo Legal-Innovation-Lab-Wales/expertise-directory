@@ -17,7 +17,6 @@ app.controller('SearchController', ['$scope', 'SearchService', '$window', functi
   $scope.exceededLimit = false;
   $scope.page = 1;
   $scope.loading = false;
-  $scope.hasMoreResults = false;
 
   $scope.loadFirstResults = function() {
     $scope.page = 1;
@@ -32,14 +31,16 @@ app.controller('SearchController', ['$scope', 'SearchService', '$window', functi
       p: $scope.page
     }, function(data) {
       if (data && data.results) {
-        if (data.results.length > 10) {
-          $scope.results = data.results.slice(0, 10); // Limit to first 10 results
-          $scope.hasMoreResults = true;
-        } else {
-          $scope.results = data.results;
-        }
+        $scope.results = data.results;
         $scope.totalResults = $scope.results.length;
         $scope.filterResults();
+
+        // Check for more than 100 results here
+        if ($scope.totalResults > 100) {
+          $scope.exceededLimit = true;
+          $scope.results = $scope.results.slice(0, 100); // Limit to first 100 results
+          $scope.totalResults = 100;
+        }
       }
     }, function(error) {
       console.error("Error fetching data", error);
