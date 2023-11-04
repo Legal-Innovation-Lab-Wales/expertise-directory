@@ -2,8 +2,8 @@ const axios = require('axios');
 const cheerio = require('cheerio');
 const NodeCache = require('node-cache');
 
-// Create a cache instance with a TTL (time to live) of 30 days
-const cache = new NodeCache({ stdTTL: 30 });
+// Create a cache instance with a TTL (time to live) of 1 hour
+const cache = new NodeCache({ stdTTL: 3600 });
 
 // Export the fetchPageResults function
 exports.fetchPageResults = async function (url) {
@@ -98,15 +98,12 @@ exports.handler = async function (event) {
     console.log('Total pages:', totalPages);
 
     // Use Promise.all to fetch data for multiple pages concurrently
-  const fetchPagePromises = Array.from({ length: totalPages }, (_, i) => {
-    const s = 1 + i * 10;  // Update this line to increment s by 10 for each page
-    const url = new URL(baseUrl);
-    url.searchParams.set('s', s);
-    return exports.fetchPageResults(url.toString());
-  });
-
-
-
+    const fetchPagePromises = Array.from({ length: totalPages }, (_, i) => {
+      const s = 1 + 10 * (Math.pow(2, i) - 1);
+      const url = new URL(baseUrl);
+      url.searchParams.set('s', s);
+      return exports.fetchPageResults(url.toString());
+    });
 
     const allResults = await Promise.all(fetchPagePromises);
 
