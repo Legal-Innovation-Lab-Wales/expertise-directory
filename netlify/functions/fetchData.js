@@ -2,8 +2,8 @@ const axios = require('axios');
 const cheerio = require('cheerio');
 const NodeCache = require('node-cache');
 
-// Create a cache instance with a TTL (time to live) of 30 days
-const cache = new NodeCache({ stdTTL: 30 * 24 * 60 * 60 });
+// Create a cache instance with a TTL (time to live) of 30 days (2592000 seconds)
+const cache = new NodeCache({ stdTTL: 2592000 });
 
 // Export the fetchPageResults function
 exports.fetchPageResults = async function (url) {
@@ -54,6 +54,7 @@ exports.fetchPageResults = async function (url) {
       }).get()
     );
 
+    // Cache the results
     cache.set(url, results);
 
     return results;
@@ -101,33 +102,37 @@ exports.fetchAllResults = async function (baseUrl) {
       totalPages = parseInt(matches[2], 10);
     }
 
+    // Ensure that the maximum number of pages is 10
+    totalPages = Math.min(totalPages, 10);
+
     console.log('Total num of pages:', totalPages);  // Debug statement
 
-    // Limit the maximum number of pages and total results
-    const maxPages = 10;
-    const maxTotalResults = 100;
-    totalPages = Math.min(totalPages, maxPages);
-
-    // Fetch all pages up to the specified limit
+    // Fetch all pages
     const allPagesPromises = Array.from({ length: totalPages }, (_, i) => {
       const s = 1 + 10 * i;  // Adjusted the calculation here to match standard pagination
       const urlWithPage = `${baseUrl}&s=${s}`;
-      
+
       // Fetch results using the modified URL
       return exports.fetchPageResults(urlWithPage);
     });
 
     const allResults = (await Promise.all(allPagesPromises)).flat();
 
-    // Limit the total results to the specified maximum
-    if (allResults.length > maxTotalResults) {
-      allResults.length = maxTotalResults;
-    }
+    // Filter out results that do not match the *something.something* pattern
+    const filteredResults = allResults.filter(result => {
+      const profileUrl = result.profileUrl;
+      const regex = /\/[^\/.-]+\/[a-z0-9.-]+\.[a-z0-9.-]+\/?/i;
+      return regex.test(profileUrl);
+    });
 
-    return allResults;
+    console.log('Results returned:', filteredResults.length);  // Debug statement
+    console.log('Total expected results:', totalPages * 10);  // Debug statement
+
+    return filteredResults;
   } catch (error) {
     console.error("Error fetching all results:", error);
     throw error;  // Re-throw the error so it can be caught and handled by the calling function
   }
 };
+
 
