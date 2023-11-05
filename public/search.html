@@ -88,7 +88,7 @@
 }
 
 .table-collapse-button:hover {
-    font-color: white; /* Dark navy color on hover */
+    color: white; /* Dark navy color on hover */
 }
 
 
@@ -160,6 +160,75 @@
     color: white;
 }
 
+/* Style for the pinned results section */
+.pinned-results {
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    margin-top: 20px;
+    padding: 10px;
+}
+
+/* Style for the collapse button */
+.table-collapse-button {
+    font-size: 20px;
+    cursor: pointer;
+    transition: transform 0.3s ease;
+}
+
+.table-collapse-button.collapsed {
+    transform: rotate(90deg);
+}
+
+/* Style for the pinned results list */
+.pinned-results ul.list-group {
+    margin-top: 10px;
+    padding-left: 0;
+}
+
+/* Style for each pinned result item */
+.pinned-results ul.list-group .list-group-item {
+    border: none;
+    padding: 0;
+    margin: 0;
+    border-top: 1px solid #ccc;
+    border-radius: 0;
+}
+
+/* Style for the pinned result item content */
+.pinned-results ul.list-group .list-group-item .staff-details {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+/* Style for the pinned result item name */
+.pinned-results ul.list-group .list-group-item .staff-details h4 {
+    margin: 0;
+    font-size: 1.2em;
+}
+
+/* Style for the pinned result item pin button */
+.pinned-results ul.list-group .list-group-item .staff-details .pin-button {
+    background-color: transparent;
+    color: #007bff;
+    border: none;
+    border-radius: 50%;
+    width: 30px;
+    height: 30px;
+    font-size: 16px;
+    cursor: pointer;
+    outline: none;
+    border: 2px solid #007bff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.pinned-results ul.list-group .list-group-item .staff-details .pin-button:hover {
+    background-color: #007bff;
+    color: white;
+}
+
 
 
     </style>
@@ -186,6 +255,7 @@
     </header>
     <div class="container">
 
+        <div class="pinned-results">
         <h3 ng-click="togglePinnedResults()">
             <span>
                 Pinned ({{ pinnedResults.length }}) 
@@ -195,9 +265,6 @@
             </span>
         </h3>
         
-        
-
-
         <ul class="list-group mt-4" ng-show="showPinnedResults">
             <li ng-repeat="result in pinnedResults" class="list-group-item" ng-click="togglePinnedEntry(result)">
                 <div class="entry-header">
@@ -215,9 +282,6 @@
         <!-- Display additional details when expanded -->
         <div ng-if="result.expanded">
             <div class="staff-details" style="display: flex; align-items: center;">
-                <a href="{{result.profileUrl}}" target="_blank">
-                <img class="profile-pic" ng-src="{{result.photoUrl}}" alt="{{result.name}}" />
-                </a>
                 <div class="info" style="flex: 1;">
                     <a href="{{result.profileUrl}}" target="_blank">
                         <h4>{{result.name}}</h4>
@@ -236,7 +300,7 @@
         </div>
     </li>
 </ul>
-
+</div>
 
 
         <div class="mb-4">
@@ -264,28 +328,29 @@
           </div>
           
 
-            <ul class="list-group mt-4">
-                <li ng-repeat="result in filteredResults" class="list-group-item">
-                    <div class="staff-details" style="display: flex; justify-content: space-between;">
-                        <div class="info">
-                            <a href="{{result.profileUrl}}" target="_blank">
-                                <h4>{{result.name}}</h4>
-                            </a>
-                            <p>{{result.additionalInfo}}</p>
-                            <div ng-if="result.expertise && result.expertise.length > 0">
-                                <strong>Areas of Expertise:</strong>
-                                <ul>
-                                    <li ng-repeat="area in result.expertise">{{area}}</li>
-                                </ul>
-                            </div>
-                        </div>
-                        <img class="profile-pic" ng-src="{{result.photoUrl}}" alt="{{result.name}}" />
+          <ul class="list-group mt-4" ng-if="filteredResults.length > 0">
+            <li ng-repeat="result in filteredResults" class="list-group-item">
+                <div class="staff-details" style="display: flex; align-items: center; justify-content: space-between; width: 100%;">
+                    <a href="{{result.profileUrl}}" target="_blank">
+                        <h4>{{result.name}}</h4>
+                    </a>
                     <button ng-click="togglePin(result)" class="pin-button">
                         {{ isPinned(result) ? '✖' : '📌' }}
                     </button>
                 </div>
-                </li>
-            </ul>
+                <div class="info">
+                    <p>{{result.additionalInfo}}</p>
+                    <div ng-if="result.expertise && result.expertise.length > 0">
+                        <strong>Areas of Expertise:</strong>
+                        <ul>
+                            <li ng-repeat="area in result.expertise">{{area}}</li>
+                        </ul>
+                    </div>
+                </div>
+            </li>
+        </ul>
+        
+        
     </div>
             </li>
         </ul>
