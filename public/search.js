@@ -1,8 +1,9 @@
 const app = angular.module('SearchApp', []);
 
 app.controller('SearchController', ['$scope', '$http', function ($scope, $http) {
+  // Initialize pinnedResults with data from localStorage if available
+  $scope.pinnedResults = JSON.parse(localStorage.getItem('pinnedResults')) || [];
   $scope.results = [];
-  $scope.pinnedResults = [];
   $scope.filteredResults = [];
   $scope.totalResults = 0;
   $scope.errorMessage = '';
@@ -10,29 +11,44 @@ app.controller('SearchController', ['$scope', '$http', function ($scope, $http) 
 
   $scope.search = function () {
     $scope.loading = true;
-    $scope.filteredResults = []; // Clear the filtered results array
     $scope.results = []; // Clear the results array
     $scope.totalResults = 0;
     $scope.errorMessage = '';
     $scope.exceedLimit = false;  // Reset the flag
     const searchTerm = $scope.searchTerm;
-
+  
     const baseUrl = `/.netlify/functions/fetchData?q=${encodeURIComponent(searchTerm)}`;
     console.log('URL:', baseUrl);
-
+  
     $http.get(baseUrl)
       .then(response => {
         console.log('Response Data:', response.data);
-
+  
         if (!response.data || !Array.isArray(response.data) || response.data.length === 0) {
           $scope.errorMessage = 'No results found.';
           return;
         }
-
-        $scope.results = response.data;
+  
+        // Filter out duplicate results that are already pinned and create a mapping of pinned results
+        const pinnedResultsMap = {};
+        $scope.pinnedResults.forEach(pinnedResult => {
+          pinnedResultsMap[pinnedResult.profileUrl] = pinnedResult;
+        });
+  
+        const newResults = [];
+        response.data.forEach(newResult => {
+          if (!pinnedResultsMap[newResult.profileUrl]) {
+            newResults.push(newResult);
+          } else {
+            // If the result matches a pinned result, add the 'isPinned' property for unpinning
+            newResults.push({ ...newResult, isPinned: true });
+          }
+        });
+  
+        $scope.results = newResults;
         $scope.totalResults = $scope.results.length;
         $scope.filterResults();
-
+  
         // Check for more than 3 results here
         if ($scope.totalResults > 99) {
           $scope.exceedLimit = true;
@@ -46,6 +62,7 @@ app.controller('SearchController', ['$scope', '$http', function ($scope, $http) 
         $scope.loading = false;
       });
   };
+  
 
   $scope.filterResults = function () {
     const additionalSearchTerm = $scope.additionalSearchTerm ? $scope.additionalSearchTerm.toLowerCase() : '';
@@ -64,16 +81,23 @@ app.controller('SearchController', ['$scope', '$http', function ($scope, $http) 
   };
 
   $scope.togglePin = function (result) {
-    const index = $scope.pinnedResults.indexOf(result);
+    const index = $scope.pinnedResults.findIndex(pinnedResult => pinnedResult.profileUrl === result.profileUrl);
     if (index === -1) {
+      // The person is not in the pinned list, so add them
       $scope.pinnedResults.push(result);
+      result.isPinned = true; // Update isPinned property
     } else {
+      // The person is already in the pinned list, so remove them
       $scope.pinnedResults.splice(index, 1);
+      result.isPinned = false; // Update isPinned property
     }
+
+    // Save pinnedResults to localStorage
+    localStorage.setItem('pinnedResults', JSON.stringify($scope.pinnedResults));
   };
 
   $scope.isPinned = function (result) {
-    return $scope.pinnedResults.includes(result);
+    return result.isPinned; // Check the isPinned property
   };
 
   $scope.showPinnedResults = true;  // Initialize as visible
@@ -86,37 +110,5 @@ app.controller('SearchController', ['$scope', '$http', function ($scope, $http) 
     entry.expanded = !entry.expanded;
   };
 
-  function searchPage(searchTerm, page = 1, maxPages = 10, baseUrl) {
-    if (page > maxPages) {
-      return Promise.resolve($scope.results);
-    }
-  
-    const urlWithPage = `${baseUrl}&s=${page * 10 + 1}`; // Adjust the URL with the correct 's' parameter
-    console.log('Page:', page, 'URL:', urlWithPage); // Log the page number and URL
-  
-    return $http.get(urlWithPage)
-      .then(response => {
-        console.log('Response Data:', response.data); // Log the response data
-  
-        if (!response.data || !Array.isArray(response.data) || response.data.length === 0) {
-          return $scope.results;
-        }
-  
-        const newResults = response.data.filter(newResult =>
-          !$scope.results.some(existingResult => existingResult.profileUrl === newResult.profileUrl)
-        );
-  
-        $scope.results = $scope.results.concat(newResults);
-        $scope.totalResults = $scope.results.length;
-        $scope.filteredResults = $scope.results;
-  
-        if (response.data.length < 10) {
-          return $scope.results;
-        } else {
-          return searchPage(searchTerm, page + 1, maxPages, baseUrl); // Pass baseUrl to the recursive function
-        }
-      });
-  }
-  
-  
 }]);
+
