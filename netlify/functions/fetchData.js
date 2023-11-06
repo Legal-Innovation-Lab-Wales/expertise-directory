@@ -64,7 +64,7 @@ exports.fetchPageResults = async function (url) {
 
 // Fetches results from a single page
 exports.handler = async function (event) {
-  const searchTerm = event.queryStringParameters.q;
+  const searchTerm = event.queryStringParameters.q.toLowerCase();
   const baseURL = `https://www.swansea.ac.uk/search/?c=www-en-meta&q=${encodeURIComponent(searchTerm)}&f%5Bpage+type%5D=staff+profile`;
 
   try {
