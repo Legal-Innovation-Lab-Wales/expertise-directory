@@ -18,11 +18,9 @@ app.controller('SearchController', ['$scope', '$http', function ($scope, $http) 
     const searchTerm = $scope.searchTerm;
   
     const baseUrl = `/.netlify/functions/fetchData?q=${encodeURIComponent(searchTerm)}`;
-    console.log('URL:', baseUrl);
   
     $http.get(baseUrl)
       .then(response => {
-        console.log('Response Data:', response.data);
   
         if (!response.data || !Array.isArray(response.data) || response.data.length === 0) {
           $scope.errorMessage = 'No results found.';
