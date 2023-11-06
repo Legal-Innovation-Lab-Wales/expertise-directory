@@ -62,12 +62,15 @@ app.controller('SearchController', ['$scope', '$http', function ($scope, $http) 
         // Check if the error status is 504, which indicates a gateway timeout
         if (error.status === 502) {
           $scope.errorMessage = 'The request timed out. Please narrow your search.';
-        } elseif (error.status === 504) {
+        } else if (error.status === 504) {
           $scope.errorMessage = 'The request timed out. Please narrow your search.';
         } else {
           // For all other types of errors, display a generic error message
           $scope.errorMessage = 'Failed to fetch data. Please try again.';
         }
+
+
+        
       })
       .finally(() => {
         $scope.loading = false;
