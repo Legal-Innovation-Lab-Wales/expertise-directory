@@ -1,0 +1,319 @@
+.custom-header-container {
+    background-color: #242f60;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px;
+    font-family: "Open Sans", sans-serif;
+}
+.custom-logos {
+    display: flex;
+    align-items: center;
+}
+.custom-logo {
+    max-width: 200px;
+    max-height: 200px;
+    margin-right: 20px;
+}
+.swansea-logo,
+.lilw-logo {
+    max-width: 100%;
+    height: auto;
+}
+.custom-header-text {
+    font-size: 2em;
+    color: white;
+}
+.spinner {
+    border: 8px solid #f3f3f3;
+    border-top: 8px solid #3498db;
+    border-radius: 50%;
+    width: 60px;
+    height: 60px;
+    animation: spin 2s linear infinite;
+}
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+.loading-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 200px;
+}
+.profile-pic {
+    border-radius: 50%;
+    width: 80px;
+    height: 80px;
+    margin-right: 10px;
+}
+.staff-details {
+    display: flex;
+    align-items: center;
+}
+.info h4 {
+    margin: 0;
+    font-size: 1.2em;
+}
+
+/* Add this CSS to your stylesheet or in a <style> tag in the HTML */
+
+.table-collapse-button {
+font-size: 8px; /* Set your desired font size */
+cursor: pointer;
+outline: none;
+margin-left: 10px; /* Add spacing between the button and the number */
+vertical-align: middle; /* Align the button vertically */
+display: inline-block; /* Keep it inline with text */
+text-align: center; /* Center the content horizontally */
+line-height: 30px; /* Vertically align content within the button */
+transition: font-color 0.3s ease, color 0.3s ease;
+}
+
+.table-collapse-button:hover {
+color: white; /* Dark navy color on hover */
+}
+
+
+
+
+.bold {
+font-weight: bold;
+font-size: 12px; /* Set your desired font size for bold text */
+}
+
+.entry-header {
+display: flex;
+justify-content: space-between;
+align-items: center;
+}
+
+.expand-button {
+background-color: transparent;
+border: none;
+width: 30px; /* Set your desired width */
+height: 30px; /* Set your desired height */
+font-size: 16px; /* Set your desired font size */
+cursor: pointer;
+outline: none;
+display: flex;
+justify-content: center;
+align-items: center;
+margin-right: 10px; /* Add spacing between the button and the name */
+}
+
+.expand-button:hover {
+background-color: #007bff; /* Change color on hover */
+color: white;
+border-radius: 50%; /* Make it circular on hover */
+}
+
+/* Add this CSS to your stylesheet or in a <style> tag in the HTML */
+
+.expand-collapse-text {
+font-size: 12px; /* Set your desired font size for small text */
+cursor: pointer;
+text-decoration: underline; /* Add underline for better click indication */
+}
+
+
+.pin-unpin-button {
+display: flex;
+align-items: center;
+}
+
+.pin-button {
+background-color: transparent;
+color: #007bff; /* Set your desired pin color */
+border: none;
+border-radius: 50%; /* Make it circular */
+width: 30px; /* Set your desired width */
+height: 30px; /* Set your desired height */
+font-size: 16px; /* Set your desired font size */
+cursor: pointer;
+outline: none;
+border: 2px solid #007bff; /* Add a border */
+display: flex;
+justify-content: center;
+align-items: center;
+}
+
+.pin-button:hover {
+background-color: #007bff; /* Change color on hover */
+color: white;
+}
+
+/* Add these styles for the sidebar */
+.pinned-sidebar {
+    position: fixed;
+    left: -50%;
+    top: 0;
+    height: 100%;
+    width: 50%;
+    background-color: #242f60;
+    overflow-x: hidden;
+    transition: left 0.5s ease-in-out;
+    padding-top: 60px;
+    box-shadow: 2px 0px 5px rgba(0,0,0,0.2);
+    z-index: 99;
+}
+
+.pinned-sidebar a {
+    padding: 8px 8px 8px 16px;
+    text-decoration: none;
+    font-size: 20px;
+    color: white;
+    display: block;
+    transition: 0.3s;
+}
+
+.pinned-sidebar a:hover {
+    color: #f1f1f1;
+}
+
+.open-btn {
+    position: fixed;
+    left: 0;
+    top: 20px;
+    font-size: 20px;
+    padding: 10px 15px;
+    background: #242f60;
+    color: white;
+    border: none;
+    cursor: pointer;
+}
+
+.open-btn:hover {
+    background-color: #575757;
+}
+
+.pinned-sidebar.open {
+    left: 0;
+}
+
+.toggle-sidebar-btn {
+position: fixed;
+left: 0;
+top: 50%;
+transform: translateY(-50%);
+background-color: #242f60;
+color: white;
+border: none;
+padding: 10px;
+cursor: pointer;
+transition: left 0.5s ease-in-out, transform 0.5s ease-in-out;
+z-index: 1; /* Ensure the button is above the sidebar */
+}
+
+.toggle-sidebar-container {
+position: fixed;
+left: 0;
+top: 50%;
+transform: translateY(-50%);
+background-color: #242f60;
+color: white;
+border: none;
+padding: 10px;
+cursor: pointer;
+transition: left 0.5s ease-in-out, transform 0.5s ease-in-out;
+z-index: 1; /* Ensure the button is above the sidebar */
+display: flex; /* Add display flex to align items */
+align-items: center; /* Vertically center the content */
+}
+
+.arrow-container {
+display: flex;
+align-items: center;
+margin-right: 10px; /* Add spacing between the arrow and the count */
+}
+
+.arrow {
+font-size: 16px;
+cursor: pointer;
+outline: none;
+margin-right: 5px; /* Adjust margin as needed */
+}
+
+.pin {
+font-size: 16px; /* Set your desired font size */
+margin-right: 5px; /* Adjust margin as needed */
+}
+
+.pin-count {
+font-size: 12px; /* Set your desired font size */
+}
+
+
+.pinned-sidebar a {
+    /* Style the links in the pinned results */
+    color: #000080; /* Dark navy text */
+    transition: 0.3s;
+}
+
+.pinned-sidebar a:hover {
+    color: #0000FF; /* Light navy on hover */
+}
+
+/* ... (your existing styles) ... */
+
+p.pinned-info.ng-binding{
+    font-size: smaller;
+}
+
+.pinned-info{
+    font-size:smaller;
+}
+
+/* Style the expand/collapse button */
+.expand-collapse-button {
+background-color: transparent;
+color: #007bff; /* Set your desired color */
+border: none;
+border-radius: 50%; /* Make it circular */
+width: 30px; /* Set your desired width */
+height: 30px; /* Set your desired height */
+font-size: 16px; /* Set your desired font size */
+cursor: pointer;
+outline: none;
+display: flex;
+justify-content: center;
+align-items: center;
+margin-right: 10px; /* Add spacing between the button and the name */
+transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+/* Change button color on hover */
+.expand-collapse-button:hover {
+background-color: #007bff; /* Change color on hover */
+color: white;
+}
+
+/* Style the name to look like a clickable link */
+h4.clickable {
+cursor: pointer;
+font-size: medium;
+}
+
+.clickable {
+display: flex;
+align-items: center;
+}
+
+.clickable > span {
+flex-grow: 1;
+}
+
+.list-group-item {
+margin: 0 auto; /* Center the list item horizontally */
+border-radius: 10px; /* Add rounded corners */
+margin-bottom: 4px;
+width:100%;
+}
+
+.pinned-result {
+width: 90%;
+margin: 0 auto; /* Center the list item horizontally */
+border-radius: 5px; /* Add rounded corners */
+margin-bottom: 4px;
+}
