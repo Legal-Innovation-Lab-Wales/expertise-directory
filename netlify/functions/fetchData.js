@@ -40,9 +40,14 @@ async function fetchProfileData(profileUrl) {
     staffProfileCache.set(profileUrl, profileInfo);
     return profileInfo;
   } catch (error) {
+    console.error(`Failed to fetch details for ${profileUrl}`, error);
     return { expertise, photoUrl, photoAlt };  // Empty data on error
   }
 }
+
+
+
+
 
 // Helper function to get full photo URL
 function getFullPhotoUrl(relativeUrl) {
@@ -54,6 +59,8 @@ function getFullPhotoUrl(relativeUrl) {
 
 // Fetches results from a single page
 exports.fetchPageResults = async function (url) {
+  
+
   const cachedData = urlCache.get(url);
   if (cachedData) {
     return cachedData;
@@ -85,10 +92,13 @@ exports.fetchPageResults = async function (url) {
     // Cache the results with the URL as the key
     urlCache.set(url, validResults);
     return validResults;
+
   } catch (error) {
+    console.error(`Failed to fetch data from ${url}`, error);
     return [];
   }
 };
+
 
 // Handler function to fetch all results based on search term
 exports.handler = async function (event) {
@@ -97,11 +107,13 @@ exports.handler = async function (event) {
 
   try {
     const allResults = await exports.fetchAllResults(baseURL);
+
     return {
       statusCode: 200,
       body: JSON.stringify(allResults),
     };
   } catch (error) {
+    console.error('Error fetching page results:', error);
     return {
       statusCode: 500,
       body: JSON.stringify({ error: 'Failed fetching data' }),
@@ -133,6 +145,8 @@ exports.fetchAllResults = async function (baseUrl) {
 
       const pageResults = await exports.fetchPageResults(urlWithPage);
       totalResults = [...totalResults, ...pageResults];
+
+
     }
 
     // Check if theoretical max is 100 and actual results are less than 100, then fetch additional data
@@ -145,6 +159,8 @@ exports.fetchAllResults = async function (baseUrl) {
 
     return totalResults;
   } catch (error) {
+    console.error("Error fetching all results:", error);
     throw error;
   }
 };
+
