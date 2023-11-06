@@ -48,7 +48,7 @@ app.controller('SearchController', ['$scope', '$http', function ($scope, $http) 
       if (error.status === 504) {
         $scope.errorMessage = 'The request timed out. Please try narrowing your search term..';
       } else if (error.status === 400) {
-        $scope.errorMessage = 'The request could not be processed. Please try a different search term.';
+        $scope.exceedLimit = true;
       } else {
         // For all other types of errors, display a generic error message
         $scope.errorMessage = 'Failed to fetch data. Please try again.';
