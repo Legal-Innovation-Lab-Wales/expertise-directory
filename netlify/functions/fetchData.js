@@ -153,7 +153,7 @@ exports.handler = async function (event) {
 
 // Fetches all results across multiple pages
 exports.fetchAllResults = async function (baseUrl) {
-  console.time('Total fetchAllResults execution time'); // Start timer
+  // console.time('Total fetchAllResults execution time'); // Start timer
 
   try {
     let totalResults = [];
@@ -198,7 +198,7 @@ exports.fetchAllResults = async function (baseUrl) {
     await fetchInBatches(urls, 10); // Fetch in batches of 10
 
     // console.log('Final Results returned:', totalResults.length);
-    console.timeEnd('Total fetchAllResults execution time'); // End timer
+    // console.timeEnd('Total fetchAllResults execution time'); // End timer
 
     return { totalResults, resultExceedsThreshold };
   } catch (error) {
@@ -206,8 +206,3 @@ exports.fetchAllResults = async function (baseUrl) {
     throw error;
   }
 };
-
-
-
-
-
