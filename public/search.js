@@ -12,15 +12,19 @@ app.controller('SearchController', ['$scope', '$http', function ($scope, $http) 
   $scope.search = function () {
     $scope.loading = true;
     $scope.results = []; // Clear the results array
+    $scope.filteredResults = [];
     $scope.totalResults = 0;
     $scope.errorMessage = '';
     $scope.exceedLimit = false;  // Reset the flag
+    
     const searchTerm = $scope.searchTerm;
   
     const baseUrl = `/.netlify/functions/fetchData?q=${encodeURIComponent(searchTerm)}`;
+    console.log('URL:', baseUrl);
   
     $http.get(baseUrl)
       .then(response => {
+        console.log('Response Data:', response.data);
   
         if (!response.data || !Array.isArray(response.data) || response.data.length === 0) {
           $scope.errorMessage = 'No results found.';
@@ -60,6 +64,7 @@ app.controller('SearchController', ['$scope', '$http', function ($scope, $http) 
         $scope.loading = false;
       });
   };
+  
   
 
   $scope.filterResults = function () {
@@ -127,5 +132,8 @@ app.controller('SearchController', ['$scope', '$http', function ($scope, $http) 
           );
       });
   };
+  
+  
+
 }]);
 
