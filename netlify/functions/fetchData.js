@@ -14,15 +14,11 @@ async function fetchProfileData(profileUrl) {
 
   // Verify the URL pattern before proceeding
   if (profileUrl.match(/-staff\/$/)) {
-    console.log(`Invalid profile URL pattern: ${profileUrl}`);
-    return { expertise, photoUrl, photoAlt };  // Return empty data for invalid URL pattern
+    return { expertise, photoUrl, photoAlt };
   }
-
-  console.log(`Fetching data for profile URL: ${profileUrl}`);
 
   const cachedProfileData = staffProfileCache.get(profileUrl);
   if (cachedProfileData) {
-    console.log(`Profile data for ${profileUrl} found in cache.`);
     return cachedProfileData;
   }
 
@@ -44,8 +40,7 @@ async function fetchProfileData(profileUrl) {
     staffProfileCache.set(profileUrl, profileInfo);
     return profileInfo;
   } catch (error) {
-    console.error(`Failed to fetch details for ${profileUrl}`, error);
-    return { expertise, photoUrl, photoAlt };  // Empty data on error
+    return { expertise, photoUrl, photoAlt };
   }
 }
 
@@ -59,16 +54,12 @@ function getFullPhotoUrl(relativeUrl) {
 
 // Fetches results from a single page
 exports.fetchPageResults = async function (url) {
-  
   const cachedData = urlCache.get(url);
   if (cachedData) {
-    console.log('Data found in cache.');
     return cachedData;
   }
-  
-  console.log(`Fetching data from URL: ${url}`);
 
- try {
+  try {
     const { data } = await axios.get(url);
     const $ = cheerio.load(data);
 
@@ -78,7 +69,6 @@ exports.fetchPageResults = async function (url) {
       const additionalInfo = $(element).find('.site-search-results-list-item-additional-information').text().trim();
 
       if (profileUrl.endsWith('-staff/')) {
-        console.log(`Invalid profile URL pattern: ${profileUrl}`);
         return null;
       }
 
@@ -88,18 +78,16 @@ exports.fetchPageResults = async function (url) {
 
     const results = await Promise.all(resultPromises);
 
-    const validResults = results.filter(result => result !== null);  // Filter out null values
+    const validResults = results.filter(result => result !== null);
 
     // Cache the results with the URL as the key
     urlCache.set(url, validResults);
     return validResults;
 
   } catch (error) {
-    console.error(`Failed to fetch data from ${url}`, error);
     return [];
   }
 };
-
 
 // Handler function to fetch all results based on search term
 exports.handler = async function (event) {
@@ -108,14 +96,11 @@ exports.handler = async function (event) {
 
   try {
     const allResults = await exports.fetchAllResults(baseURL);
-    console.log('Total records:', allResults.length);
-
     return {
       statusCode: 200,
       body: JSON.stringify(allResults),
     };
   } catch (error) {
-    console.error('Error fetching page results:', error);
     return {
       statusCode: 500,
       body: JSON.stringify({ error: 'Failed fetching data' }),
@@ -124,10 +109,7 @@ exports.handler = async function (event) {
 };
 
 // Fetches all results across multiple pages
-// Fetches all results across multiple pages
 exports.fetchAllResults = async function (baseUrl) {
-  console.time('Total fetchAllResults execution time'); // Start timer
-
   try {
     let totalResults = [];
 
@@ -140,40 +122,26 @@ exports.fetchAllResults = async function (baseUrl) {
     const totalPages = parseInt($('ul.site-search-results-pagination li.site-search-results-pagination-item')
       .last().prev().text().trim(), 10);
 
-    // Calculate theoretical maximum number of results
-    const theoreticalMaxResults = totalPages * 10;
-
-    console.log('Total pages:', totalPages);
-    console.log('Theoretical maximum results:', theoreticalMaxResults);
-
     // Prepare an array of URLs for all pages
     const urls = Array.from({ length: totalPages }, (_, i) => `${baseUrl}&s=${1 + i * 10}`);
 
-    // Fetch data from all pages in parallel using Promise.all
-    const pagesResultsPromises = urls.map(url => exports.fetchPageResults(url));
-    const pagesResults = await Promise.all(pagesResultsPromises);
+    // Function to fetch data in batches
+    const fetchInBatches = async (urls, batchSize) => {
+      const batches = Array(Math.ceil(urls.length / batchSize)).fill().map((_, i) => {
+        return urls.slice(i * batchSize, (i * batchSize) + batchSize);
+      });
 
-    // Flatten the results
-    totalResults = pagesResults.flat();
+      for (const batch of batches) {
+        const batchResultsPromises = batch.map(url => exports.fetchPageResults(url));
+        const batchResults = await Promise.all(batchResultsPromises);
+        totalResults.push(...batchResults.flat());
+      }
+    };
 
-    // Check if theoretical max is 100 and actual results are less than 100, then fetch additional data
-    if (theoreticalMaxResults === 100 && totalResults.length < 100) {
-      console.log('Fetching additional results to reach 100 profiles...');
-      const s = 101;
-      const urlWithAdditionalPage = `${baseUrl}&s=${s}`;
-      const additionalPageResults = await exports.fetchPageResults(urlWithAdditionalPage);
-      totalResults = [...totalResults, ...additionalPageResults];
-    }
-
-    console.log('Final Results returned:', totalResults.length);
-    console.timeEnd('Total fetchAllResults execution time'); // End timer
+    await fetchInBatches(urls, 10);
 
     return totalResults;
   } catch (error) {
-    console.error("Error fetching all results:", error);
     throw error;
   }
 };
-
-
-
