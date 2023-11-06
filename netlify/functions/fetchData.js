@@ -103,10 +103,7 @@ exports.fetchPageResults = async function (url) {
 };
 
 
-// Handler function to fetch all results based on search term
-// ...
-
-// Handler function to fetch all results based on search term
+// Fetches results from a single page
 exports.handler = async function (event) {
   const searchTerm = event.queryStringParameters.q;
   const baseURL = `https://www.swansea.ac.uk/search/?c=www-en-meta&q=${encodeURIComponent(searchTerm)}&f%5Bpage+type%5D=staff+profile`;
@@ -128,19 +125,25 @@ exports.handler = async function (event) {
     if (resultExceedsThreshold) {
       // Send an error response indicating that there are too many results
       return {
-        statusCode: 400, // You can choose an appropriate status code
+        statusCode: 400,
         body: JSON.stringify({ error: 'Too many results. Please refine your search criteria.' }),
       };
     }
 
     // Proceed with fetching results if the threshold is not exceeded
     const allResults = await exports.fetchAllResults(baseURL);
-    // console.log('Total records:', allResults.length);
 
-    return {
+    // Cache the response for 30 days (2592000 seconds)
+    const response = {
       statusCode: 200,
       body: JSON.stringify(allResults),
+      headers: {
+        'Cache-Control': 'public, max-age=2592000', // Cache response for 30 days
+        'Content-Type': 'application/json',
+      },
     };
+
+    return response;
   } catch (error) {
     console.error('Error fetching page results:', error);
     return {
@@ -206,3 +209,8 @@ exports.fetchAllResults = async function (baseUrl) {
     throw error;
   }
 };
+
+
+
+
+
