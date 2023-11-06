@@ -19,7 +19,7 @@ app.controller('SearchController', ['$scope', '$http', function ($scope, $http) 
     
     const searchTerm = $scope.searchTerm;
   
-    const baseUrl = `http://localhost:5000/mockApi?q=${encodeURIComponent(searchTerm)}`;
+    const baseUrl = `/.netlify/functions/fetchData?q=${encodeURIComponent(searchTerm)}`;
     console.log('URL:', baseUrl);
   
     $http.get(baseUrl)
