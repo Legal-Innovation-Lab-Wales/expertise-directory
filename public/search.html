@@ -444,8 +444,13 @@ h4.clickable {
             <div class="spinner"></div>
         </div>
  
+<!-- Add this block to display an error message when it's set -->
+<div ng-if="errorMessage" class="alert alert-danger mt-4">
+    <span>{{ errorMessage }}</span>
+  </div>
+
         <div ng-if="exceedLimit" class="alert alert-info mt-4">
-            Too many results found. Please consider refining your search or use the
+            Too many results found. Please refine your search or use the
             <a ng-href="https://www.swansea.ac.uk/search/?c=www-en-meta&q={{searchTerm}}&f[page%20type]=staff%20profile" target="_blank">
               University search function
             </a> for more results.
