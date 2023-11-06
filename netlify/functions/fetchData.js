@@ -2,82 +2,125 @@ const axios = require('axios');
 const cheerio = require('cheerio');
 const NodeCache = require('node-cache');
 
-// Create a cache instance with a TTL (time to live) of 30 days (2592000 seconds)
-const cache = new NodeCache({ stdTTL: 2592000 });
+// Create caches with TTL values
+const staffProfileCache = new NodeCache({ stdTTL: 15552000 });
+const urlCache = new NodeCache({ stdTTL: 2592000 });
 
-// Export the fetchPageResults function
+// Helper function to fetch profile data
+async function fetchProfileData(profileUrl) {
+  let expertise = [];
+  let photoUrl = '';
+  let photoAlt = '';
+
+  // Verify the URL pattern before proceeding
+  if (profileUrl.match(/-staff\/$/)) {
+    console.log(`Invalid profile URL pattern: ${profileUrl}`);
+    return { expertise, photoUrl, photoAlt };  // Return empty data for invalid URL pattern
+  }
+
+  console.log(`Fetching data for profile URL: ${profileUrl}`);
+
+  const cachedProfileData = staffProfileCache.get(profileUrl);
+  if (cachedProfileData) {
+    console.log(`Profile data for ${profileUrl} found in cache.`);
+    return cachedProfileData;
+  }
+
+  try {
+    const { data: profileData } = await axios.get(profileUrl);
+    const profile$ = cheerio.load(profileData);
+
+    profile$('.staff-profile-areas-of-expertise ul li').each((i, el) => {
+      expertise.push(profile$(el).text());
+    });
+
+    photoUrl = profile$('.staff-profile-overview-profile-picture img').attr('src');
+    photoAlt = profile$('.staff-profile-overview-profile-picture img').attr('alt');
+
+    photoUrl = getFullPhotoUrl(photoUrl);
+
+    // Cache the profile data with a TTL of 6 months
+    const profileInfo = { expertise, photoUrl, photoAlt };
+    staffProfileCache.set(profileUrl, profileInfo);
+    return profileInfo;
+  } catch (error) {
+    console.error(`Failed to fetch details for ${profileUrl}`, error);
+    return { expertise, photoUrl, photoAlt };  // Empty data on error
+  }
+}
+
+
+
+
+
+// Helper function to get full photo URL
+function getFullPhotoUrl(relativeUrl) {
+  if (relativeUrl && !relativeUrl.startsWith('http')) {
+    return `https://www.swansea.ac.uk${relativeUrl}`;
+  }
+  return relativeUrl;
+}
+
+// Fetches results from a single page
 exports.fetchPageResults = async function (url) {
-  console.log(`Fetching data from URL: ${url}`);
+  
 
-  // Check if the data is already cached
-  const cachedData = cache.get(url);
+  const cachedData = urlCache.get(url);
   if (cachedData) {
     console.log('Data found in cache.');
     return cachedData;
   }
+  
+  console.log(`Fetching data from URL: ${url}`);
 
   try {
     const { data } = await axios.get(url);
     const $ = cheerio.load(data);
 
-    const results = await Promise.all(
-      $('ul.site-search-results-list li.site-search-results-list-item').map(async (index, element) => {
-        const name = $(element).find('h3 a').text().trim();
-        const profileUrl = $(element).find('h3 a').attr('href');
-        const additionalInfo = $(element).find('.site-search-results-list-item-additional-information').text().trim();
+    const resultPromises = $('ul.site-search-results-list li.site-search-results-list-item').map(async (index, element) => {
+      const name = $(element).find('h3 a').text().trim();
+      const profileUrl = $(element).find('h3 a').attr('href');
+      const additionalInfo = $(element).find('.site-search-results-list-item-additional-information').text().trim();
 
-        let expertise = [];
-        let photoUrl = '';
-        let photoAlt = '';
+      // Verify the URL pattern before proceeding
+      const urlPattern = /-staff\/$/;
+      if (urlPattern.test(profileUrl)) {
+        console.log(`Invalid profile URL pattern: ${profileUrl}`);
+        return null;  // Return null for invalid URL pattern
+      }
 
-        try {
-          console.log(`Fetching data for profile URL: ${profileUrl}`);
-          const { data: profileData } = await axios.get(profileUrl);
-          const profile$ = cheerio.load(profileData);
+      const { expertise, photoUrl, photoAlt } = await fetchProfileData(profileUrl);
+      return { name, profileUrl, additionalInfo, expertise, photoUrl, photoAlt };
+    }).get();
 
-          profile$('.staff-profile-areas-of-expertise ul li').each((i, el) => {
-            expertise.push(profile$(el).text());
-          });
+    const results = await Promise.all(resultPromises);
 
-          photoUrl = profile$('.staff-profile-overview-profile-picture img').attr('src');
-          photoAlt = profile$('.staff-profile-overview-profile-picture img').attr('alt');
+    const validResults = results.filter(result => result !== null);  // Filter out null values
 
-          // Prepend the domain if the URL is a relative path
-          if (photoUrl && !photoUrl.startsWith('http')) {
-            photoUrl = `https://www.swansea.ac.uk${photoUrl}`;
-          }
-        } catch (error) {
-          console.error(`Failed to fetch details for ${profileUrl}`, error);
-        }
+    // Cache the results with the URL as the key
+    urlCache.set(url, validResults);
+    return validResults;
 
-        return { name, profileUrl, additionalInfo, expertise, photoUrl, photoAlt };
-      }).get()
-    );
-
-    // Cache the results
-    cache.set(url, results);
-
-    return results;
   } catch (error) {
     console.error(`Failed to fetch data from ${url}`, error);
     return [];
   }
 };
 
+
+// Handler function to fetch all results based on search term
 exports.handler = async function (event) {
   const searchTerm = event.queryStringParameters.q;
   const baseURL = `https://www.swansea.ac.uk/search/?c=www-en-meta&q=${encodeURIComponent(searchTerm)}&f%5Bpage+type%5D=staff+profile`;
-  console.log('Total records check');
+
   try {
-    // Call fetchAllResults to get all results across pages
     const allResults = await exports.fetchAllResults(baseURL);
-    console.log('Total records:', allResults.length);  // Debug statement to log total records
+    console.log('Total records:', allResults.length);
 
     return {
       statusCode: 200,
       body: JSON.stringify(allResults),
     };
-
   } catch (error) {
     console.error('Error fetching page results:', error);
     return {
@@ -87,52 +130,51 @@ exports.handler = async function (event) {
   }
 };
 
+// Fetches all results across multiple pages
 exports.fetchAllResults = async function (baseUrl) {
   try {
-    // Fetch the first page to get the total number of pages
+    let totalResults = [];
+
+    // Fetch the first page to determine the total number of pages
     const firstPageUrl = `${baseUrl}&s=1`;
     const { data: firstPageData } = await axios.get(firstPageUrl);
+
+    // Extract total number of pages from pagination div
     const $ = cheerio.load(firstPageData);
+    const totalPages = parseInt($('ul.site-search-results-pagination li.site-search-results-pagination-item')
+      .last().prev().text().trim(), 10);
 
-    // Extract total pages information from pagination
-    let totalPages = 1;
-    const pageCountText = $('span.sr-only').text();
-    const matches = pageCountText.match(/Page (\d+) of (\d+)/);
-    if (matches) {
-      totalPages = parseInt(matches[2], 10);
-    }
+    // Calculate theoretical maximum number of results
+    const theoreticalMaxResults = totalPages * 10;
 
-    // Ensure that the maximum number of pages is 10
-    totalPages = Math.min(totalPages, 10);
+    console.log('Total pages:', totalPages);
+    console.log('Theoretical maximum results:', theoreticalMaxResults);
 
-    console.log('Total num of pages:', totalPages);  // Debug statement
-
-    // Fetch all pages
-    const allPagesPromises = Array.from({ length: totalPages }, (_, i) => {
-      const s = 1 + 10 * i;  // Adjusted the calculation here to match standard pagination
+    // Fetch data from all pages
+    for (let currentPage = 1; currentPage <= totalPages; currentPage++) {
+      const s = 1 + 10 * (currentPage - 1);
       const urlWithPage = `${baseUrl}&s=${s}`;
 
-      // Fetch results using the modified URL
-      return exports.fetchPageResults(urlWithPage);
-    });
+      const pageResults = await exports.fetchPageResults(urlWithPage);
+      totalResults = [...totalResults, ...pageResults];
 
-    const allResults = (await Promise.all(allPagesPromises)).flat();
+      console.log(`Page ${currentPage} - Total Results: ${totalResults.length}`);
+    }
 
-    // Filter out results that do not match the *something.something* pattern
-    const filteredResults = allResults.filter(result => {
-      const profileUrl = result.profileUrl;
-      const regex = /\/[^\/.-]+\/[a-z0-9.-]+\.[a-z0-9.-]+\/?/i;
-      return regex.test(profileUrl);
-    });
+    // Check if theoretical max is 100 and actual results are less than 100, then fetch additional data
+    if (theoreticalMaxResults === 100 && totalResults.length < 100) {
+      console.log('Fetching additional results to reach 100 profiles...');
+      const s = 101;
+      const urlWithAdditionalPage = `${baseUrl}&s=${s}`;
+      const additionalPageResults = await exports.fetchPageResults(urlWithAdditionalPage);
+      totalResults = [...totalResults, ...additionalPageResults];
+    }
 
-    console.log('Results returned:', filteredResults.length);  // Debug statement
-    console.log('Total expected results:', totalPages * 10);  // Debug statement
-
-    return filteredResults;
+    console.log('Final Results returned:', totalResults.length);
+    return totalResults;
   } catch (error) {
     console.error("Error fetching all results:", error);
-    throw error;  // Re-throw the error so it can be caught and handled by the calling function
+    throw error;
   }
 };
-
 
