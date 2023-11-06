@@ -79,22 +79,28 @@ app.controller('SearchController', ['$scope', '$http', function ($scope, $http) 
     }
     return $scope.totalResults + ' Results';
   };
-
   $scope.togglePin = function (result) {
     const index = $scope.pinnedResults.findIndex(pinnedResult => pinnedResult.profileUrl === result.profileUrl);
     if (index === -1) {
-      // The person is not in the pinned list, so add them
-      $scope.pinnedResults.push(result);
-      result.isPinned = true; // Update isPinned property
+        // The person is not in the pinned list, so add them
+        $scope.pinnedResults.push(result);
+        result.isPinned = true; // Update isPinned property
     } else {
-      // The person is already in the pinned list, so remove them
-      $scope.pinnedResults.splice(index, 1);
-      result.isPinned = false; // Update isPinned property
+        // The person is already in the pinned list, so remove them
+        $scope.pinnedResults.splice(index, 1);
+        result.isPinned = false; // Update isPinned property
+
+        // Remove the item from filteredPinnedResults as well
+        const filteredIndex = $scope.filteredPinnedResults.findIndex(filteredResult => filteredResult.profileUrl === result.profileUrl);
+        if (filteredIndex !== -1) {
+            $scope.filteredPinnedResults.splice(filteredIndex, 1);
+        }
     }
 
     // Save pinnedResults to localStorage
     localStorage.setItem('pinnedResults', JSON.stringify($scope.pinnedResults));
-  };
+};
+
 
   $scope.isPinned = function (result) {
     return result.isPinned; // Check the isPinned property
@@ -110,5 +116,18 @@ app.controller('SearchController', ['$scope', '$http', function ($scope, $http) 
     entry.expanded = !entry.expanded;
   };
 
+  $scope.pinnedFilter = ''; // Initialize the filter input value
+
+  $scope.filterPinnedResults = function () {
+      // Use the filter input value to filter the pinned results
+      $scope.filteredPinnedResults = $scope.pinnedResults.filter(function (result) {
+          const filterText = $scope.pinnedFilter.toLowerCase();
+          return (
+              result.name.toLowerCase().includes(filterText) ||
+              (result.additionalInfo && result.additionalInfo.toLowerCase().includes(filterText)) ||
+              (result.expertise && result.expertise.some(area => area.toLowerCase().includes(filterText)))
+          );
+      });
+  };
 }]);
 
