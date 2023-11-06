@@ -21,56 +21,60 @@ app.controller('SearchController', ['$scope', '$http', function ($scope, $http) 
     const searchTerm = $scope.searchTerm;
   
     const baseUrl = `/.netlify/functions/fetchData?q=${encodeURIComponent(searchTerm)}`;
-    console.log('URL:', baseUrl);
+    // console.log('URL:', baseUrl);
   
     $http.get(baseUrl)
-      .then(response => {
-        console.log('Response Data:', response.data);
-  
-        if (!response.data || !Array.isArray(response.data) || response.data.length === 0) {
-          $scope.errorMessage = 'No results found.';
-          return;
-        }
-  
-        // Filter out duplicate results that are already pinned and create a mapping of pinned results
-        const pinnedResultsMap = {};
-        $scope.pinnedResults.forEach(pinnedResult => {
-          pinnedResultsMap[pinnedResult.profileUrl] = pinnedResult;
-        });
-  
-        const newResults = [];
-        response.data.forEach(newResult => {
-          if (!pinnedResultsMap[newResult.profileUrl]) {
-            newResults.push(newResult);
-          } else {
-            // If the result matches a pinned result, add the 'isPinned' property for unpinning
-            newResults.push({ ...newResult, isPinned: true });
-          }
-        });
-  
-        $scope.results = newResults;
-        $scope.totalResults = $scope.results.length;
-        $scope.filterResults();
-  
-        // Check for more than 3 results here
-        if ($scope.totalResults > 90) {
-          $scope.exceedLimit = true;
-        }
-      })
-      .catch(error => {
-        console.error("Error fetching data", error);
-    
-        // Check if the error status is 504, which indicates a gateway timeout
-        if (error.status === 504) {
-          $scope.errorMessage = 'The request timed out. Please try again later.';
-        } else {
-          // For all other types of errors, display a generic error message
-          $scope.errorMessage = 'Failed to fetch data. Please try again.';
-        }
-      })
-      .finally(() => {
-        $scope.loading = false;
+  .then(response => {
+    // console.log('Response Data:', response.data);
+
+    // Check if the flag indicates that there are too many results
+    if (response.data.resultExceedsThreshold) {
+      $scope.exceedLimit = true;
+      // Display a message to the user that there are too many results
+      //$scope.errorMessage = 'Too many results. Please refine your search criteria.';
+    } else if (!response.data || !Array.isArray(response.data.totalResults) || response.data.totalResults.length === 0) {
+      $scope.errorMessage = 'No results found.';
+    } else {
+      // Filter out duplicate results that are already pinned and create a mapping of pinned results
+      const pinnedResultsMap = {};
+      $scope.pinnedResults.forEach(pinnedResult => {
+        pinnedResultsMap[pinnedResult.profileUrl] = pinnedResult;
       });
+
+      const newResults = [];
+      response.data.totalResults.forEach(newResult => {
+        if (!pinnedResultsMap[newResult.profileUrl]) {
+          newResults.push(newResult);
+        } else {
+          // If the result matches a pinned result, add the 'isPinned' property for unpinning
+          newResults.push({ ...newResult, isPinned: true });
+        }
+      });
+
+      $scope.results = newResults;
+      $scope.totalResults = $scope.results.length;
+      $scope.filterResults();
+    }
+  })
+  .catch(error => {
+    console.error("Error fetching data", error);
+
+    // Check if the error status is 504, which indicates a gateway timeout
+    if (error.status === 502) {
+      $scope.errorMessage = 'The request timed out. Please try again later.';
+    } else if (error.status === 504) {
+      $scope.errorMessage = 'The request timed out. Please try again later.';
+    } else {
+      // For all other types of errors, display a generic error message
+      $scope.errorMessage = 'Failed to fetch data. Please try again.';
+    }
+  })
+  .finally(() => {
+    $scope.loading = false;
+  });
+
+  
+
   };
   
   
