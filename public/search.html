@@ -160,73 +160,178 @@
     color: white;
 }
 
-/* Style for the pinned results section */
-.pinned-results {
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    margin-top: 20px;
+ /* Add these styles for the sidebar */
+ .pinned-sidebar {
+            position: fixed;
+            left: -50%;
+            top: 0;
+            height: 100%;
+            width: 50%;
+            background-color: #242f60;
+            overflow-x: hidden;
+            transition: left 0.5s ease-in-out;
+            padding-top: 60px;
+            box-shadow: 2px 0px 5px rgba(0,0,0,0.2);
+            z-index: 99;
+        }
+
+        .pinned-sidebar a {
+            padding: 8px 8px 8px 16px;
+            text-decoration: none;
+            font-size: 20px;
+            color: white;
+            display: block;
+            transition: 0.3s;
+        }
+
+        .pinned-sidebar a:hover {
+            color: #f1f1f1;
+        }
+
+        .open-btn {
+            position: fixed;
+            left: 0;
+            top: 20px;
+            font-size: 20px;
+            padding: 10px 15px;
+            background: #242f60;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+
+        .open-btn:hover {
+            background-color: #575757;
+        }
+
+        .pinned-sidebar.open {
+            left: 0;
+        }
+       
+    .toggle-sidebar-btn {
+    position: fixed;
+    left: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    background-color: #242f60;
+    color: white;
+    border: none;
     padding: 10px;
-}
-
-/* Style for the collapse button */
-.table-collapse-button {
-    font-size: 20px;
     cursor: pointer;
-    transition: transform 0.3s ease;
+    transition: left 0.5s ease-in-out, transform 0.5s ease-in-out;
+    z-index: 1; /* Ensure the button is above the sidebar */
 }
 
-.table-collapse-button.collapsed {
-    transform: rotate(90deg);
-}
-
-/* Style for the pinned results list */
-.pinned-results ul.list-group {
-    margin-top: 10px;
-    padding-left: 0;
-}
-
-/* Style for each pinned result item */
-.pinned-results ul.list-group .list-group-item {
+.toggle-sidebar-container {
+    position: fixed;
+    left: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    background-color: #242f60;
+    color: white;
     border: none;
-    padding: 0;
-    margin: 0;
-    border-top: 1px solid #ccc;
-    border-radius: 0;
+    padding: 10px;
+    cursor: pointer;
+    transition: left 0.5s ease-in-out, transform 0.5s ease-in-out;
+    z-index: 1; /* Ensure the button is above the sidebar */
+    display: flex; /* Add display flex to align items */
+    align-items: center; /* Vertically center the content */
 }
 
-/* Style for the pinned result item content */
-.pinned-results ul.list-group .list-group-item .staff-details {
+.arrow-container {
     display: flex;
-    justify-content: space-between;
     align-items: center;
+    margin-right: 10px; /* Add spacing between the arrow and the count */
 }
 
-/* Style for the pinned result item name */
-.pinned-results ul.list-group .list-group-item .staff-details h4 {
-    margin: 0;
-    font-size: 1.2em;
-}
-
-/* Style for the pinned result item pin button */
-.pinned-results ul.list-group .list-group-item .staff-details .pin-button {
-    background-color: transparent;
-    color: #007bff;
-    border: none;
-    border-radius: 50%;
-    width: 30px;
-    height: 30px;
+.arrow {
     font-size: 16px;
     cursor: pointer;
     outline: none;
-    border: 2px solid #007bff;
+    margin-right: 5px; /* Adjust margin as needed */
+}
+
+.pin {
+    font-size: 16px; /* Set your desired font size */
+    margin-right: 5px; /* Adjust margin as needed */
+}
+
+.pin-count {
+    font-size: 12px; /* Set your desired font size */
+}
+
+
+.pinned-sidebar a {
+            /* Style the links in the pinned results */
+            color: #000080; /* Dark navy text */
+            transition: 0.3s;
+        }
+
+        .pinned-sidebar a:hover {
+            color: #0000FF; /* Light navy on hover */
+        }
+
+        /* ... (your existing styles) ... */
+
+        p.pinned-info.ng-binding{
+            font-size: smaller;
+        }
+
+        .pinned-info{
+            font-size:smaller;
+        }
+
+/* Style the expand/collapse button */
+.expand-collapse-button {
+    background-color: transparent;
+    color: #007bff; /* Set your desired color */
+    border: none;
+    border-radius: 50%; /* Make it circular */
+    width: 30px; /* Set your desired width */
+    height: 30px; /* Set your desired height */
+    font-size: 16px; /* Set your desired font size */
+    cursor: pointer;
+    outline: none;
     display: flex;
     justify-content: center;
     align-items: center;
+    margin-right: 10px; /* Add spacing between the button and the name */
+    transition: background-color 0.3s ease, color 0.3s ease;
 }
 
-.pinned-results ul.list-group .list-group-item .staff-details .pin-button:hover {
-    background-color: #007bff;
+/* Change button color on hover */
+.expand-collapse-button:hover {
+    background-color: #007bff; /* Change color on hover */
     color: white;
+}
+
+/* Style the name to look like a clickable link */
+h4.clickable {
+    cursor: pointer;
+    font-size: medium;
+}
+
+.clickable {
+    display: flex;
+    align-items: center;
+}
+
+.clickable > span {
+    flex-grow: 1;
+}
+
+.list-group-item {
+    margin: 0 auto; /* Center the list item horizontally */
+    border-radius: 10px; /* Add rounded corners */
+    margin-bottom: 4px;
+    width:100%;
+}
+
+.pinned-result {
+    width: 90%;
+    margin: 0 auto; /* Center the list item horizontally */
+    border-radius: 5px; /* Add rounded corners */
+    margin-bottom: 4px;
 }
 
 
@@ -254,53 +359,72 @@
         </div>
     </header>
     <div class="container">
-
-        <div class="pinned-results">
-        <h3 ng-click="togglePinnedResults()">
-            <span>
-                Pinned ({{ pinnedResults.length }}) 
-                <span class="table-collapse-button">
-                    {{ showPinnedResults ? '▼' : '▶' }}
-                </span>
-            </span>
-        </h3>
+        <div class="toggle-sidebar-container">
+            <button class="toggle-sidebar-btn" onclick="toggleSidebar()">
+                <div class="arrow-container">
+                    <span class="arrow" ng-bind="showPinnedResults ? '>' : '<'"></span>
+                    <span class="pin">📌</span>
+                
+                <span class="pin-count" ng-bind="pinnedResults.length"></span></div>
+            </button>
+        </div>
         
-        <ul class="list-group mt-4" ng-show="showPinnedResults">
-            <li ng-repeat="result in pinnedResults" class="list-group-item" ng-click="togglePinnedEntry(result)">
-                <div class="entry-header">
-                    <h4>
-                        {{result.name}}
-                    </h4>
-                    
-                    <span class="pin-unpin-button">
-                        <button ng-click="togglePin(result); $event.stopPropagation();" class="pin-button">
-                            {{ isPinned(result) ? '✖' : '📌' }}
-                        </button>
+        
+        
+        <div id="pinnedSidebar" class="pinned-sidebar">
+            <div class="pinned-results">
+                <h3 ng-click="togglePinnedResults()">
+                    <span>
+                        Pinned ({{ pinnedResults.length }})
+                        <span class="table-collapse-button">
+                            {{ showPinnedResults ? '▼' : '▶' }}
+                        </span>
                     </span>
-                </div>
-                <hr />
-        <!-- Display additional details when expanded -->
-        <div ng-if="result.expanded">
-            <div class="staff-details" style="display: flex; align-items: center;">
-                <div class="info" style="flex: 1;">
-                    <a href="{{result.profileUrl}}" target="_blank">
-                        <h4>{{result.name}}</h4>
-                    </a>
-                    <a href="{{result.profileUrl}}" target="_blank">
-                        <p>{{result.additionalInfo}}</p>
-                    </a>
-                    <div ng-if="result.expertise && result.expertise.length > 0">
-                        <strong>Areas of Expertise:</strong>
-                        <ul>
-                            <li ng-repeat="area in result.expertise">{{area}}</li>
-                        </ul>
+                </h3>
+                <ul class="list-group mt-4" ng-show="showPinnedResults">
+                    <div class="mt-4" style="margin-bottom: 5px; width: 90%; align-self: center;">
+                        <input type="text" ng-model="pinnedFilter" ng-change="filterPinnedResults()" placeholder="Filter Pinned Results" class="form-control"/>
                     </div>
+                    
+                    <li ng-repeat="result in (pinnedFilter ? filteredPinnedResults : pinnedResults)" class="list-group-item pinned-result">
+                        <div class="entry-header">
+                            <!-- Expand/collapse button styled like a button -->
+                            <button class="expand-collapse-button" ng-click="togglePinnedEntry(result)">
+                                {{ result.expanded ? '-' : '+' }}
+                            </button>
+                           <!-- Name in the middle, styled as a clickable link -->
+                            <h4 class="clickable" ng-click="togglePinnedEntry(result)">
+                                {{result.name}} 
+                            </h4>
+                            <a href="{{result.profileUrl}}" target="_blank" style="text-decoration: none; margin-left: 5px;">🌐
+                            </a>
+                            <span class="pin-unpin-button">
+                                <!-- Pin/unpin button on the right -->
+                                <button ng-click="togglePin(result); $event.stopPropagation();" class="pin-button">
+                                    {{ isPinned(result) ? '✖' : '📌' }}
+                                </button>
+                            </span>
+                        </div>
+                        <!-- Display additional details when expanded -->
+                        <div ng-if="result.expanded">
+                            <div class="staff-details" style="display: flex; align-items: center;">
+                                <div class="info" style="flex: 1;">
+                                        <p class="pinned-info">{{result.additionalInfo}}</p>
+                                    <div ng-if="result.expertise && result.expertise.length > 0">
+                                        <strong class="pinned-info">Areas of Expertise:</strong>
+                                        <ul class="pinned-info">
+                                            <li ng-repeat="area in result.expertise">{{area}}</li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+                </ul>
+                
+                
                 </div>
             </div>
-        </div>
-    </li>
-</ul>
-</div>
 
 
         <div class="mb-4">
@@ -321,7 +445,7 @@
         </div>
  
         <div ng-if="exceedLimit" class="alert alert-info mt-4">
-            Too many results found. Please use the
+            Too many results found. Please consider refining your search or use the
             <a ng-href="https://www.swansea.ac.uk/search/?c=www-en-meta&q={{searchTerm}}&f[page%20type]=staff%20profile" target="_blank">
               University search function
             </a> for more results.
@@ -355,5 +479,27 @@
             </li>
         </ul>
     </div>
+    <script>
+function toggleSidebar() {
+    var sidebar = document.getElementById('pinnedSidebar');
+    var arrowContainer = document.querySelector('.toggle-sidebar-container');
+    var arrow = document.querySelector('.toggle-sidebar-container .arrow');
+    
+    sidebar.classList.toggle('open');
+
+    if (sidebar.classList.contains('open')) {
+        // Get the width of the opened sidebar and adjust the arrow's left position
+        var sidebarWidth = sidebar.offsetWidth;
+        arrowContainer.style.left = sidebarWidth + 'px';
+        arrow.textContent = '<'; // Set the arrow symbol to <
+    } else {
+        // Reset the arrow's position when the sidebar is closed
+        arrowContainer.style.left = '0';
+        arrow.textContent = '>'; // Set the arrow symbol back to >
+    }
+}
+
+    </script>
+
 </body>
 </html>
