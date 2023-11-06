@@ -14,15 +14,11 @@ async function fetchProfileData(profileUrl) {
 
   // Verify the URL pattern before proceeding
   if (profileUrl.match(/-staff\/$/)) {
-    console.log(`Invalid profile URL pattern: ${profileUrl}`);
     return { expertise, photoUrl, photoAlt };  // Return empty data for invalid URL pattern
   }
 
-  console.log(`Fetching data for profile URL: ${profileUrl}`);
-
   const cachedProfileData = staffProfileCache.get(profileUrl);
   if (cachedProfileData) {
-    console.log(`Profile data for ${profileUrl} found in cache.`);
     return cachedProfileData;
   }
 
@@ -44,14 +40,9 @@ async function fetchProfileData(profileUrl) {
     staffProfileCache.set(profileUrl, profileInfo);
     return profileInfo;
   } catch (error) {
-    console.error(`Failed to fetch details for ${profileUrl}`, error);
     return { expertise, photoUrl, photoAlt };  // Empty data on error
   }
 }
-
-
-
-
 
 // Helper function to get full photo URL
 function getFullPhotoUrl(relativeUrl) {
@@ -63,15 +54,10 @@ function getFullPhotoUrl(relativeUrl) {
 
 // Fetches results from a single page
 exports.fetchPageResults = async function (url) {
-  
-
   const cachedData = urlCache.get(url);
   if (cachedData) {
-    console.log('Data found in cache.');
     return cachedData;
   }
-  
-  console.log(`Fetching data from URL: ${url}`);
 
   try {
     const { data } = await axios.get(url);
@@ -85,7 +71,6 @@ exports.fetchPageResults = async function (url) {
       // Verify the URL pattern before proceeding
       const urlPattern = /-staff\/$/;
       if (urlPattern.test(profileUrl)) {
-        console.log(`Invalid profile URL pattern: ${profileUrl}`);
         return null;  // Return null for invalid URL pattern
       }
 
@@ -100,13 +85,10 @@ exports.fetchPageResults = async function (url) {
     // Cache the results with the URL as the key
     urlCache.set(url, validResults);
     return validResults;
-
   } catch (error) {
-    console.error(`Failed to fetch data from ${url}`, error);
     return [];
   }
 };
-
 
 // Handler function to fetch all results based on search term
 exports.handler = async function (event) {
@@ -115,14 +97,11 @@ exports.handler = async function (event) {
 
   try {
     const allResults = await exports.fetchAllResults(baseURL);
-    console.log('Total records:', allResults.length);
-
     return {
       statusCode: 200,
       body: JSON.stringify(allResults),
     };
   } catch (error) {
-    console.error('Error fetching page results:', error);
     return {
       statusCode: 500,
       body: JSON.stringify({ error: 'Failed fetching data' }),
@@ -147,9 +126,6 @@ exports.fetchAllResults = async function (baseUrl) {
     // Calculate theoretical maximum number of results
     const theoreticalMaxResults = totalPages * 10;
 
-    console.log('Total pages:', totalPages);
-    console.log('Theoretical maximum results:', theoreticalMaxResults);
-
     // Fetch data from all pages
     for (let currentPage = 1; currentPage <= totalPages; currentPage++) {
       const s = 1 + 10 * (currentPage - 1);
@@ -157,24 +133,18 @@ exports.fetchAllResults = async function (baseUrl) {
 
       const pageResults = await exports.fetchPageResults(urlWithPage);
       totalResults = [...totalResults, ...pageResults];
-
-      console.log(`Page ${currentPage} - Total Results: ${totalResults.length}`);
     }
 
     // Check if theoretical max is 100 and actual results are less than 100, then fetch additional data
     if (theoreticalMaxResults === 100 && totalResults.length < 100) {
-      console.log('Fetching additional results to reach 100 profiles...');
       const s = 101;
       const urlWithAdditionalPage = `${baseUrl}&s=${s}`;
       const additionalPageResults = await exports.fetchPageResults(urlWithAdditionalPage);
       totalResults = [...totalResults, ...additionalPageResults];
     }
 
-    console.log('Final Results returned:', totalResults.length);
     return totalResults;
   } catch (error) {
-    console.error("Error fetching all results:", error);
     throw error;
   }
 };
-
