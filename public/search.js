@@ -53,7 +53,7 @@ app.controller('SearchController', ['$scope', '$http', function ($scope, $http) 
         $scope.filterResults();
   
         // Check for more than 3 results here
-        if ($scope.totalResults > 99) {
+        if ($scope.totalResults > 90) {
           $scope.exceedLimit = true;
         }
       })
