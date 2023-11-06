@@ -317,3 +317,38 @@ margin: 0 auto; /* Center the list item horizontally */
 border-radius: 5px; /* Add rounded corners */
 margin-bottom: 4px;
 }
+
+@media (max-width: 768px) {
+    .toggle-sidebar-btn {
+        bottom: 0; /* Align the button to the bottom */
+        top: auto; /* Remove the top positioning */
+        left: 0; /* Align to the left side */
+        transform: translateY(0); /* Reset transform as it's no longer needed */
+    }
+
+    .toggle-sidebar-container {
+        bottom: 0; /* Align the container to the bottom */
+        top: auto; /* Remove the top positioning */
+        left: 0; /* Align to the left side */
+        transform: translateY(0); /* Reset transform as it's no longer needed */
+    }
+
+    .pinned-sidebar {
+        width: 80%; /* Set the width of the sidebar to 90% */
+        left: -80%;
+        /* You may want to adjust the left property based on whether the sidebar is open or not */
+    }
+
+    .pinned-sidebar.open {
+        left: 0; /* Adjust this if necessary, for example, you might want to use `left: 10%` to animate from off-screen */
+    }
+
+    /* Directly targeting a button based on its existing classes */
+    .btn.btn-primary {
+        margin: 5px !important; /* 'important' might be needed to override other styles */
+        float: right;
+        
+    }
+
+}
+
