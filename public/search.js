@@ -5,6 +5,7 @@ app.controller('SearchController', ['$scope', '$http', function ($scope, $http) 
   $scope.pinnedResults = JSON.parse(localStorage.getItem('pinnedResults')) || [];
   $scope.results = [];
   $scope.filteredResults = [];
+  $scope.filteredPinnedResults = [];  // Initialize filteredPinnedResults here
   $scope.totalResults = 0;
   $scope.errorMessage = '';
   $scope.exceedLimit = false;  // Added flag to control the message visibility
@@ -60,17 +61,12 @@ app.controller('SearchController', ['$scope', '$http', function ($scope, $http) 
         console.error("Error fetching data", error);
     
         // Check if the error status is 504, which indicates a gateway timeout
-        if (error.status === 502) {
-          $scope.errorMessage = 'The request timed out. Please narrow your search.';
-        } else if (error.status === 504) {
-          $scope.errorMessage = 'The request timed out. Please narrow your search.';
+        if (error.status === 504) {
+          $scope.errorMessage = 'The request timed out. Please try again later.';
         } else {
           // For all other types of errors, display a generic error message
           $scope.errorMessage = 'Failed to fetch data. Please try again.';
         }
-
-
-        
       })
       .finally(() => {
         $scope.loading = false;
@@ -97,24 +93,20 @@ app.controller('SearchController', ['$scope', '$http', function ($scope, $http) 
   $scope.togglePin = function (result) {
     const index = $scope.pinnedResults.findIndex(pinnedResult => pinnedResult.profileUrl === result.profileUrl);
     if (index === -1) {
-        // The person is not in the pinned list, so add them
         $scope.pinnedResults.push(result);
-        result.isPinned = true; // Update isPinned property
+        result.isPinned = true;
     } else {
-        // The person is already in the pinned list, so remove them
         $scope.pinnedResults.splice(index, 1);
-        result.isPinned = false; // Update isPinned property
+        result.isPinned = false;
 
-        // Remove the item from filteredPinnedResults as well
         const filteredIndex = $scope.filteredPinnedResults.findIndex(filteredResult => filteredResult.profileUrl === result.profileUrl);
         if (filteredIndex !== -1) {
             $scope.filteredPinnedResults.splice(filteredIndex, 1);
         }
     }
 
-    // Save pinnedResults to localStorage
     localStorage.setItem('pinnedResults', JSON.stringify($scope.pinnedResults));
-};
+  };
 
 
   $scope.isPinned = function (result) {
