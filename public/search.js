@@ -18,7 +18,7 @@ app.controller('SearchController', ['$scope', '$http', function ($scope, $http) 
     $scope.errorMessage = '';
     $scope.exceedLimit = false;  // Reset the flag
     
-    const searchTerm = $scope.searchTerm;
+    const searchTerm = $scope.searchTerm.toLowerCase();
   
     const baseUrl = `/.netlify/functions/fetchData?q=${encodeURIComponent(searchTerm)}`;
     // console.log('URL:', baseUrl);
