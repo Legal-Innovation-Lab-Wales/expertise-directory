@@ -19,7 +19,7 @@ app.controller('SearchController', ['$scope', '$http', function ($scope, $http) 
     
     const searchTerm = $scope.searchTerm;
   
-    const baseUrl = `/.netlify/functions/fetchData?q=${encodeURIComponent(searchTerm)}`;
+    const baseUrl = `http://localhost:5000/mockApi?q=${encodeURIComponent(searchTerm)}`;
     console.log('URL:', baseUrl);
   
     $http.get(baseUrl)
@@ -58,7 +58,14 @@ app.controller('SearchController', ['$scope', '$http', function ($scope, $http) 
       })
       .catch(error => {
         console.error("Error fetching data", error);
-        $scope.errorMessage = 'Failed to fetch data. Please try again.';
+    
+        // Check if the error status is 504, which indicates a gateway timeout
+        if (error.status === 504) {
+          $scope.errorMessage = 'The request timed out. Please narrow your search.';
+        } else {
+          // For all other types of errors, display a generic error message
+          $scope.errorMessage = 'Failed to fetch data. Please try again.';
+        }
       })
       .finally(() => {
         $scope.loading = false;
