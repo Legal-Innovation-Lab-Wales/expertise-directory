@@ -1,51 +1,25 @@
 const axios = require('axios');
 const cheerio = require('cheerio');
-const NodeCache = require('node-cache');
-
-// Create caches with TTL values
-const staffProfileCache = new NodeCache({ stdTTL: 15552000 });
-const urlCache = new NodeCache({ stdTTL: 2592000 });
 
 // Helper function to fetch profile data
 async function fetchProfileData(profileUrl) {
-  let expertise = [];
-  let photoUrl = '';
-  let photoAlt = '';
-
-  // Verify the URL pattern before proceeding
-  if (profileUrl.match(/-staff\/$/)) {
-    // console.log(`Invalid profile URL pattern: ${profileUrl}`);
-    return { expertise, photoUrl, photoAlt };  // Return empty data for invalid URL pattern
-  }
-
-  // console.log(`Fetching data for profile URL: ${profileUrl}`);
-
-  const cachedProfileData = staffProfileCache.get(profileUrl);
-  if (cachedProfileData) {
-    // console.log(`Profile data for ${profileUrl} found in cache.`);
-    return cachedProfileData;
-  }
-
   try {
+    console.log(`Fetching profile data for ${profileUrl}`); // Fetching profile data
     const { data: profileData } = await axios.get(profileUrl);
     const profile$ = cheerio.load(profileData);
 
-    profile$('.staff-profile-areas-of-expertise ul li').each((i, el) => {
-      expertise.push(profile$(el).text());
-    });
+    // Use profile$ instead of cheerio to stay in the context of the loaded page
+    const expertise = profile$('.staff-profile-areas-of-expertise ul li').map((i, el) => profile$(el).text()).get();
+    
+    // Ensure the getFullPhotoUrl function is defined and correctly prepends the domain to the photoUrl
+    const photoUrl = getFullPhotoUrl(profile$('.staff-profile-overview-profile-picture img').attr('src'));
+    const photoAlt = profile$('.staff-profile-overview-profile-picture img').attr('alt');
 
-    photoUrl = profile$('.staff-profile-overview-profile-picture img').attr('src');
-    photoAlt = profile$('.staff-profile-overview-profile-picture img').attr('alt');
-
-    photoUrl = getFullPhotoUrl(photoUrl);
-
-    // Cache the profile data with a TTL of 6 months
-    const profileInfo = { expertise, photoUrl, photoAlt };
-    staffProfileCache.set(profileUrl, profileInfo);
-    return profileInfo;
+    console.log(`Saving profile data for ${profileUrl} to CDN cache`); // Saving to CDN cache
+    return { expertise, photoUrl, photoAlt };
   } catch (error) {
     console.error(`Failed to fetch details for ${profileUrl}`, error);
-    return { expertise, photoUrl, photoAlt };  // Empty data on error
+    return { expertise: [], photoUrl: '', photoAlt: '' };
   }
 }
 
@@ -59,16 +33,8 @@ function getFullPhotoUrl(relativeUrl) {
 
 // Fetches results from a single page
 exports.fetchPageResults = async function (url) {
-  
-  const cachedData = urlCache.get(url);
-  if (cachedData) {
-    // console.log('Data found in cache.');
-    return cachedData;
-  }
-  
-  // console.log(`Fetching data from URL: ${url}`);
-
- try {
+  try {
+    console.log(`Fetching data from ${url}`); // Fetching data
     const { data } = await axios.get(url);
     const $ = cheerio.load(data);
 
@@ -78,11 +44,8 @@ exports.fetchPageResults = async function (url) {
       const additionalInfo = $(element).find('.site-search-results-list-item-additional-information').text().trim();
 
       if (profileUrl.endsWith('-staff/')) {
-        // console.log(`Invalid profile URL pattern: ${profileUrl}`);
         return null;
       }
-
-      
 
       return fetchProfileData(profileUrl)
         .then(({ expertise, photoUrl, photoAlt }) => ({ name, profileUrl, additionalInfo, expertise, photoUrl, photoAlt }));
@@ -90,18 +53,14 @@ exports.fetchPageResults = async function (url) {
 
     const results = await Promise.all(resultPromises);
 
-    const validResults = results.filter(result => result !== null);  // Filter out null values
+    const validResults = results.filter(result => result !== null);
 
-    // Cache the results with the URL as the key
-    urlCache.set(url, validResults);
     return validResults;
-
   } catch (error) {
     console.error(`Failed to fetch data from ${url}`, error);
     return [];
   }
 };
-
 
 // Fetches results from a single page
 exports.handler = async function (event) {
@@ -111,6 +70,7 @@ exports.handler = async function (event) {
   try {
     // Fetch the first page to determine the total number of pages
     const firstPageUrl = `${baseURL}&s=1`;
+    console.log(`Fetching first page data from ${firstPageUrl}`); // Fetching first page data
     const { data: firstPageData } = await axios.get(firstPageUrl);
 
     // Extract total number of pages from pagination div
@@ -153,16 +113,16 @@ exports.handler = async function (event) {
   }
 };
 
-
 // Fetches all results across multiple pages
 exports.fetchAllResults = async function (baseUrl) {
-  // console.time('Total fetchAllResults execution time'); // Start timer
+  console.time('Total fetchAllResults execution time'); // Start timer
 
   try {
     let totalResults = [];
 
     // Fetch the first page to determine the total number of pages
     const firstPageUrl = `${baseUrl}&s=1`;
+    console.log(`Fetching first page data from ${firstPageUrl}`); // Fetching first page data
     const { data: firstPageData } = await axios.get(firstPageUrl);
 
     // Extract total number of pages from pagination div
@@ -174,11 +134,11 @@ exports.fetchAllResults = async function (baseUrl) {
     const theoreticalMaxResults = totalPages * 10;
     const resultExceedsThreshold = theoreticalMaxResults > 99;
 
-    // console.log('Total pages:', totalPages);
-    // console.log('Theoretical maximum results:', theoreticalMaxResults);
+    console.log('Total pages:', totalPages);
+    console.log('Theoretical maximum results:', theoreticalMaxResults);
 
     if (resultExceedsThreshold) {
-      // console.log('Theoretical maximum results exceed the threshold. Stopping further fetching.');
+      console.log('Theoretical maximum results exceed the threshold. Stopping further fetching.');
       return { totalResults, resultExceedsThreshold };
     }
 
@@ -200,8 +160,8 @@ exports.fetchAllResults = async function (baseUrl) {
 
     await fetchInBatches(urls, 10); // Fetch in batches of 10
 
-    // console.log('Final Results returned:', totalResults.length);
-    // console.timeEnd('Total fetchAllResults execution time'); // End timer
+    console.log('Final Results returned:', totalResults.length);
+    console.timeEnd('Total fetchAllResults execution time'); // End timer
 
     return { totalResults, resultExceedsThreshold };
   } catch (error) {
@@ -209,8 +169,3 @@ exports.fetchAllResults = async function (baseUrl) {
     throw error;
   }
 };
-
-
-
-
-
