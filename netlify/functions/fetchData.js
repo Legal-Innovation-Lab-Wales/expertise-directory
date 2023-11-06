@@ -4,7 +4,7 @@ const cheerio = require('cheerio');
 // Helper function to fetch profile data
 async function fetchProfileData(profileUrl) {
   try {
-    console.log(`Fetching profile data for ${profileUrl}`); // Fetching profile data
+    // console.log(`Fetching profile data for ${profileUrl}`); // Fetching profile data
     const { data: profileData } = await axios.get(profileUrl);
     const profile$ = cheerio.load(profileData);
 
@@ -15,10 +15,10 @@ async function fetchProfileData(profileUrl) {
     const photoUrl = getFullPhotoUrl(profile$('.staff-profile-overview-profile-picture img').attr('src'));
     const photoAlt = profile$('.staff-profile-overview-profile-picture img').attr('alt');
 
-    console.log(`Saving profile data for ${profileUrl} to CDN cache`); // Saving to CDN cache
+    // console.log(`Saving profile data for ${profileUrl} to CDN cache`); // Saving to CDN cache
     return { expertise, photoUrl, photoAlt };
   } catch (error) {
-    console.error(`Failed to fetch details for ${profileUrl}`, error);
+    // console.error(`Failed to fetch details for ${profileUrl}`, error);
     return { expertise: [], photoUrl: '', photoAlt: '' };
   }
 }
@@ -34,7 +34,7 @@ function getFullPhotoUrl(relativeUrl) {
 // Fetches results from a single page
 exports.fetchPageResults = async function (url) {
   try {
-    console.log(`Fetching data from ${url}`); // Fetching data
+    // console.log(`Fetching data from ${url}`); // Fetching data
     const { data } = await axios.get(url);
     const $ = cheerio.load(data);
 
@@ -57,7 +57,7 @@ exports.fetchPageResults = async function (url) {
 
     return validResults;
   } catch (error) {
-    console.error(`Failed to fetch data from ${url}`, error);
+    // console.error(`Failed to fetch data from ${url}`, error);
     return [];
   }
 };
@@ -70,7 +70,7 @@ exports.handler = async function (event) {
   try {
     // Fetch the first page to determine the total number of pages
     const firstPageUrl = `${baseURL}&s=1`;
-    console.log(`Fetching first page data from ${firstPageUrl}`); // Fetching first page data
+    // console.log(`Fetching first page data from ${firstPageUrl}`); // Fetching first page data
     const { data: firstPageData } = await axios.get(firstPageUrl);
 
     // Extract total number of pages from pagination div
@@ -105,7 +105,7 @@ exports.handler = async function (event) {
 
     return response;
   } catch (error) {
-    console.error('Error fetching page results:', error);
+    // console.error('Error fetching page results:', error);
     return {
       statusCode: 500,
       body: JSON.stringify({ error: 'Failed fetching data' }),
@@ -115,14 +115,14 @@ exports.handler = async function (event) {
 
 // Fetches all results across multiple pages
 exports.fetchAllResults = async function (baseUrl) {
-  console.time('Total fetchAllResults execution time'); // Start timer
+  // console.time('Total fetchAllResults execution time'); // Start timer
 
   try {
     let totalResults = [];
 
     // Fetch the first page to determine the total number of pages
     const firstPageUrl = `${baseUrl}&s=1`;
-    console.log(`Fetching first page data from ${firstPageUrl}`); // Fetching first page data
+    // console.log(`Fetching first page data from ${firstPageUrl}`); // Fetching first page data
     const { data: firstPageData } = await axios.get(firstPageUrl);
 
     // Extract total number of pages from pagination div
@@ -134,11 +134,11 @@ exports.fetchAllResults = async function (baseUrl) {
     const theoreticalMaxResults = totalPages * 10;
     const resultExceedsThreshold = theoreticalMaxResults > 99;
 
-    console.log('Total pages:', totalPages);
-    console.log('Theoretical maximum results:', theoreticalMaxResults);
+    // console.log('Total pages:', totalPages);
+    // console.log('Theoretical maximum results:', theoreticalMaxResults);
 
     if (resultExceedsThreshold) {
-      console.log('Theoretical maximum results exceed the threshold. Stopping further fetching.');
+      // console.log('Theoretical maximum results exceed the threshold. Stopping further fetching.');
       return { totalResults, resultExceedsThreshold };
     }
 
@@ -160,12 +160,12 @@ exports.fetchAllResults = async function (baseUrl) {
 
     await fetchInBatches(urls, 10); // Fetch in batches of 10
 
-    console.log('Final Results returned:', totalResults.length);
-    console.timeEnd('Total fetchAllResults execution time'); // End timer
+    // console.log('Final Results returned:', totalResults.length);
+    // console.timeEnd('Total fetchAllResults execution time'); // End timer
 
     return { totalResults, resultExceedsThreshold };
   } catch (error) {
-    console.error("Error fetching all results:", error);
+    // console.error("Error fetching all results:", error);
     throw error;
   }
 };
