@@ -14,8 +14,9 @@
     <link rel="shortcut icon" href="https://intranet.swan.ac.uk/cdn/suds/images/icons/favicon/favicon.ico">
     <link rel="stylesheet" href="https://intranet.swan.ac.uk/cdn/suds/css/suds.min.css">
     <link rel="stylesheet" href="styles.css">
+
 </head>
-<body ng-controller="SearchController">
+<body ng-controller="SearchController" >
     <header>
         <div class="custom-header-container">
             <div class="custom-logos">
@@ -37,34 +38,28 @@
     </header>
     <div class="container">
         <div class="toggle-sidebar-container">
-            <button class="toggle-sidebar-btn" onclick="toggleSidebar()">
+            <button class="toggle-sidebar-btn" ng-click="toggleSidebar()">
                 <div class="arrow-container">
                     <span class="arrow" ng-bind="showPinnedResults ? '>' : '<'"></span>
                     <span class="pin">📌</span>
-                
-                <span class="pin-count" ng-bind="pinnedResults.length"></span></div>
+                    <span class="pin-count" ng-bind="pinnedResults.length"></span>
+                </div>
             </button>
         </div>
         
-        
-        
         <div id="pinnedSidebar" class="pinned-sidebar">
             <div class="pinned-results">
-                <h3 ng-click="togglePinnedResults()">
+                <h3 class="pinned-results-toggle">
                     <span>
-                        Pinned ({{ pinnedResults.length }})
-                        <span class="table-collapse-button">
-                            {{ showPinnedResults ? '▼' : '▶' }}
-                        </span>
+                        Pinned Results ({{ pinnedResults.length }})
                     </span>
                 </h3>
                 <ul class="list-group mt-4" ng-show="showPinnedResults">
                     <div class="mt-4" style="margin-bottom: 5px; width: 90%; align-self: center;">
                         <input type="text" ng-model="pinnedFilter" ng-change="filterPinnedResults()" placeholder="Filter Pinned Results" class="form-control"/>
                     </div>
-                    
-                    <li ng-repeat="result in (pinnedFilter ? filteredPinnedResults : pinnedResults)" class="list-group-item pinned-result">
-                        <div class="entry-header">
+                    <li ng-repeat="result in (pinnedFilter ? filteredPinnedResults : pinnedResults) track by result.profileUrl" class="list-group-item pinned-result">
+                          <div class="entry-header">
                             <!-- Expand/collapse button styled like a button -->
                             <button class="expand-collapse-button" ng-click="togglePinnedEntry(result)">
                                 {{ result.expanded ? '-' : '+' }}
@@ -161,27 +156,5 @@
             </li>
         </ul>
     </div>
-    <script>
-function toggleSidebar() {
-    var sidebar = document.getElementById('pinnedSidebar');
-    var arrowContainer = document.querySelector('.toggle-sidebar-container');
-    var arrow = document.querySelector('.toggle-sidebar-container .arrow');
-    
-    sidebar.classList.toggle('open');
-
-    if (sidebar.classList.contains('open')) {
-        // Get the width of the opened sidebar and adjust the arrow's left position
-        var sidebarWidth = sidebar.offsetWidth;
-        arrowContainer.style.left = sidebarWidth + 'px';
-        arrow.textContent = '<'; // Set the arrow symbol to <
-    } else {
-        // Reset the arrow's position when the sidebar is closed
-        arrowContainer.style.left = '0';
-        arrow.textContent = '>'; // Set the arrow symbol back to >
-    }
-}
-
-    </script>
-
 </body>
 </html>
