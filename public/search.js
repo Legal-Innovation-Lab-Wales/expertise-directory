@@ -13,8 +13,8 @@ app.controller('SearchController', ['$scope', '$http', '$document', function ($s
   $scope.loading = false; // Initialize loading to false
 
   $scope.search = async function () {
-    $scope.loading = true; // Set loading to false before making the request
-    $scope.results = []; // Clear the results array
+    $scope.loading = true;
+    $scope.results = [];
     $scope.filteredResults = [];
     $scope.totalResults = 0;
     $scope.errorMessage = '';
@@ -25,45 +25,43 @@ app.controller('SearchController', ['$scope', '$http', '$document', function ($s
     try {
       const baseUrl = `/.netlify/functions/fetchData?q=${encodeURIComponent(searchTerm)}`;
       const response = await $http.get(baseUrl);
-  
-      if (response.data.resultExceedsThreshold) {
-        $scope.exceedLimit = true;
-      } else if (!response.data || !response.data.totalResults || response.data.totalResults.length === 0) {
-        $scope.errorMessage = 'No results found. Please try a different search.';
-        $scope.loading = false;
-        $scope.results = [];
-        $scope.$apply();
+      console.log(response.status);
+      if (response.status === 200) {
+        // Handle successful response
+          if (response.data.resultExceedsThreshold) {
+            // Handle the custom property indicating too many results
+            $scope.exceedLimit = true;
+            //$scope.errorMessage = 'Too many results. Please refine your search criteria.';
+          } else if (!response.data || !response.data.totalResults || response.data.totalResults.length === 0) {
+            $scope.errorMessage = 'No results found. Please try a different search.';
+          } else {
+          $scope.results = response.data.totalResults;
+          $scope.totalResults = $scope.results.length;
+          $scope.filterResults();
+          }
       } else {
-        const newResults = response.data.totalResults;
-  
-        // Flag already pinned results
-        newResults.forEach(result => {
-          result.isPinned = $scope.isPinned(result);
-        });
-  
-        $scope.results = newResults;
-        $scope.totalResults = $scope.results.length;
-        $scope.filterResults();
-  
-        // Trigger a digest cycle to update the view
-        $scope.loading = false;
-        $scope.$apply();
+        // Handle different status codes with appropriate messages
+        switch (response.status) {
+          case 400:
+            //$scope.errorMessage = 'Too many results. Please narrow your search.';
+            break;
+          case 404:
+            $scope.errorMessage = 'No results found. Please try a different search.';
+            break;
+          default:
+            $scope.errorMessage = 'An unexpected error occurred. Please try again.';
+            break;
+        }
       }
     } catch (error) {
-      if (error.status === 400) {
-        $scope.errorMessage = 'Too many results. Please narrow your search.';
-      } if (error.status === 404) {
-        $scope.errorMessage = 'No results found. Please try a different search.';
-      } if (error.status === 504) {
-        $scope.errorMessage = 'The request timed out. Please try adjusting your search, or try again later.';
-      }else {
-        $scope.errorMessage = 'Failed to fetch data. Please try again.';
-      }
+      // Handle network error or status code not caught by the switch case above
+      $scope.errorMessage = error.data?.error || 'Failed to fetch data. Please try again.';
+    } finally {
       $scope.loading = false;
-      $scope.results = [];
       $scope.$apply();
     }
   };
+  
   
 
   $scope.filterResults = function () {
