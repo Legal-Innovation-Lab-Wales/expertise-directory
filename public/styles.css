@@ -318,6 +318,12 @@ border-radius: 5px; /* Add rounded corners */
 margin-bottom: 4px;
 }
 
+.pinned-results-toggle {
+    color: white !important;
+    margin-left: 5%;
+}
+
+
 @media (max-width: 768px) {
     .toggle-sidebar-btn {
         bottom: 0; /* Align the button to the bottom */
