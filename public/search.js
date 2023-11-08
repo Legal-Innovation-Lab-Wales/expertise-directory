@@ -23,7 +23,7 @@ app.controller('SearchController', ['$scope', '$http', '$document', function ($s
     const searchTerm = $scope.searchTerm.toLowerCase();
   
       try {
-    const baseUrl = `/.netlify/functions/fetchData?q=${encodeURIComponent(searchTerm)}`;
+    const baseUrl = `/.netlify/functions/handler?q=${encodeURIComponent(searchTerm)}`;
     const response = await $http.get(baseUrl);
     console.log('Server response:', response);
 
