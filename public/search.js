@@ -12,7 +12,7 @@ app.controller('SearchController', ['$scope', '$http', '$document', function ($s
   $scope.exceedLimit = false;
   $scope.loading = false; // Initialize loading to false
 
-  $scope.search = async function () {
+  $scope.search = function () {
     $scope.loading = true;
     $scope.results = [];
     $scope.filteredResults = [];
@@ -20,37 +20,42 @@ app.controller('SearchController', ['$scope', '$http', '$document', function ($s
     $scope.errorMessage = '';
     $scope.exceedLimit = false;
   
-    const searchTerm = $scope.searchTerm.toLowerCase();
+    const searchTerm = $scope.searchTerm ? $scope.searchTerm.toLowerCase() : '';
   
-    try {
+    // Ensure there's a search term before making the request
+    if (!searchTerm) {
+      $scope.errorMessage = 'Please enter a search term.';
+      $scope.loading = false;
+    } else {
       const baseUrl = `/.netlify/functions/fetchData?q=${encodeURIComponent(searchTerm)}`;
-      const response = await $http.get(baseUrl);
-      console.log('Server response:', response); // Log the full response object
+      $http.get(baseUrl).then(response => {
+        console.log('Server response:', response); // Log the full response object
   
-      // Check the application-level statusCode within the data object
-      if (response.data.statusCode && response.data.statusCode !== 200) {
-        $scope.errorMessage = response.data.error || 'An error occurred. Please try again.';
-        // Optionally handle different application-level status codes here
-      } else if (Array.isArray(response.data.results) && response.data.results.length === 0) {
-          // The results array exists but is empty
-          $scope.errorMessage = 'No results found. Please try a different search.';
-          $scope.results = []; // Ensure results is an empty array
-          $scope.totalResults = 0;
-      } else if (response.status === 200 && Array.isArray(response.data.results)) {
+      // Handle server-side application-specific error codes
+      if (response.data.error && response.data.statusCode && response.data.statusCode !== 200) {
+        $scope.errorMessage = response.data.error;
+        $scope.results = [];
+        $scope.totalResults = 0;
+      } else if (Array.isArray(response.data.results) && response.data.results.length > 0) {
         $scope.results = response.data.results;
         $scope.totalResults = $scope.results.length;
         $scope.filterResults();
       } else {
-        $scope.errorMessage = 'An unexpected error occurred. Please try again.';
+        $scope.errorMessage = 'No results found. Please try a different search.';
+        $scope.results = [];
+        $scope.totalResults = 0;
       }
-    } catch (error) {
-      console.error("Error during HTTP request:", error);
-      $scope.errorMessage = error.data?.error || 'Failed to fetch data. Please try again.';
-    } finally {
-      $scope.loading = false;
-      $scope.$apply();
+      }).catch(error => {
+        console.error("Error during HTTP request:", error);
+        $scope.errorMessage = (error.data && error.data.error) ? error.data.error : 'Failed to fetch data. Please try again.';
+      }).finally(() => {
+        $scope.loading = false;
+        // Since we're inside a promise, $scope.$apply() may be necessary to update the bindings
+        //$scope.$apply();
+      });
     }
   };
+  
   
   
 
@@ -186,8 +191,5 @@ $document.on('click', function (event) {
       );
     });
   };
-
-  
-
 }]);
 
