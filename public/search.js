@@ -25,36 +25,26 @@ app.controller('SearchController', ['$scope', '$http', '$document', function ($s
     try {
       const baseUrl = `/.netlify/functions/fetchData?q=${encodeURIComponent(searchTerm)}`;
       const response = await $http.get(baseUrl);
-      console.log(response.status);
-      if (response.status === 200) {
-        // Handle successful response
-          if (response.data.resultExceedsThreshold) {
-            // Handle the custom property indicating too many results
-            $scope.exceedLimit = true;
-            //$scope.errorMessage = 'Too many results. Please refine your search criteria.';
-          } else if (!response.data || !response.data.totalResults || response.data.totalResults.length === 0) {
-            $scope.errorMessage = 'No results found. Please try a different search.';
-          } else {
-          $scope.results = response.data.totalResults;
-          $scope.totalResults = $scope.results.length;
-          $scope.filterResults();
-          }
+      console.log('Server response:', response); // Log the full response object
+  
+      // Check the application-level statusCode within the data object
+      if (response.data.statusCode && response.data.statusCode !== 200) {
+        $scope.errorMessage = response.data.error || 'An error occurred. Please try again.';
+        // Optionally handle different application-level status codes here
+      } else if (Array.isArray(response.data.results) && response.data.results.length === 0) {
+          // The results array exists but is empty
+          $scope.errorMessage = 'No results found. Please try a different search.';
+          $scope.results = []; // Ensure results is an empty array
+          $scope.totalResults = 0;
+      } else if (response.status === 200 && Array.isArray(response.data.results)) {
+        $scope.results = response.data.results;
+        $scope.totalResults = $scope.results.length;
+        $scope.filterResults();
       } else {
-        // Handle different status codes with appropriate messages
-        switch (response.status) {
-          case 400:
-            //$scope.errorMessage = 'Too many results. Please narrow your search.';
-            break;
-          case 404:
-            $scope.errorMessage = 'No results found. Please try a different search.';
-            break;
-          default:
-            $scope.errorMessage = 'An unexpected error occurred. Please try again.';
-            break;
-        }
+        $scope.errorMessage = 'An unexpected error occurred. Please try again.';
       }
     } catch (error) {
-      // Handle network error or status code not caught by the switch case above
+      console.error("Error during HTTP request:", error);
       $scope.errorMessage = error.data?.error || 'Failed to fetch data. Please try again.';
     } finally {
       $scope.loading = false;
