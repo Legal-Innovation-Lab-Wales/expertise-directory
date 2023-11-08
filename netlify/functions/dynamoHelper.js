@@ -13,7 +13,7 @@ const saveSearchResultsToDynamoDB = async (searchTerm, results) => {
     const params = {
       TableName: 'searches',
       Item: {
-        'term': `SEARCH#${searchTerm}`,
+        'term': `${searchTerm}`,
         'results': results,
         'entrydate': Date.now(),
         'TTL': Math.floor(Date.now() / 1000) + (7 * 24 * 60 * 60)
