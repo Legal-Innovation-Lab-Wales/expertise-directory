@@ -2,8 +2,8 @@ const AWS = require('aws-sdk');
 
 AWS.config.update({
   region: 'eu-west-2', // Your DynamoDB region
-  accessKeyId: 'DYNO_ACCESS',
-  secretAccessKey: 'DYNO_SECRET',
+  accessKeyId: process.env.DYNO_ACCESS,
+  secretAccessKey: process.env.DYNO_SECRET,
 });
 
 const dynamoDb = new AWS.DynamoDB.DocumentClient();
@@ -23,13 +23,13 @@ const saveSearchResultsToDynamoDB = async (searchTerm, results) => {
   
     try {
         await dynamoDb.put(params).promise();
-        // console.log(`Saved search results for term "${searchTerm}" to DynamoDB.`);
+        console.log(`Saved search results for term "${searchTerm}" to DynamoDB.`);
         return { saved: true };
       } catch (error) {
         if (error.code === 'ConditionalCheckFailedException') {
-          // console.log(`Search results for term "${searchTerm}" already exist in DynamoDB.`);
+          console.log(`Search results for term "${searchTerm}" already exist in DynamoDB.`);
         } else {
-          // console.error('Error saving search results to DynamoDB:', error);
+          console.error('Error saving search results to DynamoDB:', error);
         }
         return { saved: false };
       }
@@ -50,12 +50,12 @@ const saveSearchResultsToDynamoDB = async (searchTerm, results) => {
   
     try {
       await dynamoDb.put(params).promise();
-      // console.log(`Saved profile data for URL "${profileUrl}" to DynamoDB.`);
+      console.log(`Saved profile data for URL "${profileUrl}" to DynamoDB.`);
     } catch (error) {
       if (error.code === 'ConditionalCheckFailedException') {
-        // console.log(`Profile data for URL "${profileUrl}" already exists in DynamoDB.`);
+        console.log(`Profile data for URL "${profileUrl}" already exists in DynamoDB.`);
       } else {
-        // console.error('Error saving profile data to DynamoDB:', error);
+        console.error('Error saving profile data to DynamoDB:', error);
       }
     }
   };
@@ -72,7 +72,7 @@ const saveSearchResultsToDynamoDB = async (searchTerm, results) => {
       const data = await dynamoDb.get(params).promise();
       return data.Item ? data.Item.data : null;
     } catch (error) {
-      // console.error('Error getting profile data from DynamoDB:', error);
+      console.error('Error getting profile data from DynamoDB:', error);
       return null;
     }
   };
@@ -89,7 +89,7 @@ const saveSearchResultsToDynamoDB = async (searchTerm, results) => {
       const data = await dynamoDb.get(params).promise();
       return data.Item ? data.Item.results : null;
     } catch (error) {
-      // console.error('Error getting search results from DynamoDB:', error);
+      console.error('Error getting search results from DynamoDB:', error);
       return null;
     }
   };
@@ -126,9 +126,9 @@ const appendSearchResultsToDynamoDB = async (searchTerm, newResults) => {
   
     try {
       await dynamoDb.put(params).promise();
-      // console.log(`Appended search results for term "${searchTerm}" to DynamoDB.`);
+      console.log(`Appended search results for term "${searchTerm}" to DynamoDB.`);
     } catch (error) {
-      // console.error('Error appending search results to DynamoDB:', error);
+      console.error('Error appending search results to DynamoDB:', error);
     }
   };
 
