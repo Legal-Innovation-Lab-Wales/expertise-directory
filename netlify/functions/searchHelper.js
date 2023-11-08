@@ -77,26 +77,21 @@ const fetchPageResults = async function (url) {
       }
   
       let allResults = [];
-  
-      // Fetch from all pages and append results concurrently
+
+      // Fetch from all pages and append results
       const fetchPagePromises = [];
+  
       for (let page = 1; page <= totalPages; page++) {
         const pageUrl = `${baseUrl}&s=${1 + (page - 1) * 10}`;
         fetchPagePromises.push(fetchPageResults(pageUrl, searchTerm));
       }
   
       const pageResults = await Promise.all(fetchPagePromises);
-      allResults = pageResults.flat();
   
-      // Batch save results to DynamoDB
-      const batchSize = 25; // Adjust batch size as needed
-      const batchSavePromises = [];
-      for (let i = 0; i < allResults.length; i += batchSize) {
-        const batch = allResults.slice(i, i + batchSize);
-        batchSavePromises.push(saveSearchResultsToDynamoDB(searchKey, batch));
-      }
+      // Concatenate all page results into a single array
+      allResults = pageResults.reduce((accumulator, current) => accumulator.concat(current), []);
   
-      await Promise.all(batchSavePromises);
+      await saveSearchResultsToDynamoDB(searchKey, allResults);
       console.log("Saved new search results to DynamoDB.");
   
       console.timeEnd('Total fetchAllResults execution time');
