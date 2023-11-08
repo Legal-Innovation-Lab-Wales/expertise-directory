@@ -31,24 +31,28 @@ app.controller('SearchController', ['$scope', '$http', '$document', function ($s
     $http.get(baseUrl).then(response => {
       console.log('Server response:', response); // Log the full response object
 
-      // Check if the totalResults array is present and has entries
-      if (response.data && Array.isArray(response.data.totalResults) && response.data.totalResults.length > 0) {
-        $scope.results = response.data.totalResults;
+         // Check if the response contains the results and assign them to the scope
+      if (response.data && Array.isArray(response.data.results)) { // Changed from totalResults to results
+        $scope.results = response.data.results; // Changed from totalResults to results
         $scope.totalResults = $scope.results.length;
-        $scope.filterResults();
-      } else if (response.data && Array.isArray(response.data.totalResults) && response.data.totalResults.length === 0) {
-        // The totalResults array is empty
-        $scope.errorMessage = 'No results found. Please try a different search.';
-        $scope.results = [];
-        $scope.totalResults = 0;
+    
+        // If there are no results, set an appropriate message
+        if ($scope.totalResults === 0) {
+          $scope.errorMessage = 'No results found. Please try a different search.';
+        }
       } else if (response.data.error) {
-        // There is an error message in the response
+        // Handle any errors present in the response
         $scope.errorMessage = response.data.error;
+      } else {
+        // Handle unexpected cases
+        $scope.errorMessage = 'An unexpected error occurred.';
       }
     }).catch(error => {
+      // Handle HTTP request errors
       console.error("Error during HTTP request:", error);
       $scope.errorMessage = 'Failed to fetch data. Please try again.';
     }).finally(() => {
+      // Ensure that the loading indicator is turned off after the request
       $scope.loading = false;
     });
   }
