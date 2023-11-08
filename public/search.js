@@ -22,45 +22,39 @@ app.controller('SearchController', ['$scope', '$http', '$document', function ($s
   
     const searchTerm = $scope.searchTerm.toLowerCase();
   
-    try {
-      const baseUrl = `/.netlify/functions/fetchData?q=${encodeURIComponent(searchTerm)}`;
-      const response = await $http.get(baseUrl);
-      console.log('Server response:', response); // Log the full response object
-  
-      if (Array.isArray(response.data.results) && response.data.results.length === 0) {
-        // The results array exists but is empty
-        $scope.errorMessage = 'No results found. Please try a different search.';
-        $scope.results = []; // Ensure results is an empty array
-        $scope.totalResults = 0;
-      } else if (response.data.error) {
-        // Handle the custom error message from the server
-        $scope.errorMessage = response.data.error;
-        $scope.results = []; // Ensure results is an empty array
-        $scope.totalResults = 0;
-      } else if (Array.isArray(response.data.results)) {
-        // The results array has items
-        $scope.results = response.data.results;
-        $scope.totalResults = $scope.results.length;
-        $scope.filterResults();
-      } else {
-        // Handle different status codes with appropriate messages
-        switch (response.status) {
-          case 400:
-            $scope.errorMessage = 'Too many results. Please narrow your search.';
-            break;
-          case 404:
-            $scope.errorMessage = 'No results found. Please try a different search.';
-            break;
-          default:
-            $scope.errorMessage = 'An unexpected error occurred. Please try again.';
-            break;
-        }
+      try {
+    const baseUrl = `/.netlify/functions/fetchData?q=${encodeURIComponent(searchTerm)}`;
+    const response = await $http.get(baseUrl);
+    console.log('Server response:', response);
+
+    if (response.data.resultExceedsThreshold) {
+      // Handle the custom property indicating too many results
+      $scope.exceedLimit = true;
+      $scope.errorMessage = 'Too many results. Please refine your search criteria.';
+    } else if (Array.isArray(response.data.totalResults)) {
+      // The results array exists and is an array
+      $scope.results = response.data.totalResults;
+      $scope.totalResults = $scope.results.length;
+      $scope.filterResults();
+    } else {
+      // Handle different status codes or errors with appropriate messages
+      switch (response.status) {
+        case 400:
+          $scope.errorMessage = 'Too many results. Please narrow your search.';
+          break;
+        case 404:
+          $scope.errorMessage = 'No results found. Please try a different search.';
+          break;
+        default:
+          $scope.errorMessage = 'An unexpected error occurred. Please try again.';
+          break;
       }
-    } catch (error) {
-      console.error("Error during HTTP request:", error);
-      $scope.errorMessage = error.data?.error || 'Failed to fetch data. Please try again.';
-    } finally {
-      $scope.loading = false;
+    }
+  } catch (error) {
+    console.error("Error during HTTP request:", error);
+    $scope.errorMessage = error.data?.error || 'Failed to fetch data. Please try again.';
+  } finally {
+    $scope.loading = false;
       $scope.$apply();
     }
   };
