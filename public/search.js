@@ -12,52 +12,58 @@ app.controller('SearchController', ['$scope', '$http', '$document', function ($s
   $scope.exceedLimit = false;
   $scope.loading = false; // Initialize loading to false
 
-  $scope.search = function () {
-  $scope.loading = true;
-  $scope.results = [];
-  $scope.filteredResults = [];
-  $scope.totalResults = 0;
-  $scope.errorMessage = '';
-  $scope.exceedLimit = false;
-
-  const searchTerm = $scope.searchTerm ? $scope.searchTerm.toLowerCase() : '';
-
-  if (!searchTerm) {
-    $scope.errorMessage = 'Please enter a search term.';
-    $scope.loading = false;
-  } else {
-    // Make sure to use the correct base URL here
-    baseUrl = `/.netlify/functions/handler?q=${encodeURIComponent(searchTerm)}`;
-    $http.get(baseUrl).then(response => {
+  $scope.search = async function () {
+    $scope.loading = true;
+    $scope.results = [];
+    $scope.filteredResults = [];
+    $scope.totalResults = 0;
+    $scope.errorMessage = '';
+    $scope.exceedLimit = false;
+  
+    const searchTerm = $scope.searchTerm.toLowerCase();
+  
+    try {
+      const baseUrl = `/.netlify/functions/fetchData?q=${encodeURIComponent(searchTerm)}`;
+      const response = await $http.get(baseUrl);
       console.log('Server response:', response); // Log the full response object
-
-         // Check if the response contains the results and assign them to the scope
-      if (response.data && Array.isArray(response.data.results)) { // Changed from totalResults to results
-        $scope.results = response.data.results; // Changed from totalResults to results
-        $scope.totalResults = $scope.results.length;
-    
-        // If there are no results, set an appropriate message
-        if ($scope.totalResults === 0) {
-          $scope.errorMessage = 'No results found. Please try a different search.';
-        }
+  
+      if (Array.isArray(response.data.results) && response.data.results.length === 0) {
+        // The results array exists but is empty
+        $scope.errorMessage = 'No results found. Please try a different search.';
+        $scope.results = []; // Ensure results is an empty array
+        $scope.totalResults = 0;
       } else if (response.data.error) {
-        // Handle any errors present in the response
+        // Handle the custom error message from the server
         $scope.errorMessage = response.data.error;
+        $scope.results = []; // Ensure results is an empty array
+        $scope.totalResults = 0;
+      } else if (Array.isArray(response.data.results)) {
+        // The results array has items
+        $scope.results = response.data.results;
+        $scope.totalResults = $scope.results.length;
+        $scope.filterResults();
       } else {
-        // Handle unexpected cases
-        $scope.errorMessage = 'An unexpected error occurred.';
+        // Handle different status codes with appropriate messages
+        switch (response.status) {
+          case 400:
+            $scope.errorMessage = 'Too many results. Please narrow your search.';
+            break;
+          case 404:
+            $scope.errorMessage = 'No results found. Please try a different search.';
+            break;
+          default:
+            $scope.errorMessage = 'An unexpected error occurred. Please try again.';
+            break;
+        }
       }
-    }).catch(error => {
-      // Handle HTTP request errors
+    } catch (error) {
       console.error("Error during HTTP request:", error);
-      $scope.errorMessage = 'Failed to fetch data. Please try again.';
-    }).finally(() => {
-      // Ensure that the loading indicator is turned off after the request
+      $scope.errorMessage = error.data?.error || 'Failed to fetch data. Please try again.';
+    } finally {
       $scope.loading = false;
-    });
-  }
-};
-
+      $scope.$apply();
+    }
+  };
   
   
   
@@ -194,5 +200,8 @@ $document.on('click', function (event) {
       );
     });
   };
+
+  
+
 }]);
 
