@@ -10,7 +10,7 @@ const { fetchProfileData } = require('./profileHelper')
 // Fetches results from a single page
 const fetchPageResults = async function (url) {
     try {
-      // console.log(`Fetching data from ${url}`);
+      console.log(`Fetching data from ${url}`);
       const { data } = await axios.get(url);
       const $ = cheerio.load(data);
   
@@ -30,16 +30,18 @@ const fetchPageResults = async function (url) {
       const results = await Promise.all(resultPromises);
       return results.filter(result => result !== null);
     } catch (error) {
-      // console.error(`Failed to fetch data from ${url}`, error);
+      console.error(`Failed to fetch data from ${url}`, error);
       return [];
     }
   };
+
   
-   fetchAllResults = async function (baseUrl, searchTerm) {
+  
+  fetchAllResults = async function (baseUrl, searchTerm) {
     console.time('Total fetchAllResults execution time');
     console.log(`Starting fetchAllResults for searchTerm: ${searchTerm}`);
   
-    const searchKey = `${searchTerm}`;
+    const searchKey = `SEARCH#${searchTerm}`;
     const cachedResults = await getSearchResultsFromDynamoDB(searchKey);
     if (cachedResults) {
       console.log(`Search results for term "${searchTerm}" loaded from DynamoDB.`);
@@ -104,6 +106,7 @@ const fetchPageResults = async function (url) {
       return { error: error.message, statusCode: 500 }; // Return error message and status code
     }
   };
+  
 
 module.exports = {
   fetchPageResults,
