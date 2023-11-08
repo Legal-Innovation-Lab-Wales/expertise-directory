@@ -3,6 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+     "@google-cloud/recaptcha-enterprise": "^4.1.0",
     "aws-sdk": "^2.1489.0",
     "lilw-react-components": "1.0.0",
     "node-sass": "4.14.1",
