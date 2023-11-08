@@ -27,7 +27,7 @@ app.controller('SearchController', ['$scope', '$http', '$document', function ($s
     $scope.loading = false;
   } else {
     // Make sure to use the correct base URL here
-    baseUrl = `/.netlify/functions/fetchData?q=${encodeURIComponent(searchTerm)}`;
+    baseUrl = `/.netlify/functions/handler?q=${encodeURIComponent(searchTerm)}`;
     $http.get(baseUrl).then(response => {
       console.log('Server response:', response); // Log the full response object
 
