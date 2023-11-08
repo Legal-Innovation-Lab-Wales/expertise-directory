@@ -1,11 +1,9 @@
 const AWS = require('aws-sdk');
 
-// Assuming you've set AWS_ACCESS_KEY_ID and AWS_SECRET_ACCESS_KEY as environment variables
-//***REMOVED***	***REMOVED***
 AWS.config.update({
   region: 'eu-west-2', // Your DynamoDB region
-  accessKeyId: '***REMOVED***',
-  secretAccessKey: '***REMOVED***',
+  accessKeyId: process.env.DYNO_ACCESS,
+  secretAccessKey: process.env.DYNO_SECRET,
 });
 
 const dynamoDb = new AWS.DynamoDB.DocumentClient();
