@@ -1,4 +1,5 @@
 const app = angular.module('SearchApp', []);
+const recaptchaSiteKey = 'process.env.CAPTCHA';
 
 app.controller('SearchController', ['$scope', '$http', '$document', function ($scope, $http, $document) {
   
@@ -19,7 +20,7 @@ app.controller('SearchController', ['$scope', '$http', '$document', function ($s
   
     // Execute reCAPTCHA and retrieve the token
     grecaptcha.enterprise.ready(function () {
-      grecaptcha.enterprise.execute('6Ld94AYpAAAAAPF4FITrVPhbysRd00usd7gt9h2u', { action: 'HOMEPAGE' }).then(function (token) {
+      grecaptcha.enterprise.execute(recaptchaSiteKey, { action: 'HOMEPAGE' }).then(function (token) {
         // Proceed with the search using the token and search term
         const searchTerm = $scope.searchTerm ? $scope.searchTerm.toLowerCase() : '';
         const baseUrl = `/.netlify/functions/handler?q=${encodeURIComponent(searchTerm)}`;
