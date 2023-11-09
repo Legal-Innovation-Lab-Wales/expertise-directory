@@ -1,15 +1,10 @@
 const { RecaptchaEnterpriseServiceClient } = require('@google-cloud/recaptcha-enterprise');
 
-// Check for required environment variables
-if (!process.env.GOOGLE_APPLICATION_CREDENTIALS) {
-  throw new Error('The GOOGLE_APPLICATION_CREDENTIALS environment variable is not set.');
-}
-
 // Initialize the reCAPTCHA client
 const recaptchaClient = new RecaptchaEnterpriseServiceClient();
 
 const projectID = 'legaltechdotwales';
-const recaptchaSiteKey = '6Ld94AYpAAAAAPF4FITrVPhbysRd00usd7gt9h2u';
+const recaptchaSiteKey = 'process.env.CAPTCHA';
 
 
 // Helper function to get full photo URL
