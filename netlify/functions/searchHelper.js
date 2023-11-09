@@ -4,8 +4,9 @@ const {
     getSearchResultsFromDynamoDB,
     saveSearchResultsToDynamoDB
   } = require('./dynamoHelper');
-const { removeDuplicates } = require('./utils');
-const { fetchProfileData } = require('./profileHelper')
+const { allowListInput } = require('./utils');
+const { fetchProfileData } = require('./profileHelper');
+const { validateRecaptcha} = require('./utils');
 
 // Fetches results from a single page
 const fetchPageResults = async function (url) {
@@ -37,9 +38,31 @@ const fetchPageResults = async function (url) {
 
   
   
-  fetchAllResults = async function (baseUrl, searchTerm) {
+  fetchAllResults = async function (baseUrl, searchTerm, recaptchaToken) {
+    // Validate the reCAPTCHA token first
+    if (!recaptchaToken) {
+      throw new Error('No reCAPTCHA token provided.');
+    }
+  
+    const recaptchaValidationResult = await validateRecaptcha(recaptchaToken, 'HOMEPAGE');
+    if (!recaptchaValidationResult.valid) {
+      throw new Error('reCAPTCHA verification failed: ' + recaptchaValidationResult.reason);
+    }
+  
+    console.log('reCAPTCHA verification passed.');
+
+    if (!searchTerm) {
+      console.error('No search term provided.');
+      return res.status(400).json({ error: 'No search term provided.' });
+    }
+
     console.time('Total fetchAllResults execution time');
+
+    searchTerm = allowListInput(searchTerm);
+
     console.log(`Starting fetchAllResults for searchTerm: ${searchTerm}`);
+
+
   
     const searchKey = `SEARCH#${searchTerm}`;
     const cachedResults = await getSearchResultsFromDynamoDB(searchKey);
