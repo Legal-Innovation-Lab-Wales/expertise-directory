@@ -3,7 +3,7 @@ const { RecaptchaEnterpriseServiceClient } = require('@google-cloud/recaptcha-en
 // Initialize the reCAPTCHA client
 const recaptchaClient = new RecaptchaEnterpriseServiceClient();
 
-const projectID = 'legaltechdotwales';
+const projectID = 'process.env.PROJECT';
 const recaptchaSiteKey = 'process.env.CAPTCHA';
 
 
