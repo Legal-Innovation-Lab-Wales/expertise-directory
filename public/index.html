@@ -5,7 +5,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Search Expertise</title>
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular.min.js"></script>
+    <script src="https://www.google.com/recaptcha/enterprise.js?render=6Ld94AYpAAAAAPF4FITrVPhbysRd00usd7gt9h2u" async defer></script>
     <script src="search.js"></script>
+    <!-- Include UI Bootstrap -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/angular-ui-bootstrap/2.5.6/ui-bootstrap-tpls.min.js"></script>
+    <!-- Include Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <link href="https://fonts.googleapis.com/css?family=Lato:400,700%7COpen+Sans:400,600" rel="stylesheet">
     <link rel="apple-touch-icon" sizes="180x180" href="https://intranet.swan.ac.uk/cdn/suds/images/icons/favicon/apple-touch-icon.png">
     <link rel="icon" type="image/png" sizes="32x32" href="https://intranet.swan.ac.uk/cdn/suds/images/icons/favicon/favicon-32x32.png">
@@ -14,6 +19,9 @@
     <link rel="shortcut icon" href="https://intranet.swan.ac.uk/cdn/suds/images/icons/favicon/favicon.ico">
     <link rel="stylesheet" href="https://intranet.swan.ac.uk/cdn/suds/css/suds.min.css">
     <link rel="stylesheet" href="styles.css">
+    <!-- Include FontAwesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css">
+
 
 </head>
 <body ng-controller="SearchController" >
@@ -21,18 +29,13 @@
         <div class="custom-header-container">
             <div class="custom-logos">
                 <div class="custom-logo">
-                    <a href="https://swansea.ac.uk">
-                        <img src="https://intranet.swan.ac.uk/cdn/suds/images/logo/application-custom/logo-white-en.png" class="swansea-logo img-fluid" alt="Swansea University Logo" />
-                    </a>
-                </div>
-                <div class="custom-logo">
                     <a href="https://legaltech.wales">
-                        <img src="/static/media/lilw-logo-white.2c58d3c3.png" class="lilw-logo img-fluid" alt="LILW Logo" />
+                        <img src="https://images.squarespace-cdn.com/content/v1/5ec39523fd9ccb514097857d/1594649856123-KU1YMG9KO44MOQ51GNWE/LILW+%26+School+of+Law+logo.png?format=500w" class="lilw-logo img-fluid" alt="LILW Logo" />
                     </a>
                 </div>
             </div>
             <div class="custom-header-text">
-                Academic Expertise Search
+                Expertise Search
             </div>
         </div>
     </header>
@@ -100,13 +103,15 @@
 
 
         <div class="mb-4">
-            <h3>Search Term:</h3>
+            <h3>Search Term(s):</h3>      
+
             <form ng-submit="search()">
                 <div class="form-inline">
-                    <input type="text" ng-model="searchTerm" placeholder="Search" class="form-control flex-grow-1 mr-2"/>
-                    <button type="submit" class="btn btn-primary">Search</button>
+                    <input type="text" ng-model="searchTerm" placeholder="Search" class="form-control flex-grow-1 mr-2" />
+                    <button type="submit" class="btn btn-primary search-button">Search</button>
                 </div>
             </form>
+            
         </div>
         <div class="mt-4">
             <label>Filter ({{filterString()}}):</label>

@@ -11,8 +11,8 @@
     align-items: center;
 }
 .custom-logo {
-    max-width: 200px;
-    max-height: 200px;
+    max-width: 400px;
+    max-height: 400px;
     margin-right: 20px;
 }
 .swansea-logo,
@@ -21,9 +21,11 @@
     height: auto;
 }
 .custom-header-text {
-    font-size: 30px;
+    font-size: 200%;
     color: white;
+    text-align: right;
 }
+
 .spinner {
     border: 8px solid #f3f3f3;
     border-top: 8px solid #3498db;
