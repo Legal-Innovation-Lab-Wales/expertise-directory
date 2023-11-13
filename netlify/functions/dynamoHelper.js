@@ -1,11 +1,12 @@
 const AWS = require('aws-sdk');
 
 if (!process.env.DYNO_ACCESS || !process.env.DYNO_SECRET) {
-    onsole.error('Missing database environment variables');
-    throw error; // Re-throw the error to be handled by the calling function
-    // Handle missing variables appropriately
-  }
-  
+  console.error('Missing database environment variables');
+  throw error; // Re-throw the error to be handled by the calling function
+  // Handle missing variables appropriately
+} else {
+  console.log("environment variables for database loaded");
+}
 
 AWS.config.update({
   region: 'eu-west-2', // Your DynamoDB region
@@ -17,6 +18,7 @@ const dynamoDb = new AWS.DynamoDB.DocumentClient();
 
 // Function to save search results to DynamoDB
 const saveSearchResultsToDynamoDB = async (searchTerm, results) => {
+  console.log("Search term" + searchTerm);
     const params = {
       TableName: 'searches',
       Item: {
