@@ -1,6 +1,7 @@
 const { RecaptchaEnterpriseServiceClient } = require('@google-cloud/recaptcha-enterprise');
 
 if (!process.env.GOOGLE_CREDENTIALS || !process.env.PROJECT_ID || !process.env.CAPTCHA) {
+    // console.error('Missing environment variables');
     throw error; // Re-throw the error to be handled by the calling function
     // Handle missing variables appropriately
   }
@@ -55,6 +56,8 @@ function removeDuplicates(array, key) {
   }
   
   async function validateRecaptcha(token, action) {
+    // console.log('Site Key:', process.env.CAPTCHA);
+
      try {
       const projectPath = recaptchaClient.projectPath(projectID);
       const assessment = {
@@ -64,6 +67,7 @@ function removeDuplicates(array, key) {
         },
       };
 
+      // console.log("site key: " + recaptchaSiteKey);
       const request = {
         parent: projectPath,
         assessment: assessment,
@@ -91,8 +95,8 @@ function removeDuplicates(array, key) {
       // If all checks pass, return true to indicate a successful validation
       return true;
     } catch (error) {
-      console.error('Error in reCAPTCHA validation:', error);
-      console.error(error.stack);
+      // console.error('Error in reCAPTCHA validation:', error);
+      // console.error(error.stack);
       throw error; // Re-throw the error to be handled by the calling function
     }
   }
