@@ -78,6 +78,7 @@ const saveSearchResultsToDynamoDB = async (searchTerm, results) => {
   };
   
   const getSearchResultsFromDynamoDB = async (searchTerm) => {
+    console.log("Search term " + searchTerm);
     const params = {
       TableName: 'searches',
       Key: {
