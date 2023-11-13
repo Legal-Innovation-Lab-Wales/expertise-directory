@@ -6,19 +6,19 @@ const { getProfileDataFromDynamoDB, saveProfileDataToDynamoDB } = require('./dyn
 // Helper function to fetch profile data
 async function fetchProfileData(profileUrl) {
   const profileKey = `PROFILE#${profileUrl}`;
-  // console.log(`Checking for existing profile data for ${profileUrl}`);
+  console.log(`Checking for existing profile data for ${profileUrl}`);
 
   // Check if the profile data is cached
   const cachedProfileData = await getProfileDataFromDynamoDB(profileKey);
   if (cachedProfileData) {
-    // console.log(`Profile data for ${profileUrl} loaded from DynamoDB.`);
+    console.log(`Profile data for ${profileUrl} loaded from DynamoDB.`);
     return cachedProfileData;
   }
 
-  // console.log(`No existing data found. Fetching profile data for ${profileUrl}`);
+  console.log(`No existing data found. Fetching profile data for ${profileUrl}`);
 
   try {
-    // console.log(`Fetching profile data for ${profileUrl}`);
+    console.log(`Fetching profile data for ${profileUrl}`);
     const { data: profileData } = await axios.get(profileUrl);
     const profile$ = cheerio.load(profileData);
 
@@ -37,10 +37,10 @@ async function fetchProfileData(profileUrl) {
     // Save the new profile data to DynamoDB
     await saveProfileDataToDynamoDB(`PROFILE#${profileUrl}`, dataToSave);
 
-    // console.log(`Saved profile data for ${profileUrl} to DynamoDB.`);
+    console.log(`Saved profile data for ${profileUrl} to DynamoDB.`);
     return dataToSave;
   } catch (error) {
-    // console.error(`Failed to fetch details for ${profileUrl}`, error);
+    console.error(`Failed to fetch details for ${profileUrl}`, error);
     return { expertise: [], photoUrl: '', photoAlt: '' };
   }
 }
