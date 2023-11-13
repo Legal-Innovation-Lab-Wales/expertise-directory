@@ -36,7 +36,7 @@ app.controller('SearchController', ['$scope', '$http', '$document', function ($s
     const searchTerm = $scope.searchTerm ? $scope.searchTerm.toLowerCase() : '';
     const baseUrl = `/.netlify/functions/handler?q=${encodeURIComponent(searchTerm)}`;
     $scope.results = [];
-  $scope.filteredResults = [];
+    $scope.filteredResults = [];
     // Make the HTTP request with the reCAPTCHA token and search term
     $http.get(baseUrl).then(function (response) {
       // Server responded successfully, process the response
