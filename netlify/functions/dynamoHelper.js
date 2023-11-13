@@ -128,7 +128,7 @@ const appendSearchResultsToDynamoDB = async (searchTerm, newResults) => {
       await dynamoDb.put(params).promise();
       // console.log(`Appended search results for term "${searchTerm}" to DynamoDB.`);
     } catch (error) {
-      // console.error('Error appending search results to DynamoDB:', error);
+      console.error('Error appending search results to DynamoDB:', error);
     }
   };
 
