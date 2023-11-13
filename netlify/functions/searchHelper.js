@@ -10,7 +10,7 @@ const { fetchProfileData } = require('./profileHelper');
 // Fetches results from a single page
 const fetchPageResults = async function (url) {
     try {
-      console.log(`Fetching data from ${url}`);
+      // console.log(`Fetching data from ${url}`);
       const { data } = await axios.get(url);
       const $ = cheerio.load(data);
   
@@ -30,7 +30,7 @@ const fetchPageResults = async function (url) {
       const results = await Promise.all(resultPromises);
       return results.filter(result => result !== null);
     } catch (error) {
-      console.error(`Failed to fetch data from ${url}`, error);
+      // console.error(`Failed to fetch data from ${url}`, error);
       return [];
     }
   };
@@ -40,23 +40,23 @@ const fetchPageResults = async function (url) {
   fetchAllResults = async function (baseUrl, searchTerm) {
    
     if (!searchTerm) {
-      console.error('No search term provided.');
+      // console.error('No search term provided.');
       return res.status(400).json({ error: 'No search term provided.' });
     }
 
-    console.time('Total fetchAllResults execution time');
+    // console.time('Total fetchAllResults execution time');
 
     searchTerm = allowListInput(searchTerm);
 
-    console.log(`Starting fetchAllResults for searchTerm: ${searchTerm}`);
+    // console.log(`Starting fetchAllResults for searchTerm: ${searchTerm}`);
 
 
   
     const searchKey = `SEARCH#${searchTerm}`;
     const cachedResults = await getSearchResultsFromDynamoDB(searchKey);
     if (cachedResults) {
-      console.log(`Search results for term "${searchTerm}" loaded from DynamoDB.`);
-      console.timeEnd('Total fetchAllResults execution time');
+      // console.log(`Search results for term "${searchTerm}" loaded from DynamoDB.`);
+      // console.timeEnd('Total fetchAllResults execution time');
       return { results: cachedResults };
     }
   
@@ -75,15 +75,15 @@ const fetchPageResults = async function (url) {
         totalPages = parseInt(totalPagesMatch[1], 10);
       }
   
-      console.log(`Total number of pages: ${totalPages}`);
+      // console.log(`Total number of pages: ${totalPages}`);
   
       if (!totalResultsMatch) {
         return { error: 'Could not determine the total number of results.', statusCode: 500 };
       }
       const totalResults = parseInt(totalResultsMatch[1], 10);
-      console.log("totalresults:", totalResults);
+      // console.log("totalresults:", totalResults);
       if (totalPages > 25) {
-        console.log("advising too many results");
+        // console.log("advising too many results");
         return { error: `Too many results: ${totalResults}. Please refine your search criteria.`, statusCode: 400 };
       }
   
@@ -103,12 +103,12 @@ const fetchPageResults = async function (url) {
       allResults = pageResults.reduce((accumulator, current) => accumulator.concat(current), []);
   
       await saveSearchResultsToDynamoDB(searchKey, allResults);
-      console.log("Saved new search results to DynamoDB.");
+      // console.log("Saved new search results to DynamoDB.");
   
-      console.timeEnd('Total fetchAllResults execution time');
+      // console.timeEnd('Total fetchAllResults execution time');
       return { results: allResults }; // Return new results
     } catch (error) {
-      console.error("Error in fetchAllResults:", error.message);
+      // console.error("Error in fetchAllResults:", error.message);
       return { error: error.message, statusCode: 500 }; // Return error message and status code
     }
   };
