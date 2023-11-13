@@ -1,5 +1,12 @@
 const AWS = require('aws-sdk');
 
+if (!process.env.DYNO_ACCESS || !process.env.DYNO_SECRET) {
+    onsole.error('Missing database environment variables');
+    throw error; // Re-throw the error to be handled by the calling function
+    // Handle missing variables appropriately
+  }
+  
+
 AWS.config.update({
   region: 'eu-west-2', // Your DynamoDB region
   accessKeyId: process.env.DYNO_ACCESS,
