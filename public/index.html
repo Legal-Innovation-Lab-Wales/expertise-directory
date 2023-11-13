@@ -1,12 +1,13 @@
 <!DOCTYPE html>
 <html lang="en" ng-app="SearchApp">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Search Expertise</title>
-    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular.min.js"></script>
-    <script src="https://www.google.com/recaptcha/enterprise.js?render=6Ld94AYpAAAAAPF4FITrVPhbysRd00usd7gt9h2u" async defer></script>
-    <script src="search.js"></script>
+    <title>Directory of Expertise - Legal Innovation Lab Wales</title>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="msapplication-TileColor" content="#da532c">
+    <meta name="msapplication-config" content="https://intranet.swan.ac.uk/cdn/suds/images/icons/favicon/browserconfig.xml">
+    <meta name="theme-color" content="#242F60">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <link href="https://fonts.googleapis.com/css?family=Lato:400,700%7COpen+Sans:400,600" rel="stylesheet">
     <link rel="apple-touch-icon" sizes="180x180" href="https://intranet.swan.ac.uk/cdn/suds/images/icons/favicon/apple-touch-icon.png">
     <link rel="icon" type="image/png" sizes="32x32" href="https://intranet.swan.ac.uk/cdn/suds/images/icons/favicon/favicon-32x32.png">
@@ -14,144 +15,8 @@
     <link rel="mask-icon" href="https://intranet.swan.ac.uk/cdn/suds/images/icons/favicon/safari-pinned-tab.svg" color="#5bbad5">
     <link rel="shortcut icon" href="https://intranet.swan.ac.uk/cdn/suds/images/icons/favicon/favicon.ico">
     <link rel="stylesheet" href="https://intranet.swan.ac.uk/cdn/suds/css/suds.min.css">
-    <link rel="stylesheet" href="styles.css">
-
 </head>
-<body ng-controller="SearchController" >
-    <header>
-        <div class="custom-header-container">
-            <div class="custom-logos">
-                <div class="custom-logo">
-                    <a href="https://legaltech.wales">
-                        <img src="lilw.png" class="lilw-logo img-fluid" alt="LILW Logo" />
-                    </a>
-                </div>
-            </div>
-            <div class="custom-header-text">
-                Expertise Search
-            </div>
-        </div>
-    </header>
-    <div class="container">
-        <div class="toggle-sidebar-container">
-            <button class="toggle-sidebar-btn" ng-click="toggleSidebar()">
-                <div class="arrow-container">
-                    <span class="arrow" ng-bind="showPinnedResults ? '>' : '<'"></span>
-                    <span class="pin">📌</span>
-                    <span class="pin-count" ng-bind="pinnedResults.length"></span>
-                </div>
-            </button>
-        </div>
-        
-        <div id="pinnedSidebar" class="pinned-sidebar">
-            <div class="pinned-results">
-                <h3 class="pinned-results-toggle">
-                    <span>
-                        Pinned Results ({{ pinnedResults.length }})
-                    </span>
-                </h3>
-                <ul class="list-group mt-4" ng-show="showPinnedResults">
-                    <div class="mt-4" style="margin-bottom: 5px; width: 90%; align-self: center;">
-                        <input type="text" ng-model="pinnedFilter" ng-change="filterPinnedResults()" placeholder="Filter Pinned Results" class="form-control"/>
-                    </div>
-                    <li ng-repeat="result in (pinnedFilter ? filteredPinnedResults : pinnedResults) track by result.profileUrl" class="list-group-item pinned-result">
-                          <div class="entry-header">
-                            <!-- Expand/collapse button styled like a button -->
-                            <button class="expand-collapse-button" ng-click="togglePinnedEntry(result)">
-                                {{ result.expanded ? '-' : '+' }}
-                            </button>
-                           <!-- Name in the middle, styled as a clickable link -->
-                            <h4 class="clickable" ng-click="togglePinnedEntry(result)">
-                                {{result.name}} 
-                            </h4>
-                            <a href="{{result.profileUrl}}" target="_blank" style="text-decoration: none; margin-left: 5px;">🌐
-                            </a>
-                            <span class="pin-unpin-button">
-                                <!-- Pin/unpin button on the right -->
-                                <button ng-click="togglePin(result); $event.stopPropagation();" class="pin-button">
-                                    {{ isPinned(result) ? '✖' : '📌' }}
-                                </button>
-                            </span>
-                        </div>
-                        <!-- Display additional details when expanded -->
-                        <div ng-if="result.expanded">
-                            <div class="staff-details" style="display: flex; align-items: center;">
-                                <div class="info" style="flex: 1;">
-                                        <p class="pinned-info">{{result.additionalInfo}}</p>
-                                    <div ng-if="result.expertise && result.expertise.length > 0">
-                                        <strong class="pinned-info">Areas of Expertise:</strong>
-                                        <ul class="pinned-info">
-                                            <li ng-repeat="area in result.expertise">{{area}}</li>
-                                        </ul>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </li>
-                </ul>
-                
-                
-                </div>
-            </div>
-
-
-        <div class="mb-4">
-            <h3>Search Term:</h3>
-            <form ng-submit="search()">
-                <div class="form-inline">
-                    <input type="text" ng-model="searchTerm" placeholder="Search" class="form-control flex-grow-1 mr-2"/>
-                    <button type="submit" class="btn btn-primary search-button">Search</button>
-                </div>
-            </form>
-            
-        </div>
-        <div class="mt-4">
-            <label>Filter ({{filterString()}}):</label>
-            <input type="text" ng-model="additionalSearchTerm" ng-change="filterResults()" placeholder="Filter Results" class="form-control"/>
-        </div>
-        <div ng-if="loading" class="loading-container">
-            <div class="spinner"></div>
-        </div>
- 
-<!-- Add this block to display an error message when it's set -->
-<div ng-if="errorMessage" class="alert alert-danger mt-4">
-    <span>{{ errorMessage }}</span>
-  </div>
-
-        <div ng-if="exceedLimit" class="alert alert-info mt-4">
-            Too many results found. Please refine your search or use the
-            <a ng-href="https://www.swansea.ac.uk/search/?c=www-en-meta&q={{searchTerm}}&f[page%20type]=staff%20profile" target="_blank">
-              University search function
-            </a> for more results.
-          </div>
-          
-
-          <ul class="list-group mt-4" ng-if="filteredResults.length > 0">
-            <li ng-repeat="result in filteredResults" class="list-group-item">
-                <div class="staff-details" style="display: flex; align-items: center; justify-content: space-between; width: 100%;">
-                    <a href="{{result.profileUrl}}" target="_blank">
-                        <h4>{{result.name}}</h4>
-                    </a>
-                    <button ng-click="togglePin(result)" class="pin-button">
-                        {{ isPinned(result) ? '✖' : '📌' }}
-                    </button>
-                </div>
-                <div class="info">
-                    <p>{{result.additionalInfo}}</p>
-                    <div ng-if="result.expertise && result.expertise.length > 0">
-                        <strong>Areas of Expertise:</strong>
-                        <ul>
-                            <li ng-repeat="area in result.expertise">{{area}}</li>
-                        </ul>
-                    </div>
-                </div>
-            </li>
-        </ul>
-        
-        
-    </div>
-            </li>
-        </ul>
-    </div>
+<body>
+    <div id="root"></div>
 </body>
 </html>

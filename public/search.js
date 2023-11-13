@@ -1,5 +1,4 @@
-const app = angular.module('SearchApp', []);
-const recaptchaSiteKey = 'process.env.CAPTCHA';
+const app = angular.module('SearchApp', ['ui.bootstrap']);
 
 app.controller('SearchController', ['$scope', '$http', '$document', function ($scope, $http, $document) {
   
@@ -14,49 +13,57 @@ app.controller('SearchController', ['$scope', '$http', '$document', function ($s
   $scope.loading = false; // Initialize loading to false
   $scope.searchTerm = ''; // Initialize searchTerm to an empty string
 
-  $scope.search = function () {
+  $scope.search = async function () {
     $scope.loading = true;
+    $scope.results = [];
+    $scope.filteredResults = [];
+    $scope.totalResults = 0;
     $scope.errorMessage = '';
+    $scope.exceedLimit = false;
   
-    // Execute reCAPTCHA and retrieve the token
-    grecaptcha.enterprise.ready(function () {
-      grecaptcha.enterprise.execute(recaptchaSiteKey, { action: 'HOMEPAGE' }).then(function (token) {
-        // Proceed with the search using the token and search term
-        const searchTerm = $scope.searchTerm ? $scope.searchTerm.toLowerCase() : '';
-        const baseUrl = `/.netlify/functions/handler?q=${encodeURIComponent(searchTerm)}`;
-    
-        // Make the HTTP request with the reCAPTCHA token and search term
-        $http.get(baseUrl).then(function (response) {
-          // Server responded successfully, process the response
-          if (Array.isArray(response.data.results) && response.data.results.length === 0) {
+    const searchTerm = $scope.searchTerm.toLowerCase();
+  
+      try {
+    const baseUrl = `/.netlify/functions/handler?q=${encodeURIComponent(searchTerm)}`;
+    const response = await $http.get(baseUrl);
+    console.log('Server response:', response);
+
+     if (Array.isArray(response.data.results) && response.data.results.length === 0) {
+        // The results array exists but is empty
+        $scope.errorMessage = 'No results found. Please try a different search.';
+        $scope.results = []; // Ensure results is an empty array
+        $scope.totalResults = 0;
+      } else if (response.data.error) {
+        // Handle the custom error message from the server
+        $scope.errorMessage = response.data.error;
+        $scope.results = []; // Ensure results is an empty array
+        $scope.totalResults = 0;
+      } else if (Array.isArray(response.data.results)) {
+        // The results array has items
+        $scope.results = response.data.results;
+        $scope.totalResults = $scope.results.length;
+        $scope.filterResults();
+      } else {
+        // Handle different status codes with appropriate messages
+        switch (response.status) {
+          case 400:
+            $scope.errorMessage = 'Too many results. Please narrow your search.';
+            break;
+          case 404:
             $scope.errorMessage = 'No results found. Please try a different search.';
-            $scope.results = [];
-          } else if (response.data.error) {
-            $scope.errorMessage = response.data.error;
-            $scope.results = [];
-          } else if (Array.isArray(response.data.results)) {
-            $scope.results = response.data.results;
-          } else {
+            break;
+          default:
             $scope.errorMessage = 'An unexpected error occurred. Please try again.';
-          }
-          $scope.totalResults = $scope.results.length;
-          $scope.filterResults();
-        }).catch(function (error) {
-          // Handle errors such as failed HTTP requests or failed reCAPTCHA execution
-          console.error("Error during HTTP request or reCAPTCHA execution:", error);
-          $scope.errorMessage = error.data?.error || 'Failed to fetch data or reCAPTCHA failed. Please try again.';
-        }).finally(function () {
-          $scope.loading = false;
-          //$scope.$apply(); // Apply scope changes
-        });
-      }, function (error) {
-        // Handle the case where the reCAPTCHA execution fails
-        console.error("Error retrieving reCAPTCHA token:", error);
-        $scope.errorMessage = 'reCAPTCHA validation failed. Please try again.';
-        $scope.loading = false;
-        $scope.$apply(); // Apply scope changes
-      });
-    });
+            break;
+        }
+      }
+    } catch (error) {
+      console.error("Error during HTTP request:", error);
+      $scope.errorMessage = error.data?.error || 'Failed to fetch data. Please try again.';
+    } finally {
+      $scope.loading = false;
+      $scope.$apply();
+    }
   };
   
   
@@ -196,7 +203,11 @@ $document.on('click', function (event) {
     });
   };
 
-  
+    // Define the search function on the $scope
+    $scope.search = function () {
+      $scope.generateRecaptchaTokenAndSearch();
+    };
+    
 
 }]);
 
